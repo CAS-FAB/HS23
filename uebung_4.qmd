@@ -34,6 +34,8 @@ subtitle: Komplexe Rasterdaten
 
 
 ```{r}
+#| label: uebung-4-1
+
 # Musterlösung
 # 1. Koordinatenbezugssystem: EPSG 2056
 # 2. räumliche Auflösung: 25m
@@ -53,6 +55,8 @@ layout: true
 - Weise dem importierten Datensatz das Korrekte Koordinatenbezugssystem zu
 - Schau dir den Datensatz in der Konsole sowie mit `plot()` an
 ```{r}
+#| label: uebung-4-2
+
 # Musterlösung
 library(sf)
 library(tmap)
@@ -68,6 +72,8 @@ crs(swissimage) <- "epsg: 2056"
 
 
 ```{r}
+#| label: uebung-4-3
+
 plot(swissimage)
 ```
 
@@ -75,6 +81,8 @@ plot(swissimage)
 
 
 ```{r}
+#| label: uebung-4-4
+
 swissimage
 ```
 
@@ -86,11 +94,15 @@ layout: false
 - Um ein `rgb` Datensatz mit `tmap` zu plotten, verwenden wir nicht mehr `tm_raster()` sondern `tm_rgb`
 
 ```{r}
+#| label: uebung-4-5
+
 tmap_mode("plot")
 ```
 
 
 ```{r}
+#| label: uebung-4-6
+
 tm_shape(swissimage) + 
   tm_rgb()
 ```
@@ -107,6 +119,8 @@ class: highlight-last-item
 - Hier kann ich euch nur folgenden (unbefriedigenden) Workaround anbieten
 
 ```{r}
+#| label: uebung-4-7
+
 swissimage <- project(swissimage, "epsg: 2056")
 ```
 
@@ -114,6 +128,8 @@ swissimage <- project(swissimage, "epsg: 2056")
 
 
 ```{r}
+#| label: uebung-4-8
+
 # zwar meldet `tmap` nun "Discarded datum CH1903+ in Proj4 definition" 
 # dies muss uns nicht kümmern
 tm_shape(swissimage) + 
@@ -128,6 +144,8 @@ tm_shape(swissimage) +
 Exportiert `swissimage` als `tif`-File
 
 ```{r}
+#| label: uebung-4-9
+
 #| eval: false
 # Musterlösung
 terra::writeRaster(swissimage, "_data/processed/swissimage.tif", overwrite = TRUE)
@@ -157,6 +175,8 @@ terra::writeRaster(swissimage, "_data/processed/swissimage.tif", overwrite = TRU
 - visualisiert es mit `tmap`
 
 ```{r}
+#| label: uebung-4-10
+
 # Musterlösung
 dhm25 <- rast("_data/original/DHM25_MM_ASCII_GRID/ASCII_GRID_1part/dhm25_grid_raster.asc")
 crs(dhm25) <- "epsg: 21781"
@@ -191,6 +211,8 @@ Suche dir auf den gängigen Portalen (s.u.) einen spannenden Datensatz und visua
 
 
 ```{r}
+#| label: uebung-4-11
+
 #| eval: false
 # Musterlösung
 
@@ -226,6 +248,8 @@ exclude: true
 
 
 ```{r}
+#| label: uebung-4-12
+
 tww_landquart <- read_sf("_data/processed/tww_landquart.gpkg")
 
 swissimage <- terra::rast("_data/processed/swissimage_2m_landquart.tif")

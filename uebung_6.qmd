@@ -16,6 +16,8 @@ R eignet sich hervorragend um ein Sampling Design umzusetzen
 
 
 ```{r}
+#| label: uebung-6-1
+
 library(sf)
 library(terra)
 library(tmap)
@@ -26,6 +28,8 @@ tww_landquart <- read_sf("_data/processed/tww_landquart.gpkg")
 
 
 ```{r}
+#| label: uebung-6-2
+
 base_plot <- tm_shape(tww_landquart, bbox = tww_landquart[tww_landquart$Name %in% c("Prafieb","Frättis", "Jerätsch"),]) + 
   tm_polygons(col = "Name") + 
   tm_layout(legend.show = FALSE)
@@ -44,12 +48,16 @@ layout: true
 - Samples sind zufällig verteilt
 
 ```{r}
+#| label: uebung-6-3
+
 tww_landquart$equal_samples <- 10
 sample_plots1 <- st_sample(tww_landquart, size = tww_landquart$equal_samples)
 ```
 
 
 ```{r}
+#| label: uebung-6-4
+
 base_plot +
   tm_shape(sample_plots1) +
   tm_dots(shape = 3)
@@ -64,6 +72,8 @@ base_plot +
 
 
 ```{r}
+#| label: uebung-6-5
+
 tww_landquart_polygon <- st_cast(tww_landquart, "POLYGON")
 ```
 
@@ -72,6 +82,8 @@ tww_landquart_polygon <- st_cast(tww_landquart, "POLYGON")
 `tww_landquart` (`r nrow(tww_landquart)` Zeilen):
 
 ```{r}
+#| label: uebung-6-6
+
 knitr::kable(head(tww_landquart["Name"]))
 ```
 
@@ -81,12 +93,16 @@ knitr::kable(head(tww_landquart["Name"]))
 `tww_landquart_polygon` (`r nrow(tww_landquart_polygon)` Zeilen):
 
 ```{r}
+#| label: uebung-6-7
+
 knitr::kable(head(tww_landquart_polygon["Name"]))
 ```
 
 
 
 ```{r}
+#| label: uebung-6-8
+
 tww_landquart_polygon$equal_samples <- 10
 sample_plots1b <- st_sample(tww_landquart_polygon, size = tww_landquart_polygon$equal_samples)
 ```
@@ -96,6 +112,8 @@ sample_plots1b <- st_sample(tww_landquart_polygon, size = tww_landquart_polygon$
 
 
 ```{r}
+#| label: uebung-6-9
+
 base_plot +
   tm_shape(sample_plots1) +
   tm_dots(shape = 3) +
@@ -106,6 +124,8 @@ base_plot +
 
 
 ```{r}
+#| label: uebung-6-10
+
 
 tww_landquart_polygon$i <- as.character(seq_len(nrow(tww_landquart_polygon)))
 
@@ -130,6 +150,8 @@ layout: true
 - Samples sind zufällig verteilt
 
 ```{r}
+#| label: uebung-6-11
+
 
 tww_landquart_polygon$SHAPE_Area <- st_area(tww_landquart_polygon) # Flächengrösse muss aktualisiert werden!
 
@@ -137,17 +159,23 @@ tww_landquart_polygon$relative_samples <- as.integer(round(tww_landquart_polygon
 ```
 
 ```{r}
+#| label: uebung-6-12
+
 knitr::kable(head(tww_landquart_polygon[,c("Name","SHAPE_Area", "relative_samples")]))
 ```
 
 
 ```{r}
+#| label: uebung-6-13
+
 sample_plots2 <- st_sample(tww_landquart_polygon, size = tww_landquart_polygon$relative_samples)
 ```
 
 
 
 ```{r}
+#| label: uebung-6-14
+
 base_plot +
   tm_shape(sample_plots2) +
   tm_dots(shape = 3)
@@ -162,10 +190,14 @@ layout: false
 - Implizit abhängig von der Flächengrösse (grosse Polygone erhalten mehr Samples)
 
 ```{r}
+#| label: uebung-6-15
+
 sample_plots3 <- st_sample(tww_landquart, size = 200, type = "regular")
 ```
 
 ```{r}
+#| label: uebung-6-16
+
 base_plot +
   tm_shape(sample_plots3) +
   tm_dots(shape = 3)

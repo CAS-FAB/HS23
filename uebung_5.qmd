@@ -2,6 +2,8 @@
 
 
 ```{r}
+#| label: uebung-5-1
+
 
 library(tmap)
 
@@ -28,6 +30,8 @@ tmap_mode("plot")
   - im Zip File: `_data/processed/ausserberg.gpkg` bzw. `_data/processed/dhm200_2056.tif`
 
 ```{r}
+#| label: uebung-5-2
+
 # Musterlösung
 library(sf)
 library(terra)
@@ -46,6 +50,8 @@ dhm200 <- rast("_data/processed/dhm200_2056.tif")
 
 
 ```{r}
+#| label: uebung-5-3
+
 # Musterlösung
 tm_shape(dhm200) + 
   tm_raster() + 
@@ -66,6 +72,8 @@ layout: false
 - Visualisiere das resultierende Raster mit `tmap` (wieder gemeinsam mit `ausserberg`)
 
 ```{r}
+#| label: uebung-5-4
+
 # Musterlösung
 dhm200_cropped <- terra::crop(dhm200, ausserberg)
 
@@ -86,6 +94,8 @@ tm_shape(dhm200_cropped) +
 - wiederhole das Zuschneiden mittels `crop` sowie das Visualisieren mittels `tmap`
 
 ```{r}
+#| label: uebung-5-5
+
 # Musterlösung
 dhm25 <- rast("_data/processed/dhm25_2056.tif") 
 dhm25_crop <- crop(dhm25, ausserberg)           
@@ -96,6 +106,8 @@ dhm25_crop <- crop(dhm25, ausserberg)
 
 
 ```{r}
+#| label: uebung-5-6
+
 tm_shape(dhm25_crop) + 
   tm_raster(style = "cont", palette = "viridis") + 
   tm_shape(ausserberg) + 
@@ -129,6 +141,8 @@ class: highlight-last-item
 
 
 ```{r}
+#| label: uebung-5-7
+
 # Musterlösung
 
 ausserberg_vect <- vect(ausserberg)
@@ -138,6 +152,8 @@ elev <- extract(dhm25, ausserberg_vect) # <- die Funktion extract() extrahiert d
 
 
 ```{r}
+#| label: uebung-5-8
+
 # Musterlösung
 elev                                     # <- der output ist eine data.frame mit 2 Spalten
 ```
@@ -150,6 +166,8 @@ Spiele die Höheninformation aus `extract` zurück in `ausserberg`.
 
 
 ```{r}
+#| label: uebung-5-9
+
 # Musterlösung
 ausserberg$elevation <- elev[,2]         # <- die 2. Spalte aus elev auf ausserberg übertragen
 ```
@@ -161,6 +179,8 @@ ausserberg$elevation <- elev[,2]         # <- die 2. Spalte aus elev auf ausserb
 Visualisiere nun `ausserberg` und Färbe die Punkte nach ihrer Höheninformation ein.
 
 ```{r}
+#| label: uebung-5-10
+
 # Musterlösung
 
 tm_shape(dhm25_crop) + 
@@ -175,6 +195,8 @@ tm_shape(dhm25_crop) +
 
 
 ```{r}
+#| label: uebung-5-11
+
 tm_shape(ausserberg) + 
   tm_bubbles(col="elevation", style="cont", palette="viridis", breaks = seq(1240, 1320, 20)) +
   tm_layout(title = "Punkdaten mit extrahierten Werten aus dhm25")
@@ -202,6 +224,8 @@ layout: false
 
 
 ```{r}
+#| label: uebung-5-12
+
 # Musterlösung
 # Datensätze einlesen:
 tww <- read_sf("_data/original/TWW/TWW_LV95/trockenwiesenweiden.shp")
@@ -218,6 +242,8 @@ hoheitsgebiet <- st_transform(hoheitsgebiet, 2056)
 Erstelle ein neues Objekt `landquart`, welches nur die Gemeinde Landquart beinhaltet und visualisiere diese.
 
 ```{r}
+#| label: uebung-5-13
+
 # Musterlösung
 landquart <- hoheitsgebiet[hoheitsgebiet$NAME == "Landquart", ]
 
@@ -233,6 +259,8 @@ tm_shape(landquart) +
 Überlagere die `TWW` Flächen mit der Gemeindegrenze von Landqart.
 
 ```{r}
+#| label: uebung-5-14
+
 # Musterlösung
 tm_shape(tww) + 
   tm_polygons() +
@@ -249,11 +277,15 @@ tm_shape(tww) +
 - Visualisiere das Resultat
 
 ```{r}
+#| label: uebung-5-15
+
 # Musterlösung
 tww_landquart <- st_intersection(tww, landquart)
 ```
 
 ```{r}
+#| label: uebung-5-16
+
  tm_shape(landquart) +
   tm_borders(col = "black") +
   tm_shape(tww_landquart) + 
@@ -277,6 +309,8 @@ layout: true
 - Alternativ können wir alle TWW Flächen selektieren, die mindestens Teilweise innerhalb des Gemeindegebietes liegen
 
 ```{r}
+#| label: uebung-5-17
+
 tww_landquart2 <- tww[landquart, ]
 ```
 
@@ -291,12 +325,16 @@ layout: false
 - Vergleiche `tww_landquart2` mit `tww_landquart`. Wie unterscheiden sich diese?
 
 ```{r}
+#| label: uebung-5-18
+
 # Musterlösung
 tww_landquart2 <- tww[landquart, ]
 ```
 
 
 ```{r}
+#| label: uebung-5-19
+
  tm_shape(landquart) +
   tm_borders(col = "black") +
   tm_shape(tww_landquart2) + 
@@ -311,6 +349,8 @@ tww_landquart2 <- tww[landquart, ]
 Exportiere `tww_landquart2` als Geopackage
 
 ```{r}
+#| label: uebung-5-20
+
 # Musterlösung
 st_write(tww_landquart2, "_data/processed/tww_landquart.gpkg", delete_layer = TRUE)
 ```

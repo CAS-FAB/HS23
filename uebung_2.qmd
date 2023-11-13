@@ -7,6 +7,8 @@ subtitle: Komplexe Vektordaten
 Erstelle ein neues R Script mit dem Namen `Uebung_2.R` und lade darin die libraries `sf` und `tmap`
 
 ```{r}
+#| label: uebung-2-1
+
 library(sf)
 library(tmap)
 ```
@@ -24,6 +26,8 @@ library(tmap)
 
 
 ```{r}
+#| label: uebung-2-2
+
 # Musterlösung
 
 #https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/shp/2056/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill.zip
@@ -40,6 +44,8 @@ library(tmap)
 Importiere das den Datensatz mit `read_sf()` und speichere den output in der Variabel `gemeindegrenzen`
 
 ```{r}
+#| label: uebung-2-3
+
 # Musterlösung
 gemeindegrenzen <- read_sf("_data/original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_BEZIRKSGEBIET.shp")
 ```
@@ -52,6 +58,8 @@ gemeindegrenzen <- read_sf("_data/original/ch.swisstopo.swissboundaries3d-gemein
 Betrachte den importierten Datensatz in der Konsole. Was für Informationen kannst du entnehmen?
 
 ```{r}
+#| label: uebung-2-4
+
 # Musterlösung
 
 # - Die Koordinaten sind im Bezugssystem `CH1903+ LV95` abgespeichert
@@ -67,6 +75,8 @@ Entferne alle Spalten bis auf `NAME`, `EINWOHNERZ` und `geometry`.
 
 
 ```{r}
+#| label: uebung-2-5
+
 
 # Musterlösung
 gemeindegrenzen <- gemeindegrenzen[, c("NAME","EINWOHNERZ","geometry")]
@@ -79,6 +89,8 @@ gemeindegrenzen <- gemeindegrenzen[, c("NAME","EINWOHNERZ","geometry")]
 Visualisiere die Gemeindegrenzen mit `plot()` und `tmap`.
 
 ```{r}
+#| label: uebung-2-6
+
 # Musterlösung
 tm_shape(gemeindegrenzen) + tm_polygons()
 ```
@@ -91,6 +103,8 @@ tm_shape(gemeindegrenzen) + tm_polygons()
 Färbe die Polygone nach der Einwohnerzahl ein. Spiele mit der Option `style` herum.
 
 ```{r}
+#| label: uebung-2-7
+
 # Musterlösung
 tm_shape(gemeindegrenzen) + tm_polygons(col = "EINWOHNERZ", style = "cont")
 ```
