@@ -1,12 +1,13 @@
-title: Übung 6
+---
 subtitle: Sampling Design mit R
+---
+
+# Übung 6
 
 
 ## Sampling Desing mit R
 
-![:scale 60%](images/sampling-design-folie.png)
-
-???
+![](images/sampling-design-folie.png)
 
 R eignet sich hervorragend um ein Sampling Design umzusetzen
 
@@ -17,13 +18,14 @@ R eignet sich hervorragend um ein Sampling Design umzusetzen
 
 ```{r}
 #| label: uebung-6-1
+#| output: false
 
-library(sf)
-library(terra)
-library(tmap)
+library("sf")
+library("terra")
+library("tmap")
 tmap_mode("plot")
 
-tww_landquart <- read_sf("_data/processed/tww_landquart.gpkg")
+tww_landquart <- read_sf("data/processed/tww_landquart.gpkg")
 ```
 
 
@@ -35,8 +37,6 @@ base_plot <- tm_shape(tww_landquart, bbox = tww_landquart[tww_landquart$Name %in
   tm_layout(legend.show = FALSE)
 ```
 
-
-layout: true
 
 
 ## Zufällig und gleichmässig verteilt
@@ -140,8 +140,6 @@ tm_shape(tww_landquart_polygon, bbox = tww_landquart[tww_landquart$Name %in% c("
 
 
 
-layout: true
-
 ## Zufällig und in Abhängigkeit der Flächengrösse verteilt
 
 
@@ -181,8 +179,6 @@ base_plot +
   tm_dots(shape = 3)
 ```
 
-
-layout: false
 
 ## Gleichmässig verteilt
 

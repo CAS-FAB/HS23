@@ -1,10 +1,13 @@
-title: Übung 1
+---
 subtitle: Einfache Vektordaten
+---
+
+# Übung 1
 
 ## Vorbereitung 
 
 
-- Erstelle ein neues RStudio Projekt
+- Erstelle ein neues ***RStudio Projekt***
 - Erstelle ein neues R-Script mit dem Namen `Uebung_1.R`
 - Lade dir `Vegauf_Aussenberg_2019_Kopfdaten.csv` (von Moodle, Kurstag 12) herunter 
 
@@ -13,54 +16,67 @@ subtitle: Einfache Vektordaten
 - Importiere die CSV `Vegauf_Aussenberg_2019_Kopfdaten.csv` gewohnt als `data.frame` in R. 
 - Speichere die `data.frame` in der Variabel `ausserberg`
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-1-1
 
-#Musterlösung
-ausserberg <- read.csv("_data/original/Vegauf_Ausserberg_2019_Kopfdaten.csv", sep = "\t")
+ausserberg <- read.csv("data/original/Vegauf_Ausserberg_2019_Kopfdaten.csv", sep = "\t")
+```
 
+```{r}
+#| echo: true
+#| output: true
 ausserberg[1:6, 1:6] # ich zeige nur die ersten 6 Spalten und Zeilen
 ```
 
+
+:::
+::::
 
 
 ## Übung 1.2 <!--3-->
 
 Such dir die Koordinaten im `data.frame` heraus. In welchem Koordinatensystem liegen diese wohl vor?
 
-```{r}
-#| label: uebung-1-2
 
-# Musterlösung
-# in CH1903+ LV95
 
-```
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
+In CH1903+ LV95
+
+:::
+::::
 
 
 ## Übung 1.3 <!--4-->
 
 Visualisiere die Erhebungsplots räumlich als Scatterplot. Die x- und y-Achsen sind jetzt räumliche Koordinaten, auf was musst du achten?
 
+
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-1-3
-
-# Musterlösung
+#| filename: Musterlösung
 plot(ausserberg$geogr..Br., ausserberg$geogr..L., asp = 1)
-# zu beachten:
-# - Reihenfolge der Koordinaten
-# - asp = 1
+
 ```
 
+zu beachten:
+- Reihenfolge der Koordinaten
+- asp = 1
 
 
-```{r}
-#| label: uebung-1-4
 
-# knitr::include_graphics(knitr::fig_chunk("scatterplot", "png"))
-```
-
-
+:::
+::::
 
 
 
@@ -69,19 +85,26 @@ plot(ausserberg$geogr..Br., ausserberg$geogr..L., asp = 1)
 
 Installiere nun das R-Package `sf` und lade es in die aktuelle Session.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-1-5
-
 #| eval: false
-# Musterlösung
-install.packages("sf") # installieren (mit Anführungs- und Schlusszeichen)
+#| filename: Musterlösung
+install.packages("sf") 
 ```
 
 ```{r}
 #| label: uebung-1-6
+#| filename: Musterlösung
 
-library(sf)            # laden (ohne Anführungs- und Schlusszeichen)
+library("sf")           
 ```
+
+:::
+::::
 
 
 
@@ -92,28 +115,35 @@ Wir machen nun aus dem `data.frame` `ausserberg` ein Vektor-Objekt und verwenden
 
 Mit dem Argument `coords = ` informieren wir dieser Funktion, wo unsere Koordinateninformation liegt. Probiere etwas rum bis es funktioniert und weise *danach* das Neue Objekt der Variabel `ausserberg_sf` zu.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-1-7
-
-# Musterlösung
+#| filename: Musterlösung
 ausserberg_sf <- st_as_sf(ausserberg, coords = c("geogr..Br.","geogr..L."))
 ```
 
 
-layout: true
+:::
+::::
+
 
 ## Übung 1.6 <!--2-->
-
 
 
 Vergleiche nun `ausserberg` und `ausserberg_sf` in der Konsole. Wodurch unterscheiden sie sich?
 
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
+- `ausserberg_sf`: hat die beiden Koordinaten-Spalten verloren und verfügt dafür neu über eine Spalte `geometry`.
+- `ausserberg_sf`: verfügt nun über Metadaten im header:
+
 ```default
-
-# `ausserberg_sf` hat die beiden Koordinaten-Spalten verloren und verfügt dafür neu über eine Spalte `geometry`.
-# `ausserberg_sf` verfügt nun über Metadaten im header:
-
 Simple feature collection with 15 features and 34 fields
 Geometry type: POINT
 Dimension:     XY
@@ -121,21 +151,13 @@ Bounding box:  xmin: 2631175 ymin: 1129737 xmax: 2631510 ymax: 1129986
 CRS:           NA
 ```
 
+:::
+::::
 
-
-```
-Simple feature collection with 15 features and 34 fields
-Geometry type: POINT
-Dimension:     XY
-Bounding box:  xmin: 2631175 ymin: 1129737 xmax: 2631510 ymax: 1129986
-*CRS:           NA
-```
 
 *Wir haben nirgends deklariert, in welchem Koordinatenbezugssystem sich unsere Koordinaten befinden.*
 
 
-
-layout: false
 
 ## Input <!--6-->
 
@@ -220,18 +242,17 @@ PROJCS["CH1903+ / LV95",
 
 Weise nun unserem Datensatz das richtige Koordinatensystem zu. Dafür brauchst du die Funktion `st_crs` sowie den EPSG Code des Koordinatensystems. 
 
+
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-1-8
-
-# Musterlösung
+#| filename: Musterlösung
 st_crs(ausserberg_sf) <- 2056
-```
 
-
-```{r}
-#| label: uebung-1-9
-
-ausserberg_sf
+ausserberg_sf[1:4, 1:6] 
 ```
 
 ```
@@ -239,9 +260,12 @@ Simple feature collection with 15 features and 34 fields
 Geometry type: POINT
 Dimension:     XY
 Bounding box:  xmin: 2631175 ymin: 1129752 xmax: 2631210 ymax: 1129910
-*Projected CRS: CH1903+ / LV95
+Projected CRS: CH1903+ / LV95
 ```
 
+
+:::
+::::
 
 
 
@@ -251,14 +275,21 @@ Bounding box:  xmin: 2631175 ymin: 1129752 xmax: 2631210 ymax: 1129910
 - `aussenberg_sf` reagiert nun anders auf gewisse functions
 - teste die Funktion `plot` mit `aussenberg_sf`
 
+
+
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-1-10
-
-# Musterlösung
+#| filename: Musterlösung
 # plot(ausserberg_sf) <- macht einen Plot pro Spalte, maximal 9
 plot(ausserberg_sf["Verbuschung"]) # Plottet nur die ausgewählte Spalte
 ```
 
+:::
+::::
 
 
 ## Input <!--6-->
@@ -269,20 +300,20 @@ plot(ausserberg_sf["Verbuschung"]) # Plottet nur die ausgewählte Spalte
 
 ```{r}
 #| label: uebung-1-11
+#| eval: false
+#| echo: true
 
 install.packages("tmap")
 ```
 
 ```{r}
 #| label: uebung-1-12
+#| output: false
 
-library(tmap)
+library("tmap")
 
 ```
 
-???
-
-- Der automatische Plot mit `plot()` ist noch nicht wirklich anschaulich. 
 
 
 
@@ -296,127 +327,34 @@ library(tmap)
 
 ```{r}
 #| label: uebung-1-13
+#| layout-ncol: 2
+
 
 tm_shape(ausserberg_sf) + # datensatz        
   tm_dots()               # darstellungsform 
-```
 
-```{r}
-#| label: uebung-1-14
-
-# knitr::include_graphics(knitr::fig_chunk("tmap1", "png"))
-```
-
-
-
-
-
-```{r}
-#| label: uebung-1-15
-
-tm_shape(ausserberg_sf) + # datensatz        
-  tm_bubbles()            # darstellungsform 
-```
-
-
-
-```{r}
-#| label: uebung-1-16
-
-# knitr::include_graphics(knitr::fig_chunk("tmap2", "png"))
-```
-
-
-
-
-
-
-```{r}
-#| label: uebung-1-17
+tm_shape(ausserberg_sf) +  
+  tm_bubbles()            
 
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "Verbuschung")
-```
 
-
-
-```{r}
-#| label: uebung-1-18
-
-# knitr::include_graphics(knitr::fig_chunk("tmap3", "png"))
-```
-
-
-
-
-
-```{r}
-#| label: uebung-1-19
 
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "Verbuschung",
              shape = "Vegetationstyp")
-```
-
-
-
-```{r}
-#| label: uebung-1-20
-
-# knitr::include_graphics(knitr::fig_chunk("tmap4", "png"))
-```
-
-
-
-
-
-```{r}
-#| label: uebung-1-21
 
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "Verbuschung",
              shape = "Vegetationstyp") +
   tm_layout(legend.outside = TRUE)
   
-```
-
-
-
-```{r}
-#| label: uebung-1-22
-
-# knitr::include_graphics(knitr::fig_chunk("tmap5", "png"))
-```
-
-
-
-
-
-```{r}
-#| label: uebung-1-23
 
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "Verbuschung",
              shape = "Vegetationstyp") +
   tm_layout(legend.outside = TRUE,
             legend.position = c("right","bottom"))
-  
-```
-
-
-
-```{r}
-#| label: uebung-1-24
-
-# knitr::include_graphics(knitr::fig_chunk("tmap6", "png"))
-```
-
-
-
-
-
-```{r}
-#| label: uebung-1-25
 
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "Verbuschung",
@@ -429,34 +367,19 @@ tm_shape(ausserberg_sf) +
 
 
 
-```{r}
-#| label: uebung-1-26
-
-# knitr::include_graphics(knitr::fig_chunk("tmap7", "png"))
-```
-
-
-
-
-
-layout: false
-
 ## Übung 1.10 <!--7-->
 
 Erstellt nun eine eigene Karte mit `tmap` und euren Daten. Versucht, den unten stehenden Plot zu rekonstruieren (oder probiert was eigenes). 
 
 
-```{r}
-#| label: uebung-1-27
 
-```
-
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
 ```{r}
 #| label: uebung-1-28
-
-
-# Musterlösung
+#| filename: Musterlösung
 
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "gew_Temperaturzahl", palette = "viridis") +
@@ -466,10 +389,11 @@ tm_shape(ausserberg_sf) +
           lines = FALSE)
 ```
 
+:::
+::::
 
 
 
-class: highlight-last-item
 
 ## Input <!--4-->
 
@@ -493,11 +417,14 @@ class: highlight-last-item
 - Schaut euch diesen Datensatz an, was hat sich verändert?
 - Tipp: Nutzt dafür die Funktion `st_transform()`
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 
 ```{r}
 #| label: uebung-1-29
-
-# Musterlösung
+#| filename: Musterlösung
 ausserberg_sf_wgs84 <- st_transform(ausserberg_sf, 4326)
 ```
 
@@ -507,10 +434,14 @@ Simple feature collection with 15 features and 34 fields
 Geometry type: POINT
 Dimension:     XY
 Bounding box:  xmin: 7.843394 ymin: 46.3183 xmax: 7.847758 ymax: 46.32055
-*Geodetic CRS:  WGS 84
+Geodetic CRS:  WGS 84
 ```
+
 Zudem haben sich die Koordinatenwerte verändert. Neu: `POINT (7.843859 46.31987)`
 
+
+:::
+::::
 
 exclude: true
 
@@ -519,14 +450,13 @@ exclude: true
 Wiederhole nochmal den letzten `tmap` plot , diesmal mit dem Datensatz `ausserberg_sf_wgs84`. Wie unterscheiden sich die Plots? 
 
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-1-30
-
-# Musterlösung
-
-# Musterlösung
-# - Die markierten Koordinaten haben sich verändert
-# - Kaum merklich haben sich auch die Positionen der Punkte verändert (unterschiedliches Datum)
+#| filename: Musterlösung
 
 
 tm_shape(ausserberg_sf_wgs84) +
@@ -537,12 +467,12 @@ tm_shape(ausserberg_sf_wgs84) +
           lines = FALSE)
 ```
 
+- Die markierten Koordinaten haben sich verändert
+- Kaum merklich haben sich auch die Positionen der Punkte verändert (unterschiedliches Datum)
 
 
-```{r}
-#| label: uebung-1-31
-
-```
+:::
+::::
 
 
 
@@ -559,7 +489,7 @@ tm_shape(ausserberg_sf_wgs84) +
 ```{r}
 #| label: uebung-1-32
 
-write_sf(ausserberg_sf, "_data/processed/ausserberg.gpkg")
+write_sf(ausserberg_sf, "data/processed/ausserberg.gpkg")
 ```
 
 
@@ -568,7 +498,7 @@ Beim Einlesen von `ausserberg.gpkg` ist R nun sofort klar, dass es sich um Punkt
 ```{r}
 #| label: uebung-1-33
 
-ausserberg_sf <- read_sf("_data/processed/ausserberg.gpkg")
+ausserberg_sf <- read_sf("data/processed/ausserberg.gpkg")
 ```
 
 
@@ -583,11 +513,14 @@ ausserberg_sf <- read_sf("_data/processed/ausserberg.gpkg")
 - Transformiere die Koordinaten anschliessend in WGS84
 - erstelle eine Karte mit `tmap`
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-1-34
-
-# Musterlösung
-hangenmoos <- readxl::read_excel("_data/original/daten_vegedaz/Hagenmoos.xlsx", "KopfdatenVertikal")
+#| filename: Musterlösung
+hangenmoos <- readxl::read_excel("data/original/daten_vegedaz/Hagenmoos.xlsx", "KopfdatenVertikal")
 
 hangenmoos_sf <- st_as_sf(hangenmoos, coords = c("X", "Y"))
 st_crs(hangenmoos_sf) <- 21781
@@ -600,8 +533,8 @@ tm_shape(hangenmoos_sf_wgs84) +
 
 ```
 
-
-
+:::
+::::
 
 
 
@@ -630,13 +563,13 @@ tm_shape(hangenmoos_sf_wgs84) +
 - Mit `tmap` lassen sich aber auch sehr leicht interaktive Karten erstellen
 - Setze dafür `tmap_mode("view")` und führe dein letzter Code für die Erstellung eines tmap-Plots nochmals aus
   
-
-
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
 ```{r}
 #| label: uebung-1-36
-
-# Musterlösung
+#| filename: Musterlösung
 tmap_mode("view")
 
 tm_shape(hangenmoos_sf_wgs84) +  tm_bubbles(col = "Bereich")  +  tm_layout(legend.outside = TRUE)
@@ -644,13 +577,13 @@ tm_shape(hangenmoos_sf_wgs84) +  tm_bubbles(col = "Bereich")  +  tm_layout(legen
 
 
 
+:::
+::::
+
+
+:::{.callout-note}
 
 ## Rückblick <!-- -->
-
-
-![](images/rückblick.jpg)
-
-
 
 - Bisher haben wir mit Vektordaten vom Typ `Point` gearbeitet
 - Das dem zugrundeliegende, konzeptionelle Datenmodell ist das Entitäten Modell
@@ -658,15 +591,11 @@ tm_shape(hangenmoos_sf_wgs84) +  tm_bubbles(col = "Bereich")  +  tm_layout(legen
 - In `R` haben wir diese Punktdaten als `data.frame` importiert und danach in ein `sf` Objekt konvertiert
 - `sf`-Objekte zeichnen sich dadurch aus, dass sie über eine Geometriespalte sowie über Metadaten verfügen
 
+:::
 
 
-
+:::{.callout-note}
 ## Ausblick
-
-
-![](images/ausblick.jpg)
-
-
 
 - Punktdaten lassen sich gut in CSV abspeichern, weil sich die Geometrie so gut vorhersehbar ist (jeder Punkte besteht aus genau einer x- und einer y-Koordinate)
 - Linien und Polygone sind komplexer, sie können aus beliebig vielen Knoten bestehen
@@ -674,6 +603,7 @@ tm_shape(hangenmoos_sf_wgs84) +  tm_bubbles(col = "Bereich")  +  tm_layout(legen
 - Das bekannteste Format für Vektordaten ist das *shapefile*
 - Shapefiles haben aber Nachteile ein sinnvolleres Format ist deshalb *geopackage*
 
+:::
 
 
 

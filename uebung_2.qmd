@@ -1,6 +1,9 @@
 
-title: Übung 2
+---
 subtitle: Komplexe Vektordaten
+---
+
+# Übung 2
 
 ## Vorbereitung <!--1-->
 
@@ -8,9 +11,10 @@ Erstelle ein neues R Script mit dem Namen `Uebung_2.R` und lade darin die librar
 
 ```{r}
 #| label: uebung-2-1
+#| output: false
 
-library(sf)
-library(tmap)
+library("sf")
+library("tmap")
 ```
 
 
@@ -25,17 +29,17 @@ library(tmap)
 - Entzippe das File (sofern nötig) und schau dir den Inhalt an
 
 
-```{r}
-#| label: uebung-2-2
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
-# Musterlösung
+<https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d/swissboundaries3d_2023-01/swissboundaries3d_2023-01_2056_5728.gpkg.zip>
 
-#https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/shp/2056/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill.zip
-
-#Shortlink (für diesen Kurs): https://bit.ly/3CaAj5W
+Shortlink (für diesen Kurs): <https://bit.ly/47wCOzo>
 
 
-```
+:::
+::::
 
 
 
@@ -43,13 +47,19 @@ library(tmap)
 
 Importiere das den Datensatz mit `read_sf()` und speichere den output in der Variabel `gemeindegrenzen`
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-2-3
-
-# Musterlösung
-gemeindegrenzen <- read_sf("_data/original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_BEZIRKSGEBIET.shp")
+#| filename: Musterlösung
+gemeindegrenzen <- read_sf("data/original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_BEZIRKSGEBIET.shp")
 ```
 
+
+:::
+::::
 
 
 
@@ -57,16 +67,16 @@ gemeindegrenzen <- read_sf("_data/original/ch.swisstopo.swissboundaries3d-gemein
 
 Betrachte den importierten Datensatz in der Konsole. Was für Informationen kannst du entnehmen?
 
-```{r}
-#| label: uebung-2-4
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
-# Musterlösung
+- Die Koordinaten sind im Bezugssystem `CH1903+ LV95` abgespeichert
+- Es handelt sich um 159 Gemeinden und 21 Attribute, die meisten unbrauchbar
 
-# - Die Koordinaten sind im Bezugssystem `CH1903+ LV95` abgespeichert
-# - Es handelt sich um 159 Gemeinden und 21 Attribute, die meisten unbrauchbar
 
-```
-
+:::
+::::
 
 
 ## Übung 2.4 <!--3-->
@@ -74,41 +84,59 @@ Betrachte den importierten Datensatz in der Konsole. Was für Informationen kann
 Entferne alle Spalten bis auf `NAME`, `EINWOHNERZ` und `geometry`.
 
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-2-5
-
-
-# Musterlösung
+#| filename: Musterlösung
+#| 
 gemeindegrenzen <- gemeindegrenzen[, c("NAME","EINWOHNERZ","geometry")]
 ```
 
+
+:::
+::::
 
 
 ## Übung 2.5 <!--4-->
 
 Visualisiere die Gemeindegrenzen mit `plot()` und `tmap`.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-2-6
-
-# Musterlösung
+#| filename: Musterlösung
 tm_shape(gemeindegrenzen) + tm_polygons()
 ```
 
 
+
+:::
+::::
 
 
 ## Übung 2.6 <!--4-->
 
 Färbe die Polygone nach der Einwohnerzahl ein. Spiele mit der Option `style` herum.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-2-7
-
-# Musterlösung
+#| filename: Musterlösung
 tm_shape(gemeindegrenzen) + tm_polygons(col = "EINWOHNERZ", style = "cont")
 ```
 
 
 
+
+:::
+::::
 

@@ -1,6 +1,8 @@
-title: Übung 3
+---
 subtitle: Einfache Rasterdaten
+---
 
+# Übung 3
 
 ## Vorbereitung <!--2-->
 
@@ -11,9 +13,10 @@ Erstelle dann ein neues R Script mit dem Namen `Uebung_3.R` und lade darin die l
 
 ```{r}
 #| label: uebung-3-1
+#| output: false
 
-library(sf)
-library(tmap)
+library("sf")
+library("tmap")
 ```
 
 
@@ -27,20 +30,19 @@ library(tmap)
   - [swisstopo.admin.ch](https://www.swisstopo.admin.ch)
 - Entzippe das File (sofern nötig) und schau dir den Inhalt an
 
-```{r}
-#| label: uebung-3-2
 
-# Musterlösung
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
-#https://www.swisstopo.admin.ch/de/geodata/height/dhm25200.html
-#Shortlink (für diesen Kurs): https://bit.ly/3Hj4X0K
-
-
-```
+- <https://www.swisstopo.admin.ch/de/geodata/height/dhm25200.html>
+- Shortlink (für diesen Kurs): <https://bit.ly/3Hj4X0K>
 
 
+:::
+::::
 
-layout: true
+
 
 ## Input: Raster Datenformate  <!--4-->
 
@@ -49,44 +51,32 @@ layout: true
 Inhalt des heruntergeladenen zip-Files:
 
 
-### Eigentliche Daten:
-- DHM200_polyface.dxf
-- DHM200.asc
-- DHM200.xyz
-
-
-
-### Metadaten und Lizenzbedigungen:
-- license.txt
-- Metadata_gm03.xml
-- Metadata_PDF.pdf
-- Metadata_xml_iso19139.xml
-
-
+- Eigentliche Daten:
+  - DHM200_polyface.dxf
+  - DHM200.asc
+  - DHM200.xyz
+- Metadaten und Lizenzbedigungen:
+  - license.txt
+  - Metadata_gm03.xml
+  - Metadata_PDF.pdf
+  - Metadata_xml_iso19139.xml
 
 
 Der gleiche Datensatz (`DHM25 200`) in 3 unterschiedlichen Datenformaten:
 
-- ~~DHM200_polyface.dxf~~
 - DHM200.asc
 - DHM200.xyz
-
-???
-
-- 3x die gleichen Daten!
-- dxf wird eher im CAD bereich verwendet, dieses werden wir ignorieren (könnt ihr löschen)
+- ~~DHM200_polyface.dxf~~ (← CAD bereich)
 
 
-
-
-## ESRI ArcInfo ASCII Grid  <!--1-->
+### ESRI ArcInfo ASCII Grid  <!--1-->
 
 - Dateierweiterung \*.asc
 - ein Datenformat von ESRI (siehe die [Spezifikationen](http://old.geotools.org/ArcInfo-ASCII-Grid-format_5250.html))
 - beginnt mit mehreren Zeilen Metaadaten, darauf folgen die eigentlichen Werte
 - kann in einem Texteditor geöffnet werden:
 
-```{}
+```{.default}
 NCOLS 1926
 NROWS 1201
 XLLCORNER 479900.
@@ -102,7 +92,7 @@ NODATA_VALUE -9999.
 
 
 
-## ASCII Gridded XYZ  <!--1-->
+### ASCII Gridded XYZ  <!--1-->
 
 - Dateierweiterung \*.xyz
 - Ein offenes Format
@@ -115,12 +105,13 @@ NODATA_VALUE -9999.
 655400.00 302000.00 831.20
 ```
 
-
+### Raster in `R`
 
 Um Rasterdaten in R zu importieren verwenden wir das Package `terra`.
 
 ```{r}
 #| label: uebung-3-3
+#| eval: false
 
 install.packages("terra")
 ```
@@ -129,9 +120,9 @@ install.packages("terra")
 ```{r}
 #| label: uebung-3-4
 
-library(terra)
+library("terra")
 
-dhm200 <- rast("_data/original/dhm25_200/DHM200.xyz")
+dhm200 <- rast("data/original/dhm25_200/DHM200.xyz")
 ```
 
 - Aus `terra` benötigen wir die Funktion `rast`
@@ -142,31 +133,12 @@ dhm200 <- rast("_data/original/dhm25_200/DHM200.xyz")
 #| label: uebung-3-5
 
 dhm200
+
+plot(dhm200)  # für einfache visualisierungen
+
 ```
 
 
-
-
-```{r}
-#| label: uebung-3-6
-
-dhm200
-```
-
-
-
-Eine einfache Visualisierung erhält man mit dem `plot()` Befehl:
-
-```{r}
-#| label: uebung-3-7
-
-plot(dhm200)
-```
-
-
-
-
-layout: false
 
 ## Übung 3.2 <!--3-->
 
@@ -174,12 +146,18 @@ In welchem Koordinatensystem befindet sich dieses Höhenmodell?
 
 Tipp: Konsultiere die Metadaten!
 
-## Lösung
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
 ![](images/ref.png)
 
-&rarr; im alten Schweizer Koordinatensystem CH1903 LV03
+→ im alten Schweizer Koordinatensystem CH1903 LV03
 
+
+
+:::
+::::
 
 ## Übung 3.2 <!--3-->
 
@@ -189,7 +167,7 @@ Wie hoch ist die Auflösung?
 
 ![](images/res.png)
 
-&rarr; 200 Meter
+→ 200 Meter
 
 
 
@@ -199,15 +177,12 @@ Importiere `DHM200` in R und schau dir das Objekt in der Konsole sowie mit `plot
 
 ```{r}
 #| label: uebung-3-8
-
-# Musterlösung
-dhm200 <- rast("_data/original/dhm25_200/DHM200.xyz")
+#| filename: Musterlösung
+dhm200 <- rast("data/original/dhm25_200/DHM200.xyz")
 dhm200
 plot(dhm200)
 ```
 
-
-layout: true
 ## Input: Koordinatenbezugssystem *festlegen*
 
 
@@ -237,12 +212,8 @@ dhm200
 
 
 
-layout: true
-
 ## Input: Koordinatenbezugssystem *transformieren*
 
-
-class: highlight-last-item
 - Koordinatenbezugssystem von `dhm200`: `CH1903 LV03` bzw. `EPSG: 21781`
 - Analog Vektordaten: in das *neue* Schweizer Koordinatenbezugssytem transformieren
 - Vektordaten: Funktion `st_transform`
@@ -270,21 +241,25 @@ dhm200_2056
 
 
 
-layout: false
-
 ## Übung 3.4 <!--4-->
 
 - Transformiere `dhm200` in das Koordinatenbezugssystem `CH1903+ LV95`
 - Speichere den Output als `dhm200_2056`
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-3-14
-
-# Musterlösung
+#| filename: Musterlösung
 dhm200_2056 <- project(dhm200, "epsg: 2056")
 ```
 
 
+
+:::
+::::
 
 
 
@@ -297,35 +272,49 @@ Tipp: Um ein Polygon zu visualisieren sind wir wie folgt vorgegangen
 
 ```{r}
 #| label: uebung-3-15
+#| eval: false
 
 tm_shape(gemeindegrenzen) + tm_polygons()
 ```
 
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 
 ```{r}
 #| label: uebung-3-16
-
-# Musterlösung
+#| filename: Musterlösung
+#| 
 # tmap_mode("view") # optional
 tm_shape(dhm200_2056) + tm_raster()
 ```
 
 
 
+:::
+::::
+
 
 ## Übung 3.6 <!--4-->
 
 Verändere die Darstellungsweise des Rasters mithilfe von `style` und `palette`. Tipp, schau dir die Hilfe von `?tm_raster` an.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-3-17
-
-# Musterlösung
+#| filename: Musterlösung
 tm_shape(dhm200_2056) + tm_raster(style = "cont", palette = "viridis")
 ```
 
 
+
+:::
+::::
 
 ## Input <!--3-->
 
@@ -338,7 +327,7 @@ tm_shape(dhm200_2056) + tm_raster(style = "cont", palette = "viridis")
 
 #| eval: false
 #| 
-writeRaster(dhm200_2056,"_data/processed/dhm200_2056.tif", overwrite = TRUE)
+writeRaster(dhm200_2056,"data/processed/dhm200_2056.tif", overwrite = TRUE)
 ```
 
 - beim Import ist die CRS Information bekannt (CRS setzen und transformieren ist nicht mehr nötig)
@@ -346,7 +335,7 @@ writeRaster(dhm200_2056,"_data/processed/dhm200_2056.tif", overwrite = TRUE)
 ```{r}
 #| label: uebung-3-19
 
-dhm200_2056 <- rast("_data/processed/dhm200_2056.tif")
+dhm200_2056 <- rast("data/processed/dhm200_2056.tif")
 
 dhm200_2056
 ```
@@ -357,21 +346,29 @@ dhm200_2056
 
 Exportiere `dhm200_2056` als `tif` File
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-3-20
-
 #| eval: false
-# Musterlösung
-writeRaster(dhm200_2056,"_data/processed/dhm200_2056.tif")
+#| filename: Musterlösung
+
+
+writeRaster(dhm200_2056,"data/processed/dhm200_2056.tif")
 ```
 
 
+:::
+::::
 
-class: highlight-last-item
 
+:::{.callout-note}
 ## Rückblick
 
 Wir haben...
+
 - ein Höhenmodell der Schweiz heruntergeladen
 - 3 unterschiedliche Datenformaten von Rasterdaten kennengelernt
 - ein Rasterdatensatz mithilfe von `rast` aus `terra` in R importiert
@@ -381,6 +378,6 @@ Wir haben...
 - mit verschiedenen Darstellungformen in `tmap` gearbeitet (optionen `style` und `palette`)
 - DHM: *ein* Wert pro Zelle. Es gibt aber Situationen, wo wir mehreren Werten pro Zelle benötigen
 
-
+:::
 
 
