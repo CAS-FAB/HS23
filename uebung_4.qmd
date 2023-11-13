@@ -1,0 +1,240 @@
+title: Übung 4
+subtitle: Komplexe Rasterdaten
+
+
+- Satelliten und Drohnen nehmen meist verschiedene Spektren von Elektromagnetischen Wellen auf
+- diese Spektren werden in unterschiedlichen Datensätzen abgespeichert
+- diese Datensätze müssen wieder zusammengefügt werden um ein Gesamtbild zu erhalten
+- Beispiel: Rot, Grün und Blau werte fügen sich zu einem Farbluftbild zusammen
+
+
+
+
+![](https://datacarpentry.org/organization-geospatial/fig/dc-spatial-raster/RGBSTack_1.jpg)
+<!-- https://datacarpentry.org/organization-geospatial/01-intro-raster-data/ -->
+
+
+
+
+
+
+## Übung 4.1 <!-- 3-->
+
+
+- Ladet euch den Datensatz [`swissimage 25` ](https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage25.html) von Swisstopo herunter
+- Shortlink: https://bit.ly/3qGTjXN
+- Enzipped den Inhalt in euer RStudio Projekt und schaut den Inhalt an
+  - Was ist das Koordinatenbezugssystem? Wie hoch ist die räumliche Auflösung?
+
+
+
+
+![](https://www.swisstopo.admin.ch/content/swisstopo-internet/de/geodata/images/ortho/swissimage25/_jcr_content/contentPar/textimage/image.transform.1606150942318/noresize/image.swissimage25.jpg)
+<!-- https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage25.html -->
+
+
+```{r}
+# Musterlösung
+# 1. Koordinatenbezugssystem: EPSG 2056
+# 2. räumliche Auflösung: 25m
+
+
+```
+
+layout: true
+
+## Übung 4.2 <!-- 3-->
+
+
+
+- Erstelle ein neues R Script mit dem Namen `Uebung_4.R` 
+- Lade die libraries `sf`, `tmap` und `terra`. 
+- Importiere den Swissimage Datensatz 
+- Weise dem importierten Datensatz das Korrekte Koordinatenbezugssystem zu
+- Schau dir den Datensatz in der Konsole sowie mit `plot()` an
+```{r}
+# Musterlösung
+library(sf)
+library(tmap)
+library(terra)
+
+swissimage <- rast("_data/original/swissimage25/SWISSIMAGE25m/SI25-2012-2013-2014.tif")
+
+crs(swissimage) <- "epsg: 2056"
+
+```
+
+
+
+
+```{r}
+plot(swissimage)
+```
+
+
+
+
+```{r}
+swissimage
+```
+
+
+
+layout: false
+
+## Input: RGB Plots mit `tmap`
+- Um ein `rgb` Datensatz mit `tmap` zu plotten, verwenden wir nicht mehr `tm_raster()` sondern `tm_rgb`
+
+```{r}
+tmap_mode("plot")
+```
+
+
+```{r}
+tm_shape(swissimage) + 
+  tm_rgb()
+```
+
+
+
+
+class: highlight-last-item
+
+## Input: Seltsamer bug mit `tmap`  <!-- 3-->
+- Obwohl wir das Koordinatenbezugssystem korrekt gesetzt haben, kann `tmap` diese nicht interpretieren
+- dies äussert sich in der folgenden Warnung:
+- `Current projection of shape swissimage unknown and cannot be determined.`
+- Hier kann ich euch nur folgenden (unbefriedigenden) Workaround anbieten
+
+```{r}
+swissimage <- project(swissimage, "epsg: 2056")
+```
+
+
+
+
+```{r}
+# zwar meldet `tmap` nun "Discarded datum CH1903+ in Proj4 definition" 
+# dies muss uns nicht kümmern
+tm_shape(swissimage) + 
+  tm_rgb()
+
+```
+
+
+
+## Übung 4.3
+
+Exportiert `swissimage` als `tif`-File
+
+```{r}
+#| eval: false
+# Musterlösung
+terra::writeRaster(swissimage, "_data/processed/swissimage.tif", overwrite = TRUE)
+```
+
+
+
+
+
+## Input
+- Heute haben wir das Höhenmodell `dhm200` importiert
+- Höhenmodell mit 200m Auflösung (&rarr; grob! )
+- swisstopo stellt zusätzlich das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung zur Verfügung (https://bit.ly/3kFgZrF)
+- durch die höhere Auflösung dauert das transformieren in ein neues Koordinatensystem etwas länger
+
+
+
+
+## Übung 4.4
+
+- Ladet euch das das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung herunter (https://bit.ly/3kFgZrF)
+- importiert es in R
+- setzt das korrekte CRS
+- transformiert es in EPSG 2056 und verwendet dabei folgende Optionen: 
+  - mit `filename =` den Output direkt in ein File speichern
+  - mit `progress = TRUE` den Fortschritt anzeigen lassen
+- visualisiert es mit `tmap`
+
+```{r}
+# Musterlösung
+dhm25 <- rast("_data/original/DHM25_MM_ASCII_GRID/ASCII_GRID_1part/dhm25_grid_raster.asc")
+crs(dhm25) <- "epsg: 21781"
+
+terra::project(dhm25, "epsg: 2056", filename = "_data/dhm25_2056.tif", progress = TRUE)
+```
+
+
+
+
+## Übung 4.5 (Optional und Open End)
+
+Suche dir auf den gängigen Portalen (s.u.) einen spannenden Datensatz und visualisiere diesen
+  - [opendata.swiss](https://opendata.swiss/)
+  - [map.geo.admin.ch](https://map.geo.admin.ch)
+  - [swisstopo.admin.ch](https://www.swisstopo.admin.ch)
+  
+
+
+## Übung 4.6 (Optional und Open End)
+
+- Lade dir swissimage daten in der Auflösung von 2m herunter und importiere sie in `R`
+- Achtung! Sehr anspruchsvoll!!
+- Tipps: du brauchst dazu:
+  - `list.files()`
+  - `lapply`
+  - `do.call`
+  - `mosaic`
+
+
+
+
+
+```{r}
+#| eval: false
+# Musterlösung
+
+# Daten herunterladen:
+
+links <- read.csv("_data/original/swissimage_2m_landquart/swissimage_2m_urls.csv",header = FALSE)
+
+links <- links$V1
+
+filenames <- basename(links)
+
+for (i in seq_along(links)) {
+  download.file(links[i], file.path("_data/original/swissimage_2m_landquart/", filenames[i]))
+}
+
+# Daten importieren:
+
+swissimage_paths <- list.files("_data/original/swissimage_2m_landquart",full.names = TRUE)
+
+swissimage_list <- lapply(swissimage_paths, function(x){rast(x)})
+
+swiss_mosaic <- do.call(terra::mosaic, swissimage_list)
+
+writeRaster(swiss_mosaic, "_data/processed/swissimage_2m_landquart.tif", overwrite = TRUE)
+
+```
+
+
+exclude: true
+
+## Übung 4.7 
+
+
+
+```{r}
+tww_landquart <- read_sf("_data/processed/tww_landquart.gpkg")
+
+swissimage <- terra::rast("_data/processed/swissimage_2m_landquart.tif")
+
+tm_shape(swissimage) +
+  tm_rgb() +
+  tm_shape(tww_landquart, is.master = TRUE) +
+  tm_polygons() +
+  tm_scale_bar(position = c(1,0), just = c(1,0),bg.color = "white")
+```
+
+

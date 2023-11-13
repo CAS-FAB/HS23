@@ -1,0 +1,614 @@
+title: Übung 1
+subtitle: Einfache Vektordaten
+
+## Vorbereitung 
+
+
+- Erstelle ein neues RStudio Projekt
+- Erstelle ein neues R-Script mit dem Namen `Uebung_1.R`
+- Lade dir `Vegauf_Aussenberg_2019_Kopfdaten.csv` (von Moodle, Kurstag 12) herunter 
+
+## Übung 1.1 <!--10-->
+
+- Importiere die CSV `Vegauf_Aussenberg_2019_Kopfdaten.csv` gewohnt als `data.frame` in R. 
+- Speichere die `data.frame` in der Variabel `ausserberg`
+
+```{r}
+#Musterlösung
+ausserberg <- read.csv("_data/original/Vegauf_Ausserberg_2019_Kopfdaten.csv", sep = "\t")
+
+ausserberg[1:6, 1:6] # ich zeige nur die ersten 6 Spalten und Zeilen
+```
+
+
+
+## Übung 1.2 <!--3-->
+
+Such dir die Koordinaten im `data.frame` heraus. In welchem Koordinatensystem liegen diese wohl vor?
+
+```{r}
+# Musterlösung
+# in CH1903+ LV95
+
+```
+
+
+
+## Übung 1.3 <!--4-->
+
+Visualisiere die Erhebungsplots räumlich als Scatterplot. Die x- und y-Achsen sind jetzt räumliche Koordinaten, auf was musst du achten?
+
+```{r}
+# Musterlösung
+plot(ausserberg$geogr..Br., ausserberg$geogr..L., asp = 1)
+# zu beachten:
+# - Reihenfolge der Koordinaten
+# - asp = 1
+```
+
+
+
+```{r}
+# knitr::include_graphics(knitr::fig_chunk("scatterplot", "png"))
+```
+
+
+
+
+
+
+## Übung 1.4 <!--3-->
+
+Installiere nun das R-Package `sf` und lade es in die aktuelle Session.
+
+```{r}
+#| eval: false
+# Musterlösung
+install.packages("sf") # installieren (mit Anführungs- und Schlusszeichen)
+```
+
+```{r}
+library(sf)            # laden (ohne Anführungs- und Schlusszeichen)
+```
+
+
+
+
+## Übung 1.5 <!--5-->
+
+Wir machen nun aus dem `data.frame` `ausserberg` ein Vektor-Objekt und verwenden dazu die Funktion `st_as_sf()` aus der eben installierten Library `sf`. 
+
+Mit dem Argument `coords = ` informieren wir dieser Funktion, wo unsere Koordinateninformation liegt. Probiere etwas rum bis es funktioniert und weise *danach* das Neue Objekt der Variabel `ausserberg_sf` zu.
+
+```{r}
+# Musterlösung
+ausserberg_sf <- st_as_sf(ausserberg, coords = c("geogr..Br.","geogr..L."))
+```
+
+
+layout: true
+
+## Übung 1.6 <!--2-->
+
+
+
+Vergleiche nun `ausserberg` und `ausserberg_sf` in der Konsole. Wodurch unterscheiden sie sich?
+
+
+```default
+
+# `ausserberg_sf` hat die beiden Koordinaten-Spalten verloren und verfügt dafür neu über eine Spalte `geometry`.
+# `ausserberg_sf` verfügt nun über Metadaten im header:
+
+Simple feature collection with 15 features and 34 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 2631175 ymin: 1129737 xmax: 2631510 ymax: 1129986
+CRS:           NA
+```
+
+
+
+```
+Simple feature collection with 15 features and 34 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 2631175 ymin: 1129737 xmax: 2631510 ymax: 1129986
+*CRS:           NA
+```
+
+*Wir haben nirgends deklariert, in welchem Koordinatenbezugssystem sich unsere Koordinaten befinden.*
+
+
+
+layout: false
+
+## Input <!--6-->
+
+Nun wollen wir unserem Datensatz das richtige Koordinatenreferenzsystem zuweisen. Wie sprechen wir das korrekte Koordinatensystem `CH1903+ LV95` an?
+
+Im Wesentlichen gibt es 3 Methoden, ein Koordinatenreferenzsystem anzusprechen: 
+
+- proj.4
+- Well known text wkt
+- EPSG
+
+
+
+### proj.4
+
+- In einem `proj.4`-string werden alle wichtige Aspekte des Koordinatenreferensystems abgespeichert (ellipse, datum, projection units)
+- der `proj.4`-strings verwenden ein `key=value` system, die mit `+` kombiniert werden
+- der `proj.4`-string von `CH1903+LV95` sieht folgendermassen aus: 
+
+```{}
++proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 
++x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 
++units=m +no_defs
+```
+
+
+
+### Well known text wkt
+
+- Logik ähnlich wie `proj.4`-strings
+- verwenden einen anderen Syntax (`key[value]`)
+- der wkt von `CH1903+LV95` sieht folgendermassen aus
+
+```{}
+PROJCS["CH1903+ / LV95",
+    GEOGCS["CH1903+",
+        DATUM["CH1903+",
+            SPHEROID["Bessel 1841",6377397.155,299.1528128,
+                AUTHORITY["EPSG","7004"]],
+            TOWGS84[674.374,15.056,405.346,0,0,0,0],
+            AUTHORITY["EPSG","6150"]],
+        PRIMEM["Greenwich",0,
+            AUTHORITY["EPSG","8901"]],
+        UNIT["degree",0.0174532925199433,
+            AUTHORITY["EPSG","9122"]],
+        AUTHORITY["EPSG","4150"]],
+    PROJECTION["Hotine_Oblique_Mercator_Azimuth_Center"],
+    PARAMETER["latitude_of_center",46.95240555555556],
+    PARAMETER["longitude_of_center",7.439583333333333],
+    PARAMETER["azimuth",90],
+    PARAMETER["rectified_grid_angle",90],
+    PARAMETER["scale_factor",1],
+    PARAMETER["false_easting",2600000],
+    PARAMETER["false_northing",1200000],
+    UNIT["metre",1,
+        AUTHORITY["EPSG","9001"]],
+    AXIS["Y",EAST],
+    AXIS["X",NORTH],
+    AUTHORITY["EPSG","2056"]]
+```
+
+
+
+### EPSG Code
+
+- die European Petroleum Survey Group (EPSG): ein wissenschaftliche Organisation (Geodäsie, Vermessung und Kartographie)
+
+- öffentliche Datenbank um Koordinatenbezugssysteme (sowie Ellipsoide und Geodätisches Datumsangaben) festzuhalten
+- jede Einträge hat einen Referenz Code (siehe [epsg.io](https://epsg.io/))
+-  Wie lautet der EPSG Code für `CH1903+LV95`?
+- der EPSG Code ist der einfachste Weg, ein Koordinatenbezugssystem anzusprechen
+- am besten ist, man notiert sich die EPSG Codes unserer vier Wichtigsten Koordinatenbezugssysteme:
+  - `CH1903+ LV95`: `2056`
+  - `CH1903  LV03`: `21781`
+    - `WGS84`: `4326`
+    - `WGS 84 / Pseudo-Mercator`: `3857` <!-- wurde bis dato gar nicht erwähnt -->
+
+
+
+
+## Übung 1.8 <!--3-->
+
+Weise nun unserem Datensatz das richtige Koordinatensystem zu. Dafür brauchst du die Funktion `st_crs` sowie den EPSG Code des Koordinatensystems. 
+
+```{r}
+# Musterlösung
+st_crs(ausserberg_sf) <- 2056
+```
+
+
+```{r}
+ausserberg_sf
+```
+
+```
+Simple feature collection with 15 features and 34 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 2631175 ymin: 1129752 xmax: 2631210 ymax: 1129910
+*Projected CRS: CH1903+ / LV95
+```
+
+
+
+
+## Übung 1.9 <!--2-->
+
+- `R` weiss nun, das es sich bei `aussenberg_sf`um einen Vektordatensatz handelt 
+- `aussenberg_sf` reagiert nun anders auf gewisse functions
+- teste die Funktion `plot` mit `aussenberg_sf`
+
+```{r}
+# Musterlösung
+# plot(ausserberg_sf) <- macht einen Plot pro Spalte, maximal 9
+plot(ausserberg_sf["Verbuschung"]) # Plottet nur die ausgewählte Spalte
+```
+
+
+
+## Input <!--6-->
+
+- In `R` gibt es dezidierte libraries, um geografische Daten zu visualisieren
+- Wir werden im Unterricht die library `tmap` verwenden. 
+- Installiere dieses Package und lade es in die aktuelle session.
+
+```{r}
+install.packages("tmap")
+```
+
+```{r}
+library(tmap)
+
+```
+
+???
+
+- Der automatische Plot mit `plot()` ist noch nicht wirklich anschaulich. 
+
+
+
+## Input
+
+- `tmap` funktioniert nach einem "layer"-Prinzip
+- ein Layer besteht aus 2 Komponenten: 
+  - `tm_shape()`: der Datensatz
+  - `tm_dots` (oder `tm_lines`, `tm_polygons`...):  die *Darstellungsform*
+
+
+```{r}
+tm_shape(ausserberg_sf) + # datensatz        
+  tm_dots()               # darstellungsform 
+```
+
+```{r}
+# knitr::include_graphics(knitr::fig_chunk("tmap1", "png"))
+```
+
+
+
+
+
+```{r}
+tm_shape(ausserberg_sf) + # datensatz        
+  tm_bubbles()            # darstellungsform 
+```
+
+
+
+```{r}
+# knitr::include_graphics(knitr::fig_chunk("tmap2", "png"))
+```
+
+
+
+
+
+
+```{r}
+tm_shape(ausserberg_sf) +
+  tm_bubbles(col = "Verbuschung")
+```
+
+
+
+```{r}
+# knitr::include_graphics(knitr::fig_chunk("tmap3", "png"))
+```
+
+
+
+
+
+```{r}
+tm_shape(ausserberg_sf) +
+  tm_bubbles(col = "Verbuschung",
+             shape = "Vegetationstyp")
+```
+
+
+
+```{r}
+# knitr::include_graphics(knitr::fig_chunk("tmap4", "png"))
+```
+
+
+
+
+
+```{r}
+tm_shape(ausserberg_sf) +
+  tm_bubbles(col = "Verbuschung",
+             shape = "Vegetationstyp") +
+  tm_layout(legend.outside = TRUE)
+  
+```
+
+
+
+```{r}
+# knitr::include_graphics(knitr::fig_chunk("tmap5", "png"))
+```
+
+
+
+
+
+```{r}
+tm_shape(ausserberg_sf) +
+  tm_bubbles(col = "Verbuschung",
+             shape = "Vegetationstyp") +
+  tm_layout(legend.outside = TRUE,
+            legend.position = c("right","bottom"))
+  
+```
+
+
+
+```{r}
+# knitr::include_graphics(knitr::fig_chunk("tmap6", "png"))
+```
+
+
+
+
+
+```{r}
+tm_shape(ausserberg_sf) +
+  tm_bubbles(col = "Verbuschung",
+             shape = "Vegetationstyp") +
+  tm_layout(legend.outside = TRUE,
+            legend.position = c("right","bottom")) +
+  tm_grid(labels.rot = c(90, 0), lines = FALSE)
+  
+```
+
+
+
+```{r}
+# knitr::include_graphics(knitr::fig_chunk("tmap7", "png"))
+```
+
+
+
+
+
+layout: false
+
+## Übung 1.10 <!--7-->
+
+Erstellt nun eine eigene Karte mit `tmap` und euren Daten. Versucht, den unten stehenden Plot zu rekonstruieren (oder probiert was eigenes). 
+
+
+```{r}
+```
+
+
+```{r}
+
+# Musterlösung
+
+tm_shape(ausserberg_sf) +
+  tm_bubbles(col = "gew_Temperaturzahl", palette = "viridis") +
+  tm_layout(legend.outside = TRUE,
+            legend.position = c("right","bottom")) +
+  tm_grid(labels.rot = c(0, 90), 
+          lines = FALSE)
+```
+
+
+
+
+class: highlight-last-item
+
+## Input <!--4-->
+
+- Bisher: Dem Datensatz ein Koordinatensystem *zuweisen*. 
+- Auch häufig: Koordinaten vom einen Koordinantensystem in ein anderes übersetzen (*transformieren*)
+- Wichtig unterschied!
+- Koordinatenbezugssystem *zuweisen* 
+  - verändert die Koordinatenwerte *nicht*, 
+  - ist nur sinnvoll, wenn das Koordinatensystem nicht oder falsch zugewiesen wurde
+- Koordinatenbezugssystem*transformieren* 
+  - verändert die Koordinatenwerte 
+    - ist unter verschiedenen Szenarien sinnvoll (um versch. Datequellen zu integrieren)
+
+
+
+
+## Übung 1.11 <!--3-->
+
+- Transformiert `ausserberg_sf` in das Koordinatenbezugssystem WGS84
+- Speichert den output in einer neuen Variabel (z.B `ausserberg_sf_wgs84`)
+- Schaut euch diesen Datensatz an, was hat sich verändert?
+- Tipp: Nutzt dafür die Funktion `st_transform()`
+
+
+```{r}
+# Musterlösung
+ausserberg_sf_wgs84 <- st_transform(ausserberg_sf, 4326)
+```
+
+Die Metadaten haben sich verändert (vorher: `Projected CRS: CH1903+ / LV95`)
+```
+Simple feature collection with 15 features and 34 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 7.843394 ymin: 46.3183 xmax: 7.847758 ymax: 46.32055
+*Geodetic CRS:  WGS 84
+```
+Zudem haben sich die Koordinatenwerte verändert. Neu: `POINT (7.843859 46.31987)`
+
+
+exclude: true
+
+## Übung 1.12 <!--4-->
+
+Wiederhole nochmal den letzten `tmap` plot , diesmal mit dem Datensatz `ausserberg_sf_wgs84`. Wie unterscheiden sich die Plots? 
+
+
+```{r}
+# Musterlösung
+
+# Musterlösung
+# - Die markierten Koordinaten haben sich verändert
+# - Kaum merklich haben sich auch die Positionen der Punkte verändert (unterschiedliches Datum)
+
+
+tm_shape(ausserberg_sf_wgs84) +
+  tm_bubbles(col = "gew_Temperaturzahl", palette = "viridis") +
+  tm_layout(legend.outside = TRUE,
+            legend.position = c("right","bottom")) +
+  tm_grid(labels.rot = c(0, 90), 
+          lines = FALSE)
+```
+
+
+
+```{r}
+```
+
+
+
+
+## Input <!--4-->
+
+- CSVs eignen sich nur bedingt um räumliche Daten abzuspeichern
+- Um aus `Vegauf_Ausserberg_2019_Kopfdaten.csv` ein räumliches Objekt zu machen mussten wir verschiedene Schritte erledigen
+  1. CSV als Dataframe einlesen
+  2. CSV in `sf` objekt konvertieren
+  3. CRS Zuweisen
+- Wir können `ausserberg_sf` in einem explizit *räumlichen* Datenformat abspeichern, sodass die obigen Schritte beim importieren nicht nötig sind:
+
+```{r}
+write_sf(ausserberg_sf, "_data/processed/ausserberg.gpkg")
+```
+
+
+Beim Einlesen von `ausserberg.gpkg` ist R nun sofort klar, dass es sich um Punktdaten im Koordinatenbezugssystem `EPSG 2056` handelt. 
+
+```{r}
+ausserberg_sf <- read_sf("_data/processed/ausserberg.gpkg")
+```
+
+
+
+
+
+## Übung 1.13 <!--15-->
+
+- Importiere nun aus dem Excel Hagenmoos.xlsx das Datenblatt `KopfdatenVertikal` als `data.frame`. 
+- Konvertiere den Dataframe in ein `sf` objekt 
+- Weise das korrekte Koordinatensytem zu
+- Transformiere die Koordinaten anschliessend in WGS84
+- erstelle eine Karte mit `tmap`
+
+```{r}
+# Musterlösung
+hangenmoos <- readxl::read_excel("_data/original/daten_vegedaz/Hagenmoos.xlsx", "KopfdatenVertikal")
+
+hangenmoos_sf <- st_as_sf(hangenmoos, coords = c("X", "Y"))
+st_crs(hangenmoos_sf) <- 21781
+
+hangenmoos_sf_wgs84 <- st_transform(hangenmoos_sf, 4326)
+
+tm_shape(hangenmoos_sf_wgs84) +
+  tm_bubbles(col = "Bereich")  +
+  tm_layout(legend.outside = TRUE)
+
+```
+
+
+
+
+
+
+
+## Input <!--3-->
+
+- Der Datensatz `Hangenmoos` beinhaltet Erhebungen an den gleichen Standorten in verschiedenen Jahren. 
+- Dies führt dazu, dass sich Punkte überlagern (gleiche Koordinaten)
+- Um dies zu vermeiden, können wir mit der `facet` option in `tmap` arbeiten
+
+```{r}
+tm_shape(hangenmoos_sf_wgs84) +
+  tm_bubbles(size = .2, col = "Bereich")  +
+  tm_layout(legend.outside = TRUE) +
+ {{tm_facets("Jahr",nrow = 1)}}
+```
+
+
+
+## Übung 1.14 <!--3-->
+
+
+- Bisher haben wir nur s
+- Mit `tmap` lassen sich aber auch sehr leicht interaktive Karten erstellen
+- Setze dafür `tmap_mode("view")` und führe dein letzter Code für die Erstellung eines tmap-Plots nochmals aus
+  
+
+
+
+```{r}
+# Musterlösung
+tmap_mode("view")
+
+tm_shape(hangenmoos_sf_wgs84) +  tm_bubbles(col = "Bereich")  +  tm_layout(legend.outside = TRUE)
+```
+
+
+
+
+## Rückblick <!-- -->
+
+
+![](images/rückblick.jpg)
+
+
+
+- Bisher haben wir mit Vektordaten vom Typ `Point` gearbeitet
+- Das dem zugrundeliegende, konzeptionelle Datenmodell ist das Entitäten Modell
+- Diese Punktdaten waren in einem csv sowie einem xlsx Dateiformat abgespeichert
+- In `R` haben wir diese Punktdaten als `data.frame` importiert und danach in ein `sf` Objekt konvertiert
+- `sf`-Objekte zeichnen sich dadurch aus, dass sie über eine Geometriespalte sowie über Metadaten verfügen
+
+
+
+
+## Ausblick
+
+
+![](images/ausblick.jpg)
+
+
+
+- Punktdaten lassen sich gut in CSV abspeichern, weil sich die Geometrie so gut vorhersehbar ist (jeder Punkte besteht aus genau einer x- und einer y-Koordinate)
+- Linien und Polygone sind komplexer, sie können aus beliebig vielen Knoten bestehen
+- Es bessere Wege, räumliche Daten abzuspeichern
+- Das bekannteste Format für Vektordaten ist das *shapefile*
+- Shapefiles haben aber Nachteile ein sinnvolleres Format ist deshalb *geopackage*
+
+
+
+
+
+
+
+
+
+
+

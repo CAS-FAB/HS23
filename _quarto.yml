@@ -1,0 +1,29 @@
+project:
+  type: book
+
+
+book:
+  title: "CAS FAB"
+  author: "Nils Ratnaweera"
+  date: "11/13/2023"
+  chapters:
+    - index.qmd
+    - uebung_1.qmd
+    - uebung_2.qmd
+    - uebung_3.qmd
+    - uebung_4.qmd
+    - uebung_5.qmd
+    - uebung_6.qmd
+
+bibliography: references.bib
+execute: 
+  freeze: true
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

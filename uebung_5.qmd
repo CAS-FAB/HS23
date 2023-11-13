@@ -1,0 +1,320 @@
+# Integration von Geodaten
+
+
+```{r}
+
+library(tmap)
+
+tmap_options(check.and.fix = TRUE)
+tmap_mode("plot")
+```
+
+## Integration von Geodaten
+
+- Bisher haben wir alle Datensätze einzeln betrachtet
+- Wenn wir alle Datensätze ins gleiche Bezugssystem bringen, können wir diese *integrieren* bzw. überlagern
+- Überlagern kann heissen: 
+  - gemeinsam Visualisieren
+    - Information übertragen
+
+  
+
+
+## Übung 5.1
+
+- Starte ein neues Script `Uebung_5.R`
+- Importiere darin alle räumlichen libraries
+- Importiere die Datensätze `ausserberg.gpkg` (aus Übung 2) sowie `dhm200_2056.tif` (aus Übung 3)
+  - im Zip File: `_data/processed/ausserberg.gpkg` bzw. `_data/processed/dhm200_2056.tif`
+
+```{r}
+# Musterlösung
+library(sf)
+library(terra)
+library(tmap)
+
+ausserberg <- read_sf("_data/processed/ausserberg.gpkg")
+dhm200 <- rast("_data/processed/dhm200_2056.tif")
+```
+
+
+
+## Übung 5.2
+
+Überlagere die beiden Datensätze in einem `tmap`-Plot, indem du diese mit `+` verkettest.
+
+
+
+```{r}
+# Musterlösung
+tm_shape(dhm200) + 
+  tm_raster() + 
+  tm_shape(ausserberg) + 
+  tm_dots()
+```
+
+- da das `dhm200` die ganze Schweiz abdeckt, sind unsere Punkte kaum erkennbar.
+- Lösung: raster mittels unseren Punktdaten "zuschneiden" (`crop`)
+
+
+layout: false
+
+## Übung 5.3
+
+- Mit `crop()` können wir ein Raster auf den "extent" von einem Vektor Datensatz zuschneiden
+- Schneide `dhm200` auf den extent von `ausserberg` zu
+- Visualisiere das resultierende Raster mit `tmap` (wieder gemeinsam mit `ausserberg`)
+
+```{r}
+# Musterlösung
+dhm200_cropped <- terra::crop(dhm200, ausserberg)
+
+tm_shape(dhm200_cropped) + 
+  tm_raster() + 
+  tm_shape(ausserberg) + 
+  tm_dots() +
+  tm_layout(legend.outside = TRUE)
+```
+
+
+
+
+
+## Übung 5.4
+- die Auflösung des Raster Datensatzes ist zu grob!!
+- Lösung: Hoch aufgelöster Datensatz `dhm25` (aus Übung 4) und einlesen (zip-File: `processed/dhm25_2056.tif`)
+- wiederhole das Zuschneiden mittels `crop` sowie das Visualisieren mittels `tmap`
+
+```{r}
+# Musterlösung
+dhm25 <- rast("_data/processed/dhm25_2056.tif") 
+dhm25_crop <- crop(dhm25, ausserberg)           
+```
+
+
+
+
+
+```{r}
+tm_shape(dhm25_crop) + 
+  tm_raster(style = "cont", palette = "viridis") + 
+  tm_shape(ausserberg) + 
+  tm_dots()
+```
+
+
+
+
+
+
+layout: false
+class: highlight-last-item
+
+## Rasterwerte extrahieren
+
+
+- bisher haben wir zwei Datensätze (Raster und Vektor) visuell überlagert
+- nächster Schritt: **Information** von Raster &rarr; Punkt Datensatz übertragen
+- dazu müssen wir `ausserberg` von einem `sp`- in ein `SpatVector` Objekt konvertieren
+- danach können wir das `SpatVector` Objekt gemeinsam mit `extract` verwenden
+
+
+
+## Übung 5.5
+
+- Wandle `ausserberg` mit der Funktion `vect()` in ein `SpatVector` Objekt und speichere es als `ausserberg_vect`
+- Schau dir `ausserberg_vect` an, was hat sich verändert?
+- Verwende die Funktion `extract` mit `ausserberg_vect` um die Höhenwerte aus `dhm25` zu extrahieren
+- Speichere den output in einer Variabel und beguteachte diese
+
+
+```{r}
+# Musterlösung
+
+ausserberg_vect <- vect(ausserberg)
+elev <- extract(dhm25, ausserberg_vect) # <- die Funktion extract() extrahiert die Information
+```
+
+
+
+```{r}
+# Musterlösung
+elev                                     # <- der output ist eine data.frame mit 2 Spalten
+```
+
+
+
+## Übung 5.6
+
+Spiele die Höheninformation aus `extract` zurück in `ausserberg`.
+
+
+```{r}
+# Musterlösung
+ausserberg$elevation <- elev[,2]         # <- die 2. Spalte aus elev auf ausserberg übertragen
+```
+
+
+
+  ## Übung 5.7 
+
+Visualisiere nun `ausserberg` und Färbe die Punkte nach ihrer Höheninformation ein.
+
+```{r}
+# Musterlösung
+
+tm_shape(dhm25_crop) + 
+  tm_raster(style = "cont", palette = "viridis") + 
+  tm_shape(ausserberg) + 
+  tm_bubbles() +
+  tm_layout(title = "dhm25 mit überlagerten Punktdaten")
+```
+
+
+
+
+
+```{r}
+tm_shape(ausserberg) + 
+  tm_bubbles(col="elevation", style="cont", palette="viridis", breaks = seq(1240, 1320, 20)) +
+  tm_layout(title = "Punkdaten mit extrahierten Werten aus dhm25")
+```
+
+
+
+
+layout: false
+
+## Vektordaten zuschneiden
+
+- nun wollen wir zwei Vektordatensätze miteinander verschneiden
+- Ausgangslage:
+  - wir verfügen über einen [TWW Datensatz der Schweiz](https://www.bafu.admin.ch/bafu/de/home/themen/biodiversitaet/zustand/karten/geodaten.html) (https://bit.ly/3CqNRKT)
+  - wir verfügen über den [Gemeindelayer der Schweiz](https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/shp/2056/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill.zip) (https://bit.ly/3CaAj5W)
+  - wir wollen alle TWW Flächen innerhalb der Gemeinde Landquart erhalten
+
+
+
+## Übung 5.8
+
+- Lade diese beiden Datensätze herunter und importiere sie in `R` (swissboundaries *Hoheitsgebiet*)
+- Transformiere sie in `ESPG 2056`
+
+
+```{r}
+# Musterlösung
+# Datensätze einlesen:
+tww <- read_sf("_data/original/TWW/TWW_LV95/trockenwiesenweiden.shp")
+hoheitsgebiet <- read_sf("_data/original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_HOHEITSGEBIET.shp")
+
+# Gemeindegrenzenen in EPSG 2056 transformieren und nur Landquart selektieren
+hoheitsgebiet <- st_transform(hoheitsgebiet, 2056)
+```
+
+
+
+## Übung 5.9
+
+Erstelle ein neues Objekt `landquart`, welches nur die Gemeinde Landquart beinhaltet und visualisiere diese.
+
+```{r}
+# Musterlösung
+landquart <- hoheitsgebiet[hoheitsgebiet$NAME == "Landquart", ]
+
+tm_shape(landquart) + 
+  tm_polygons() +
+  tm_layout(title = "Gemeinde Landquart")
+```
+
+
+
+## Übung 5.10
+
+Überlagere die `TWW` Flächen mit der Gemeindegrenze von Landqart.
+
+```{r}
+# Musterlösung
+tm_shape(tww) + 
+  tm_polygons() +
+  tm_layout(title = "TWW der Schweiz")  +
+  tm_shape(landquart) + 
+  tm_polygons(col = "red",border.col = "red")
+```
+
+
+
+## Übung 5.11
+
+- Verwende die Funktion `st_intersection()` um die TWW-Flächen auf die Gemeindegrenze von Landquart zu zuschneiden. 
+- Visualisiere das Resultat
+
+```{r}
+# Musterlösung
+tww_landquart <- st_intersection(tww, landquart)
+```
+
+```{r}
+ tm_shape(landquart) +
+  tm_borders(col = "black") +
+  tm_shape(tww_landquart) + 
+  tm_polygons(col = "forestgreen") +
+  tm_layout(title = "TWW in Landquart")
+```
+
+
+
+layout: true
+
+## Vektordaten selektieren
+
+
+
+
+- Mit `st_intersection` haben wir TWW Flächen verschnitten, da `st_intersetion` die Schnittmenge beider Polygone nimmt
+
+![:scale 50%](images/postgis-06-st-intersection.png)
+<!-- https://academy.vertabelo.com/course/postgis/additional-geometry-features/functions-returning-geometries/st-intersection -->
+- Alternativ können wir alle TWW Flächen selektieren, die mindestens Teilweise innerhalb des Gemeindegebietes liegen
+
+```{r}
+tww_landquart2 <- tww[landquart, ]
+```
+
+
+
+layout: false
+
+## Übung 5.12 
+
+- Selektiere die TWW Flächen, welche sich zumindest Teilweise in der Gemeinde Landquart befinden und speichere den Output als `tww_landquart2`
+- Visualisiere das Resultat mit `tmap`
+- Vergleiche `tww_landquart2` mit `tww_landquart`. Wie unterscheiden sich diese?
+
+```{r}
+# Musterlösung
+tww_landquart2 <- tww[landquart, ]
+```
+
+
+```{r}
+ tm_shape(landquart) +
+  tm_borders(col = "black") +
+  tm_shape(tww_landquart2) + 
+  tm_polygons(col = "forestgreen") +
+  tm_layout(title = "TWW in Landquart")
+```
+
+
+
+## Übung 5.13
+
+Exportiere `tww_landquart2` als Geopackage
+
+```{r}
+# Musterlösung
+st_write(tww_landquart2, "_data/processed/tww_landquart.gpkg", delete_layer = TRUE)
+```
+
+
+
+

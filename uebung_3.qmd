@@ -1,0 +1,346 @@
+title: Übung 3
+subtitle: Einfache Rasterdaten
+
+
+## Vorbereitung <!--2-->
+
+Installiere zudem das R Package `terra`
+
+Erstelle dann ein neues R Script mit dem Namen `Uebung_3.R` und lade darin die libraries `sf` sowie `tmap`.
+
+
+```{r}
+library(sf)
+library(tmap)
+```
+
+
+
+## Übung 3.1 <!--10-->
+
+- Such das digitale Höhenmodell der Schweiz (200m Auflösung)
+- Auch hier kannst du die folgenden Adressen nutzen:
+  - [opendata.swiss](https://opendata.swiss/)
+  - [map.geo.admin.ch](https://map.geo.admin.ch)
+  - [swisstopo.admin.ch](https://www.swisstopo.admin.ch)
+- Entzippe das File (sofern nötig) und schau dir den Inhalt an
+
+```{r}
+# Musterlösung
+
+#https://www.swisstopo.admin.ch/de/geodata/height/dhm25200.html
+#Shortlink (für diesen Kurs): https://bit.ly/3Hj4X0K
+
+
+```
+
+
+
+layout: true
+
+## Input: Raster Datenformate  <!--4-->
+
+
+
+Inhalt des heruntergeladenen zip-Files:
+
+
+### Eigentliche Daten:
+- DHM200_polyface.dxf
+- DHM200.asc
+- DHM200.xyz
+
+
+
+### Metadaten und Lizenzbedigungen:
+- license.txt
+- Metadata_gm03.xml
+- Metadata_PDF.pdf
+- Metadata_xml_iso19139.xml
+
+
+
+
+Der gleiche Datensatz (`DHM25 200`) in 3 unterschiedlichen Datenformaten:
+
+- ~~DHM200_polyface.dxf~~
+- DHM200.asc
+- DHM200.xyz
+
+???
+
+- 3x die gleichen Daten!
+- dxf wird eher im CAD bereich verwendet, dieses werden wir ignorieren (könnt ihr löschen)
+
+
+
+
+## ESRI ArcInfo ASCII Grid  <!--1-->
+
+- Dateierweiterung \*.asc
+- ein Datenformat von ESRI (siehe die [Spezifikationen](http://old.geotools.org/ArcInfo-ASCII-Grid-format_5250.html))
+- beginnt mit mehreren Zeilen Metaadaten, darauf folgen die eigentlichen Werte
+- kann in einem Texteditor geöffnet werden:
+
+```{}
+NCOLS 1926
+NROWS 1201
+XLLCORNER 479900.
+YLLCORNER 61900.
+CELLSIZE 200.
+NODATA_VALUE -9999.
+-9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. 
+...
+...
+...
+835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816 799.2  
+```
+
+
+
+## ASCII Gridded XYZ  <!--1-->
+
+- Dateierweiterung \*.xyz
+- Ein offenes Format
+- Beinhaltet 3 Spalten: x- und y- Koordinaten sowie Zellwert
+- kann in einem Texteditor geöffnet werden:
+
+```{}
+655000.00 302000.00 835.01
+655200.00 302000.00 833.11
+655400.00 302000.00 831.20
+```
+
+
+
+Um Rasterdaten in R zu importieren verwenden wir das Package `terra`.
+
+```{r}
+install.packages("terra")
+```
+
+
+```{r}
+library(terra)
+
+dhm200 <- rast("_data/original/dhm25_200/DHM200.xyz")
+```
+
+- Aus `terra` benötigen wir die Funktion `rast`
+- das Importieren funktioniert gleich, unabhängig von der Dateierweiterung
+- eine summarische Zusammenfassung erhält man via Konsole:
+
+```{r}
+dhm200
+```
+
+
+
+
+```{r}
+dhm200
+```
+
+
+
+Eine einfache Visualisierung erhält man mit dem `plot()` Befehl:
+
+```{r}
+plot(dhm200)
+```
+
+
+
+
+layout: false
+
+## Übung 3.2 <!--3-->
+
+In welchem Koordinatensystem befindet sich dieses Höhenmodell? 
+
+Tipp: Konsultiere die Metadaten!
+
+## Lösung
+
+![](images/ref.png)
+
+&rarr; im alten Schweizer Koordinatensystem CH1903 LV03
+
+
+## Übung 3.2 <!--3-->
+
+Wie hoch ist die Auflösung?
+
+## Lösung
+
+![](images/res.png)
+
+&rarr; 200 Meter
+
+
+
+## Übung 3.3 <!--3-->
+
+Importiere `DHM200` in R und schau dir das Objekt in der Konsole sowie mit `plot()` an.
+
+```{r}
+# Musterlösung
+dhm200 <- rast("_data/original/dhm25_200/DHM200.xyz")
+dhm200
+plot(dhm200)
+```
+
+
+layout: true
+## Input: Koordinatenbezugssystem *festlegen*
+
+
+
+- Das Koordinatenbezugssystem haben wir bereits für Vektordaten festgelegt
+- dabei haben wir folgenden Befehl verwendet: 
+- `st_crs(meinvektordatensatz) <- 21781` (&larr; für das alte Schweizer Koordinatenbezugssystem)
+- für Rasterdaten funktioniert es leicht anders:
+
+```{r}
+crs(dhm200) <- "epsg: 21781"
+```
+
+- `crs()` statt `st_crs`
+- `"epsg: 21781"` (mit Anführungs- und Schlusszeichen) statt `21781`
+
+
+
+
+```{r}
+dhm200
+```
+
+
+
+layout: true
+
+## Input: Koordinatenbezugssystem *transformieren*
+
+
+class: highlight-last-item
+- Koordinatenbezugssystem von `dhm200`: `CH1903 LV03` bzw. `EPSG: 21781`
+- Analog Vektordaten: in das *neue* Schweizer Koordinatenbezugssytem transformieren
+- Vektordaten: Funktion `st_transform`
+- Rasterdaten: Funktion `project`
+
+```{r}
+dhm200_2056 <- project(dhm200, "epsg: 2056")
+```
+
+
+
+```{r}
+dhm200
+```
+
+```{r}
+dhm200_2056
+```
+
+
+
+layout: false
+
+## Übung 3.4 <!--4-->
+
+- Transformiere `dhm200` in das Koordinatenbezugssystem `CH1903+ LV95`
+- Speichere den Output als `dhm200_2056`
+
+```{r}
+# Musterlösung
+dhm200_2056 <- project(dhm200, "epsg: 2056")
+```
+
+
+
+
+
+
+## Übung 3.5 <!--4-->
+
+Visualisiere `dhm200_2056` mit `tmap`.
+
+Tipp: Um ein Polygon zu visualisieren sind wir wie folgt vorgegangen
+
+```{r}
+tm_shape(gemeindegrenzen) + tm_polygons()
+```
+
+
+
+```{r}
+# Musterlösung
+# tmap_mode("view") # optional
+tm_shape(dhm200_2056) + tm_raster()
+```
+
+
+
+
+## Übung 3.6 <!--4-->
+
+Verändere die Darstellungsweise des Rasters mithilfe von `style` und `palette`. Tipp, schau dir die Hilfe von `?tm_raster` an.
+
+```{r}
+# Musterlösung
+tm_shape(dhm200_2056) + tm_raster(style = "cont", palette = "viridis")
+```
+
+
+
+## Input <!--3-->
+
+- Wir haben das DHM auf unsere Bedürfnisse angepasst (CRS gesetzt und transformiert)
+
+- Wir können unser verändertes Objekt (`dhm200_2056`) exportieren, so dass diese Änderungen abgespeichert werden
+
+```{r}
+#| eval: false
+#| 
+writeRaster(dhm200_2056,"_data/processed/dhm200_2056.tif", overwrite = TRUE)
+```
+
+- beim Import ist die CRS Information bekannt (CRS setzen und transformieren ist nicht mehr nötig)
+
+```{r}
+dhm200_2056 <- rast("_data/processed/dhm200_2056.tif")
+
+dhm200_2056
+```
+
+
+
+## Übung 3.7 <!--4-->
+
+Exportiere `dhm200_2056` als `tif` File
+
+```{r}
+#| eval: false
+# Musterlösung
+writeRaster(dhm200_2056,"_data/processed/dhm200_2056.tif")
+```
+
+
+
+class: highlight-last-item
+
+## Rückblick
+
+Wir haben...
+- ein Höhenmodell der Schweiz heruntergeladen
+- 3 unterschiedliche Datenformaten von Rasterdaten kennengelernt
+- ein Rasterdatensatz mithilfe von `rast` aus `terra` in R importiert
+- diesem Rasterdatensatz das korrekte Koordinatenbezugssystem zugewiesen (`crs`)
+- diesen Rasterdatensatz in ein anderes Koordinatensystem transformiert (`project`)
+- diesen Rasterdatensatz mit `plot()` sowie `tmap` visualisert
+- mit verschiedenen Darstellungformen in `tmap` gearbeitet (optionen `style` und `palette`)
+- DHM: *ein* Wert pro Zelle. Es gibt aber Situationen, wo wir mehreren Werten pro Zelle benötigen
+
+
+
+
