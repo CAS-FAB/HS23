@@ -1,7 +1,6 @@
 project:
   type: book
 
-
 book:
   title: "CAS FAB"
   author: "Nils Ratnaweera"
@@ -15,9 +14,13 @@ book:
     - uebung_5.qmd
     - uebung_6.qmd
 
+number-depth: 0
 bibliography: references.bib
+number-sections: false
+
 execute: 
   freeze: true
+
 
 format:
   html:
