@@ -2,7 +2,7 @@
 subtitle: Komplexe Rasterdaten
 ---
 
-# Übung 4
+# Übung 4 {#sec-uebung-4}
 
 - Satelliten und Drohnen nehmen meist verschiedene Spektren von Elektromagnetischen Wellen auf
 - diese Spektren werden in unterschiedlichen Datensätzen abgespeichert
@@ -57,7 +57,6 @@ subtitle: Komplexe Rasterdaten
 ```{r}
 #| label: uebung-4-2
 #| output: false
-#| filename: Musterlösung
 library("sf")
 library("tmap")
 library("terra")
@@ -138,9 +137,12 @@ tm_shape(swissimage_10) +
   - mit `progress = TRUE` den Fortschritt anzeigen lassen
 - visualisiert es mit `tmap`
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-4-10
-#| filename: Musterlösung
 dhm25 <- rast("data/original/DHM25_MM_ASCII_GRID/ASCII_GRID_1part/dhm25_grid_raster.asc")
 crs(dhm25) <- "epsg: 21781"
 
@@ -151,6 +153,9 @@ dhm25
 
 
 
+
+:::
+::::
 
 ## Übung 4.5 (Optional und Open End)
 
@@ -175,10 +180,13 @@ Suche dir auf den gängigen Portalen (s.u.) einen spannenden Datensatz und visua
 
 
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-4-11
 #| eval: false
-#| filename: Musterlösung
 
 # Daten herunterladen:
 
@@ -205,12 +213,12 @@ writeRaster(swiss_mosaic, "data/processed/swissimage_2m_landquart.tif", overwrit
 ```
 
 
-<!-- hier weiterfahren -->
 
-exclude: true
+:::
+::::
+
 
 ## Übung 4.7 
-
 
 
 ```{r}

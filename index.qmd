@@ -1,5 +1,27 @@
-# Preface {.unnumbered}
+# CAS Vegetationsanalyse & Feldbotanik {.unnumbered}
 
-This is a Quarto book.
+Wilkommen bei den Kursunterlagen zum Kurstag 17 *Geographische Kartendarstellungen mit R*, im Rahmen des Modul 2 im CAS Vegetationsanalyse & Feldbotanik. Diese Kursunterlagen sollen Vegetationsökologen und Feldbotaniker in die Lage versetzen, ihre Daten mit Hilfe von R zu analysieren und zu visualisieren. Der Kurs ist als Workshop aufgebaut: Die Inputs sind relativ kurz, dafür programmieren wir viel *gemeinsam*. Dabei werden am Kurstag die Übungen 1 bis 6 so weit wie möglich gemeinsam durchgearbeitet, der Rest ist als Hausaufgabe gedacht. 
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+Jede Übung wird auf dem Beamer projeziert und sofern nötig mündlich ergänzt. Danach haben die Kursteilnehmer Zeit, die Übung selbständig zu lösen. Nach einer Weile wird eine Lösung präsentiert (live coding) und die Teilnehmer können Fragen stellen. Für Personen, denen das Tempo zu langsam ist, können die Übungen auch selbständig durcharbeiten. Nach dem Kurstag werden die Musterlösungen aufgeschaltet.
+
++-------+-------+-----------------------------------------------------------+
+| von   | bis   | Thema                                                     |
++=======+=======+===========================================================+
+| 09:00 | 09:35 | Begrüssung und Einführung räumliche Daten                 |
++-------+-------+-----------------------------------------------------------+
+| 09:50 | 10:35 | Vektordaten: [Übung 1](uebung_1.qmd)                      |
++-------+-------+-----------------------------------------------------------+
+| 10:50 | 12:00 | Vektordaten: [Übung 1](uebung_1.qmd) & [2](uebung_1.qmd)  |                
++-------+-------+-----------------------------------------------------------+
+| 12:00 | 13:00 | Mittagspause                                              |
++-------+-------+-----------------------------------------------------------+
+| 13:00 | 13:35 | Rasterdaten: Input und [Übung 3](uebung_3.qmd)            |
++-------+-------+-----------------------------------------------------------+
+| 13:50 | 14:35 | Rasterdaten:  [Übung 3](uebung_3.qmd) & [4](uebung_4.qmd) |
++-------+-------+-----------------------------------------------------------+
+| 14:50 | 15:35 | Integration von Geodaten: [Übung 5](uebung_5.qmd)         |
++-------+-------+-----------------------------------------------------------+
+| 15:50 | 17:00 | Sampling Design: [Übung 6](uebung_6.qmd)                  |
++-------+-------+-----------------------------------------------------------+
+
+: Ungefährer Zeitplan für den Kurstag

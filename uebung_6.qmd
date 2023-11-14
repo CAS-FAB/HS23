@@ -1,20 +1,47 @@
 ---
-subtitle: Sampling Design mit R
+subtitle: Sampling Design
 ---
 
-# Übung 6
+
+# Übung 6 {#sec-uebung-6}
 
 
-## Sampling Desing mit R
+R eignet sich hervorragend um ein Sampling Design umzusetzen. Am ersten Tag des CAS habt ihr etwas zu *Sampling Design* gelernt (siehe @fig-sampling-design).
+
+::::{#fig-sampling-design}
+:::{.callout-note collapse="true"}
+
+## Folie Sampling Design
 
 ![](images/sampling-design-folie.png)
 
-R eignet sich hervorragend um ein Sampling Design umzusetzen
+:::
+::::
+﻿
 
 
+Schauen wir uns folgende *Sampling* Strategien an:
 
-## Ausgangslage
+- zufällig
+  - nicht stratifiziert (siehe @fig-zufaellig-nicht-stratifiziert2 und @sec-zufaellig-nicht-stratifiziert)
+  - stratifiziert (siehe @fig-zufaellig-stratifiziert2 und @sec-zufaellig-stratifiziert)
+- systematisch / regelmässig (siehe @fig-systematisch2 und @sec-systematisch)
 
+
+::::{.column-page}
+:::{#fig-sampling-design .column-body-outset layout-ncol="2"}
+
+![30 Samples total, 10 Samples pro Lokalität](`r knitr::fig_chunk("fig-zufaellig-nicht-stratifiziert", "png")`){#fig-zufaellig-nicht-stratifiziert2}
+
+![30 Samples total, verteilt nach Hektaren](`r knitr::fig_chunk("fig-zufaellig-stratifiziert", "png")`){#fig-zufaellig-stratifiziert2}
+
+![30 Samples total, systematisch / regelmässig verteilt](`r knitr::fig_chunk("fig-systematisch", "png")`){#fig-systematisch2}
+
+Verschiedene Sampling Strategien
+:::
+::::
+
+## Vorbereitung
 
 ```{r}
 #| label: uebung-6-1
@@ -25,183 +52,103 @@ library("terra")
 library("tmap")
 tmap_mode("plot")
 
-tww_landquart <- read_sf("data/processed/tww_landquart.gpkg")
+set.seed(1920)
 ```
+
+```{r}
+
+tww <- read_sf("data/original/TWW/TWW_LV95/trockenwiesenweiden.shp")
+
+filter <- c("Marièrs", "Buzzera", "Truois")   # <1>
+tww <- tww[tww$Name %in% filter,]             # <1>
+
+tww <- tww[, "Name"]                          # <2>
+
+tww$area_ha <- as.numeric(st_area(tww))/10000 # <3>
+
+samples_total <- 30                           # <4>
+
+
+base_plot <- tm_shape(tww) +                  # <5>
+  tm_polygons(col = "Name") +                 # <5>
+  tm_layout(legend.show = FALSE, asp = 7/5)   # <5>
+```
+
+1. Nur 3 Lokaliäten auswählen
+2. Nur die Spalte "Name" (=Lokalität) behalten. Die Geometrie Spalte kommt automatisch mit.
+3. Fläche berechnen und in Hektaren umrechnen (als Vorbereitung für die das stratifizierte Sampling)
+4. Variabel erstelen für die Summe an Samples, die wir machen können / wollen
+5. Optional: Da wir immer wieder die gleiche Karte machen, können wir eine Basis Karte erstellen und immer wieder benutzen. 
+
+## Zufällige Verteilung
+
+Für die zufällige Verteilung der `r samples_total` Samples, gibt es zwei Möglichkeiten: (1) Nicht stratifiziert und (2) Stratifiziert. In jedem Fall brauchen wir eine Spalte mit der Anzahl der Samples für die jeweilige Lokalität:
+
+```{r}
+tww$nicht_stratifiziert <- samples_total/nrow(tww)                      #<1>
+
+tww$stratifiziert <- round(samples_total/sum(tww$area_ha)*tww$area_ha)  #<2>
+```
+
+1. Nicht stratifiziert: In jeder Lokalität gleich viele Samples ($\frac{30}{3}= 10$)
+2. Stratifiziert: Samples in Relation zur Fläche ($A$) verteilen ($\frac{30}{\sum \text{A}} \times \text{A}$)
 
 
 ```{r}
-#| label: uebung-6-2
-
-base_plot <- tm_shape(tww_landquart, bbox = tww_landquart[tww_landquart$Name %in% c("Prafieb","Frättis", "Jerätsch"),]) + 
-  tm_polygons(col = "Name") + 
-  tm_layout(legend.show = FALSE)
+knitr::kable(tww)
 ```
 
 
 
-## Zufällig und gleichmässig verteilt
 
-
-
-
-- Gleich viele samples (10) pro *Multi*polygon
-- Samples sind zufällig verteilt
-
-```{r}
-#| label: uebung-6-3
-
-tww_landquart$equal_samples <- 10
-sample_plots1 <- st_sample(tww_landquart, size = tww_landquart$equal_samples)
-```
+### Nicht stratifiziert {#sec-zufaellig-nicht-stratifiziert}
 
 
 ```{r}
-#| label: uebung-6-4
+#| label: fig-zufaellig-nicht-stratifiziert
+sample_plots1 <- st_sample(tww, size = tww$nicht_stratifiziert)
 
 base_plot +
   tm_shape(sample_plots1) +
-  tm_dots(shape = 3)
+  tm_dots(shape = 3, size = 3) +
+  tm_layout(title = "Zufällig - Nicht stratifiziert", legend.show = TRUE)
 ```
 
 
-
-
-
-- Gleich viele samples (10) pro ~~Multi~~polygon
-- Samples sind zufällig verteilt
+### Stratifiziert {#sec-zufaellig-stratifiziert}
 
 
 ```{r}
-#| label: uebung-6-5
-
-tww_landquart_polygon <- st_cast(tww_landquart, "POLYGON")
-```
-
-
-
-`tww_landquart` (`r nrow(tww_landquart)` Zeilen):
-
-```{r}
-#| label: uebung-6-6
-
-knitr::kable(head(tww_landquart["Name"]))
-```
-
-
-
-
-`tww_landquart_polygon` (`r nrow(tww_landquart_polygon)` Zeilen):
-
-```{r}
-#| label: uebung-6-7
-
-knitr::kable(head(tww_landquart_polygon["Name"]))
-```
-
-
-
-```{r}
-#| label: uebung-6-8
-
-tww_landquart_polygon$equal_samples <- 10
-sample_plots1b <- st_sample(tww_landquart_polygon, size = tww_landquart_polygon$equal_samples)
-```
-
-
-
-
-
-```{r}
-#| label: uebung-6-9
-
-base_plot +
-  tm_shape(sample_plots1) +
-  tm_dots(shape = 3) +
-  tm_layout(title = "10 samples pro MULTIpolygon")
-```
-
-
-
-
-```{r}
-#| label: uebung-6-10
-
-
-tww_landquart_polygon$i <- as.character(seq_len(nrow(tww_landquart_polygon)))
-
-tm_shape(tww_landquart_polygon, bbox = tww_landquart[tww_landquart$Name %in% c("Prafieb","Frättis", "Jerätsch"),]) + 
-  tm_polygons(col = "i") + 
-  tm_layout(legend.show = FALSE) +
-  tm_shape(sample_plots1b) +
-  tm_dots(shape = 3) +
-  tm_layout(title = "10 samples pro Polygon")
-
-```
-
-
-
-## Zufällig und in Abhängigkeit der Flächengrösse verteilt
-
-
-
-- Anzahl Samples ist abhängig von der Flächengrösse (1 Sample pro 4'000 m2)
-- Samples sind zufällig verteilt
-
-```{r}
-#| label: uebung-6-11
-
-
-tww_landquart_polygon$SHAPE_Area <- st_area(tww_landquart_polygon) # Flächengrösse muss aktualisiert werden!
-
-tww_landquart_polygon$relative_samples <- as.integer(round(tww_landquart_polygon$SHAPE_Area/4000))
-```
-
-```{r}
-#| label: uebung-6-12
-
-knitr::kable(head(tww_landquart_polygon[,c("Name","SHAPE_Area", "relative_samples")]))
-```
-
-
-```{r}
-#| label: uebung-6-13
-
-sample_plots2 <- st_sample(tww_landquart_polygon, size = tww_landquart_polygon$relative_samples)
-```
-
-
-
-```{r}
-#| label: uebung-6-14
+#| label: fig-zufaellig-stratifiziert
+sample_plots2 <- st_sample(tww, size = tww$stratifiziert)
 
 base_plot +
   tm_shape(sample_plots2) +
-  tm_dots(shape = 3)
+  tm_dots(shape = 3, size = 3) +
+  tm_layout(title = "Zufällig - Stratifiziert")
 ```
 
 
-## Gleichmässig verteilt
 
-- Regelmässige Verteilung der Samples (auf einem "Raster")
-- Implizit abhängig von der Flächengrösse (grosse Polygone erhalten mehr Samples)
 
-```{r}
-#| label: uebung-6-15
-
-sample_plots3 <- st_sample(tww_landquart, size = 200, type = "regular")
-```
+## Systematisch / Regelmässig {#sec-systematisch}
 
 ```{r}
-#| label: uebung-6-16
+#| label: fig-systematisch
+
+sample_plots3 <- st_sample(tww, size = samples_total, type = "regular")
 
 base_plot +
   tm_shape(sample_plots3) +
-  tm_dots(shape = 3)
+  tm_dots(shape = 3, size = 3) +
+  tm_layout(title = "Systematisch / Regelmässig")
 ```
 
 
 
-## Übung (Open End, ohne Musterlösung)
+## Übung 
+
+(Open End und ohne Musterlösung)
 
 - Wähle einen kleineren Kanton oder eine Gemeinde aus
 - Selektiere die TWW Standorte dieser Gemeinde / dieses Kantons

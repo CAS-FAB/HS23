@@ -2,7 +2,7 @@
 subtitle: Einfache Vektordaten
 ---
 
-# Übung 1
+# Übung 1 {#sec-uebung-1}
 
 ## Vorbereitung 
 
@@ -64,7 +64,6 @@ Visualisiere die Erhebungsplots räumlich als Scatterplot. Die x- und y-Achsen s
 
 ```{r}
 #| label: uebung-1-3
-#| filename: Musterlösung
 plot(ausserberg$geogr..Br., ausserberg$geogr..L., asp = 1)
 
 ```
@@ -92,13 +91,11 @@ Installiere nun das R-Package `sf` und lade es in die aktuelle Session.
 ```{r}
 #| label: uebung-1-5
 #| eval: false
-#| filename: Musterlösung
 install.packages("sf") 
 ```
 
 ```{r}
 #| label: uebung-1-6
-#| filename: Musterlösung
 
 library("sf")           
 ```
@@ -121,7 +118,6 @@ Mit dem Argument `coords = ` informieren wir dieser Funktion, wo unsere Koordina
 
 ```{r}
 #| label: uebung-1-7
-#| filename: Musterlösung
 ausserberg_sf <- st_as_sf(ausserberg, coords = c("geogr..Br.","geogr..L."))
 ```
 
@@ -159,7 +155,7 @@ CRS:           NA
 
 
 
-## Input <!--6-->
+## Input CRS ansprechen<!--6-->
 
 Nun wollen wir unserem Datensatz das richtige Koordinatenreferenzsystem zuweisen. Wie sprechen wir das korrekte Koordinatensystem `CH1903+ LV95` an?
 
@@ -171,27 +167,32 @@ Im Wesentlichen gibt es 3 Methoden, ein Koordinatenreferenzsystem anzusprechen:
 
 
 
-### proj.4
+:::{.callout-note collapse="true"}
+
+## proj.4 (optional)
 
 - In einem `proj.4`-string werden alle wichtige Aspekte des Koordinatenreferensystems abgespeichert (ellipse, datum, projection units)
 - der `proj.4`-strings verwenden ein `key=value` system, die mit `+` kombiniert werden
 - der `proj.4`-string von `CH1903+LV95` sieht folgendermassen aus: 
 
-```{}
+```{.default}
 +proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 
 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 
 +units=m +no_defs
 ```
 
+:::
 
 
-### Well known text wkt
+:::{.callout-note collapse="true"}
+
+## Well known text wkt (optional)
 
 - Logik ähnlich wie `proj.4`-strings
 - verwenden einen anderen Syntax (`key[value]`)
 - der wkt von `CH1903+LV95` sieht folgendermassen aus
 
-```{}
+```{.default}
 PROJCS["CH1903+ / LV95",
     GEOGCS["CH1903+",
         DATUM["CH1903+",
@@ -219,9 +220,12 @@ PROJCS["CH1903+ / LV95",
     AUTHORITY["EPSG","2056"]]
 ```
 
+:::
 
 
-### EPSG Code
+:::{.callout-important collapse="true"}
+
+## EPSG Code (wichtig)
 
 - die European Petroleum Survey Group (EPSG): ein wissenschaftliche Organisation (Geodäsie, Vermessung und Kartographie)
 
@@ -229,12 +233,17 @@ PROJCS["CH1903+ / LV95",
 - jede Einträge hat einen Referenz Code (siehe [epsg.io](https://epsg.io/))
 -  Wie lautet der EPSG Code für `CH1903+LV95`?
 - der EPSG Code ist der einfachste Weg, ein Koordinatenbezugssystem anzusprechen
-- am besten ist, man notiert sich die EPSG Codes unserer vier Wichtigsten Koordinatenbezugssysteme:
-  - `CH1903+ LV95`: `2056`
-  - `CH1903  LV03`: `21781`
-    - `WGS84`: `4326`
-    - `WGS 84 / Pseudo-Mercator`: `3857` <!-- wurde bis dato gar nicht erwähnt -->
+- am besten ist, man notiert sich die EPSG Codes unserer wichtigsten Koordinatenbezugssysteme:
 
+  | Koordinatenbezugssystem   | EPSG Code   | Kommentar                           | Einheit |
+  |---------------------------|-------------| ------------------------------------|---------|
+  | `CH1903+ LV95`            | `2056`      | Neues Koordinatensystem der Schweiz | Meter   |
+  | `CH1903 LV03`             | `21781`     | Altes Koordinatensystem der Schweiz | Meter   |
+  | `WGS84`                   | `4326`      | Weltweites Koordinatensystem        | Grad    |
+
+
+
+:::
 
 
 
@@ -249,7 +258,6 @@ Weise nun unserem Datensatz das richtige Koordinatensystem zu. Dafür brauchst d
 
 ```{r}
 #| label: uebung-1-8
-#| filename: Musterlösung
 st_crs(ausserberg_sf) <- 2056
 
 ausserberg_sf[1:4, 1:6] 
@@ -283,7 +291,6 @@ Projected CRS: CH1903+ / LV95
 
 ```{r}
 #| label: uebung-1-10
-#| filename: Musterlösung
 # plot(ausserberg_sf) <- macht einen Plot pro Spalte, maximal 9
 plot(ausserberg_sf["Verbuschung"]) # Plottet nur die ausgewählte Spalte
 ```
@@ -292,7 +299,7 @@ plot(ausserberg_sf["Verbuschung"]) # Plottet nur die ausgewählte Spalte
 ::::
 
 
-## Input <!--6-->
+## Input `tmap` <!--6-->
 
 - In `R` gibt es dezidierte libraries, um geografische Daten zu visualisieren
 - Wir werden im Unterricht die library `tmap` verwenden. 
@@ -316,8 +323,6 @@ library("tmap")
 
 
 
-
-## Input
 
 - `tmap` funktioniert nach einem "layer"-Prinzip
 - ein Layer besteht aus 2 Komponenten: 
@@ -379,7 +384,6 @@ Erstellt nun eine eigene Karte mit `tmap` und euren Daten. Versucht, den unten s
 
 ```{r}
 #| label: uebung-1-28
-#| filename: Musterlösung
 
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "gew_Temperaturzahl", palette = "viridis") +
@@ -395,7 +399,7 @@ tm_shape(ausserberg_sf) +
 
 
 
-## Input <!--4-->
+## Input CRS wechseln <!--4-->
 
 - Bisher: Dem Datensatz ein Koordinatensystem *zuweisen*. 
 - Auch häufig: Koordinaten vom einen Koordinantensystem in ein anderes übersetzen (*transformieren*)
@@ -424,7 +428,6 @@ tm_shape(ausserberg_sf) +
 
 ```{r}
 #| label: uebung-1-29
-#| filename: Musterlösung
 ausserberg_sf_wgs84 <- st_transform(ausserberg_sf, 4326)
 ```
 
@@ -456,7 +459,6 @@ Wiederhole nochmal den letzten `tmap` plot , diesmal mit dem Datensatz `ausserbe
 
 ```{r}
 #| label: uebung-1-30
-#| filename: Musterlösung
 
 
 tm_shape(ausserberg_sf_wgs84) +
@@ -477,7 +479,7 @@ tm_shape(ausserberg_sf_wgs84) +
 
 
 
-## Input <!--4-->
+## Input Räumliche Datenformate<!--4-->
 
 - CSVs eignen sich nur bedingt um räumliche Daten abzuspeichern
 - Um aus `Vegauf_Ausserberg_2019_Kopfdaten.csv` ein räumliches Objekt zu machen mussten wir verschiedene Schritte erledigen
@@ -519,7 +521,6 @@ ausserberg_sf <- read_sf("data/processed/ausserberg.gpkg")
 
 ```{r}
 #| label: uebung-1-34
-#| filename: Musterlösung
 hangenmoos <- readxl::read_excel("data/original/daten_vegedaz/Hagenmoos.xlsx", "KopfdatenVertikal")
 
 hangenmoos_sf <- st_as_sf(hangenmoos, coords = c("X", "Y"))
@@ -539,7 +540,7 @@ tm_shape(hangenmoos_sf_wgs84) +
 
 
 
-## Input <!--3-->
+## Input Small Multiples<!--3-->
 
 - Der Datensatz `Hangenmoos` beinhaltet Erhebungen an den gleichen Standorten in verschiedenen Jahren. 
 - Dies führt dazu, dass sich Punkte überlagern (gleiche Koordinaten)
@@ -569,7 +570,6 @@ tm_shape(hangenmoos_sf_wgs84) +
 
 ```{r}
 #| label: uebung-1-36
-#| filename: Musterlösung
 tmap_mode("view")
 
 tm_shape(hangenmoos_sf_wgs84) +  tm_bubbles(col = "Bereich")  +  tm_layout(legend.outside = TRUE)
@@ -579,6 +579,8 @@ tm_shape(hangenmoos_sf_wgs84) +  tm_bubbles(col = "Bereich")  +  tm_layout(legen
 
 :::
 ::::
+
+## Fazit
 
 
 :::{.callout-note}

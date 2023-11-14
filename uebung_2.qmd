@@ -3,7 +3,7 @@
 subtitle: Komplexe Vektordaten
 ---
 
-# Übung 2
+# Übung 2 {#sec-uebung-2}
 
 ## Vorbereitung <!--1-->
 
@@ -53,7 +53,6 @@ Importiere das den Datensatz mit `read_sf()` und speichere den output in der Var
 
 ```{r}
 #| label: uebung-2-3
-#| filename: Musterlösung
 gemeindegrenzen <- read_sf("data/original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_BEZIRKSGEBIET.shp")
 ```
 
@@ -90,7 +89,6 @@ Entferne alle Spalten bis auf `NAME`, `EINWOHNERZ` und `geometry`.
 
 ```{r}
 #| label: uebung-2-5
-#| filename: Musterlösung
 #| 
 gemeindegrenzen <- gemeindegrenzen[, c("NAME","EINWOHNERZ","geometry")]
 ```
@@ -110,7 +108,6 @@ Visualisiere die Gemeindegrenzen mit `plot()` und `tmap`.
 
 ```{r}
 #| label: uebung-2-6
-#| filename: Musterlösung
 tm_shape(gemeindegrenzen) + tm_polygons()
 ```
 
@@ -130,7 +127,6 @@ Färbe die Polygone nach der Einwohnerzahl ein. Spiele mit der Option `style` he
 
 ```{r}
 #| label: uebung-2-7
-#| filename: Musterlösung
 tm_shape(gemeindegrenzen) + tm_polygons(col = "EINWOHNERZ", style = "cont")
 ```
 

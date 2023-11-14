@@ -2,44 +2,48 @@
 subtitle: Integration von Geodaten
 ---
 
-# Übung 5
-
-```{r}
-#| label: uebung-5-1
-#| output: false
-
-
-library("tmap")
-
-tmap_options(check.and.fix = TRUE)
-tmap_mode("plot")
-```
-
-## Integration von Geodaten
+# Übung 5 {#sec-uebung-5}
 
 - Bisher haben wir alle Datensätze einzeln betrachtet
 - Wenn wir alle Datensätze ins gleiche Bezugssystem bringen, können wir diese *integrieren* bzw. überlagern
 - Überlagern kann heissen: 
   - gemeinsam Visualisieren
-    - Information übertragen
+  - Information übertragen
 
-  
+
+Vorbereitung: 
+
+- Starte ein neues Script `Uebung_5.R`
+- Importiere darin alle räumlichen libraries
+
+
+```{r}
+#| label: uebung-5-1
+#| output: false
+
+library("tmap")
+library("sf")
+library("terra")
+
+# tmap_options(check.and.fix = TRUE)
+tmap_mode("plot")
+```
+
+
 
 
 ## Übung 5.1
 
-- Starte ein neues Script `Uebung_5.R`
-- Importiere darin alle räumlichen libraries
-- Importiere die Datensätze `ausserberg.gpkg` (aus Übung 2) sowie `dhm200_2056.tif` (aus Übung 3)
-  - im Zip File: `data/processed/ausserberg.gpkg` bzw. `data/processed/dhm200_2056.tif`
+Importiere die Datensätze `ausserberg.gpkg` (aus Übung 2) sowie `dhm200_2056.tif` (aus Übung 3, `data/processed/ausserberg.gpkg` bzw. `data/processed/dhm200_2056.tif`)
+
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
 ```{r}
 #| label: uebung-5-2
-#| filename: Musterlösung
 #| output: false
-library("sf")
-library("terra")
-library("tmap")
+
 
 ausserberg <- read_sf("data/processed/ausserberg.gpkg")
 dhm200 <- rast("data/processed/dhm200_2056.tif")
@@ -47,15 +51,21 @@ dhm200 <- rast("data/processed/dhm200_2056.tif")
 
 
 
+:::
+::::
+
 ## Übung 5.2
 
 Überlagere die beiden Datensätze in einem `tmap`-Plot, indem du diese mit `+` verkettest.
 
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 
 ```{r}
 #| label: uebung-5-3
-#| filename: Musterlösung
 tm_shape(dhm200) + 
   tm_raster() + 
   tm_shape(ausserberg) + 
@@ -66,15 +76,21 @@ tm_shape(dhm200) +
 - Lösung: raster mittels unseren Punktdaten "zuschneiden" (`crop`)
 
 
+:::
+::::
+
 ## Übung 5.3
 
 - Mit `crop()` können wir ein Raster auf den "extent" von einem Vektor Datensatz zuschneiden
 - Schneide `dhm200` auf den extent von `ausserberg` zu
 - Visualisiere das resultierende Raster mit `tmap` (wieder gemeinsam mit `ausserberg`)
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-5-4
-#| filename: Musterlösung
 dhm200_cropped <- terra::crop(dhm200, ausserberg)
 
 tm_shape(dhm200_cropped) + 
@@ -86,6 +102,9 @@ tm_shape(dhm200_cropped) +
 
 
 
+:::
+::::
+
 
 
 ## Übung 5.4
@@ -93,15 +112,15 @@ tm_shape(dhm200_cropped) +
 - Lösung: Hoch aufgelöster Datensatz `dhm25` (aus Übung 4) und einlesen (zip-File: `processed/dhm25_2056.tif`)
 - wiederhole das Zuschneiden mittels `crop` sowie das Visualisieren mittels `tmap`
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-5-5
-#| filename: Musterlösung
 dhm25 <- rast("data/processed/dhm25_2056.tif") 
 dhm25_crop <- crop(dhm25, ausserberg)           
 ```
-
-
-
 
 
 ```{r}
@@ -116,8 +135,11 @@ tm_shape(dhm25_crop) +
 
 
 
+:::
+::::
 
-## Rasterwerte extrahieren
+
+## Input: Rasterwerte extrahieren
 
 
 - bisher haben wir zwei Datensätze (Raster und Vektor) visuell überlagert
@@ -135,44 +157,58 @@ tm_shape(dhm25_crop) +
 - Speichere den output in einer Variabel und beguteachte diese
 
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-5-7
-#| filename: Musterlösung
 
-ausserberg_vect <- vect(ausserberg)
-elev <- extract(dhm25, ausserberg_vect) # <- die Funktion extract() extrahiert die Information
+# ausserberg_vect <- vect(ausserberg)
+elev <- extract(dhm25, ausserberg) # <- die Funktion extract() extrahiert die Information
 ```
 
 
 
 ```{r}
 #| label: uebung-5-8
-#| filename: Musterlösung
 elev                                     # <- der output ist eine data.frame mit 2 Spalten
 ```
 
+
+:::
+::::
 
 
 ## Übung 5.6
 
 Spiele die Höheninformation aus `extract` zurück in `ausserberg`.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 
 ```{r}
 #| label: uebung-5-9
-#| filename: Musterlösung
 ausserberg$elevation <- elev[,2]         # <- die 2. Spalte aus elev auf ausserberg übertragen
 ```
 
 
 
+:::
+::::
+
   ## Übung 5.7 
 
 Visualisiere nun `ausserberg` und Färbe die Punkte nach ihrer Höheninformation ein.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-5-10
-#| filename: Musterlösung
 
 tm_shape(dhm25_crop) + 
   tm_raster(style = "cont", palette = "viridis") + 
@@ -180,8 +216,6 @@ tm_shape(dhm25_crop) +
   tm_bubbles() +
   tm_layout(title = "dhm25 mit überlagerten Punktdaten")
 ```
-
-
 
 
 
@@ -195,8 +229,11 @@ tm_shape(ausserberg) +
 
 
 
+:::
+::::
 
-## Vektordaten zuschneiden
+
+## Input: Vektordaten zuschneiden
 
 - nun wollen wir zwei Vektordatensätze miteinander verschneiden
 - Ausgangslage:
@@ -211,10 +248,13 @@ tm_shape(ausserberg) +
 - Lade diese beiden Datensätze herunter und importiere sie in `R` (swissboundaries *Hoheitsgebiet*)
 - Transformiere sie in `ESPG 2056`
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 
 ```{r}
 #| label: uebung-5-12
-#| filename: Musterlösung
 # Datensätze einlesen:
 tww <- read_sf("data/original/TWW/TWW_LV95/trockenwiesenweiden.shp")
 hoheitsgebiet <- read_sf("data/original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_HOHEITSGEBIET.shp")
@@ -225,13 +265,19 @@ hoheitsgebiet <- st_transform(hoheitsgebiet, 2056)
 
 
 
+:::
+::::
+
 ## Übung 5.9
 
 Erstelle ein neues Objekt `landquart`, welches nur die Gemeinde Landquart beinhaltet und visualisiere diese.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-5-13
-#| filename: Musterlösung
 landquart <- hoheitsgebiet[hoheitsgebiet$NAME == "Landquart", ]
 
 tm_shape(landquart) + 
@@ -239,15 +285,18 @@ tm_shape(landquart) +
   tm_layout(title = "Gemeinde Landquart")
 ```
 
-
-
+:::
+::::
 ## Übung 5.10
 
 Überlagere die `TWW` Flächen mit der Gemeindegrenze von Landqart.
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-5-14
-#| filename: Musterlösung
 tm_shape(tww) + 
   tm_polygons() +
   tm_layout(title = "TWW der Schweiz")  +
@@ -257,14 +306,20 @@ tm_shape(tww) +
 
 
 
+:::
+::::
+
 ## Übung 5.11
 
 - Verwende die Funktion `st_intersection()` um die TWW-Flächen auf die Gemeindegrenze von Landquart zu zuschneiden. 
 - Visualisiere das Resultat
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-5-15
-#| filename: Musterlösung
 tww_landquart <- st_intersection(tww, landquart)
 ```
 
@@ -280,14 +335,15 @@ tww_landquart <- st_intersection(tww, landquart)
 
 
 
-## Vektordaten selektieren
+:::
+::::
 
+## Input: Vektordaten selektieren
 
-
-
-- Mit `st_intersection` haben wir TWW Flächen verschnitten, da `st_intersetion` die Schnittmenge beider Polygone nimmt
+Mit `st_intersection` haben wir TWW Flächen verschnitten, da `st_intersetion` die Schnittmenge beider Polygone nimmt
 
 ![](images/postgis-06-st-intersection.png)
+
 <!-- https://academy.vertabelo.com/course/postgis/additional-geometry-features/functions-returning-geometries/st-intersection -->
 - Alternativ können wir alle TWW Flächen selektieren, die mindestens Teilweise innerhalb des Gemeindegebietes liegen
 
@@ -305,9 +361,12 @@ tww_landquart2 <- tww[landquart, ]
 - Visualisiere das Resultat mit `tmap`
 - Vergleiche `tww_landquart2` mit `tww_landquart`. Wie unterscheiden sich diese?
 
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 ```{r}
 #| label: uebung-5-18
-#| filename: Musterlösung
 tww_landquart2 <- tww[landquart, ]
 ```
 
@@ -324,16 +383,26 @@ tww_landquart2 <- tww[landquart, ]
 
 
 
+:::
+::::
+
 ## Übung 5.13
+
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
 
 Exportiere `tww_landquart2` als Geopackage
 
 ```{r}
 #| label: uebung-5-20
-#| filename: Musterlösung
+#| output: false
 st_write(tww_landquart2, "data/processed/tww_landquart.gpkg", delete_layer = TRUE)
 ```
 
 
+
+:::
+::::
 
 

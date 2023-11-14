@@ -1,8 +1,10 @@
 project:
   type: book
 
+
+
 book:
-  title: "CAS FAB"
+  title: "CAS Vegetationsanalyse"
   author: "Nils Ratnaweera"
   date: "11/13/2023"
   chapters:
@@ -15,8 +17,8 @@ book:
     - uebung_6.qmd
 
 number-depth: 0
-bibliography: references.bib
 number-sections: false
+lang: de-CH
 
 execute: 
   freeze: true
