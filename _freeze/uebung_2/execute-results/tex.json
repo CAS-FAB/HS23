@@ -1,0 +1,21 @@
+{
+  "hash": "159b8b2c921d01a53de4482a146a9291",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\nsubtitle: Komplexe Vektordaten\n---\n\n\n\n# Übung 2 {#sec-uebung-2}\n\n## Vorbereitung <!--1-->\n\nErstelle ein neues R Script mit dem Namen `Uebung_2.R` und lade darin die libraries `sf` und `tmap`\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(\"sf\")\nlibrary(\"tmap\")\n```\n:::\n\n\n\n\n## Übung 2.1 <!--10-->\n\n- Suche dir die Gemeindegrenzen der Schweiz. \n- Drei nützliche Adressen hierfür sind:\n  - [opendata.swiss](https://opendata.swiss/)\n  - [map.geo.admin.ch](https://map.geo.admin.ch)\n  - [swisstopo.admin.ch](https://www.swisstopo.admin.ch)\n- Wenn du die Wahl hast, versuche das File als Geopackage herunterzuladen. Ansonsten als Shapefile oder als File Geodatabase\n- Entzippe das File (sofern nötig) und schau dir den Inhalt an\n\n\n::::{.content-visible when-profile=\"musterloesung\"}\n:::{.callout-note}\n## Musterlösung\n\n<https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d/swissboundaries3d_2023-01/swissboundaries3d_2023-01_2056_5728.gpkg.zip>\n\nShortlink (für diesen Kurs): <https://bit.ly/47wCOzo>\n\n\n:::\n::::\n\n\n\n## Übung 2.2 \n\nImportiere das den Datensatz mit `read_sf()` und speichere den output in der Variabel `gemeindegrenzen`\n\n::::{.content-visible when-profile=\"musterloesung\"}\n:::{.callout-note}\n## Musterlösung\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ngemeindegrenzen <- read_sf(\"data/original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_BEZIRKSGEBIET.shp\")\n```\n:::\n\n\n\n\n:::\n::::\n\n\n\n## Übung 2.3 <!--5-->\n\nBetrachte den importierten Datensatz in der Konsole. Was für Informationen kannst du entnehmen?\n\n::::{.content-visible when-profile=\"musterloesung\"}\n:::{.callout-note}\n## Musterlösung\n\n- Die Koordinaten sind im Bezugssystem `CH1903+ LV95` abgespeichert\n- Es handelt sich um 159 Gemeinden und 21 Attribute, die meisten unbrauchbar\n\n\n:::\n::::\n\n\n## Übung 2.4 <!--3-->\n\nEntferne alle Spalten bis auf `NAME`, `EINWOHNERZ` und `geometry`.\n\n\n::::{.content-visible when-profile=\"musterloesung\"}\n:::{.callout-note}\n## Musterlösung\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ngemeindegrenzen <- gemeindegrenzen[, c(\"NAME\",\"EINWOHNERZ\",\"geometry\")]\n```\n:::\n\n\n\n\n:::\n::::\n\n\n## Übung 2.5 <!--4-->\n\nVisualisiere die Gemeindegrenzen mit `plot()` und `tmap`.\n\n::::{.content-visible when-profile=\"musterloesung\"}\n:::{.callout-note}\n## Musterlösung\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntm_shape(gemeindegrenzen) + tm_polygons()\n```\n\n::: {.cell-output-display}\n![](uebung_2_files/figure-pdf/uebung-2-6-1.pdf){fig-pos='H'}\n:::\n:::\n\n\n\n\n\n:::\n::::\n\n\n## Übung 2.6 <!--4-->\n\nFärbe die Polygone nach der Einwohnerzahl ein. Spiele mit der Option `style` herum.\n\n::::{.content-visible when-profile=\"musterloesung\"}\n:::{.callout-note}\n## Musterlösung\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntm_shape(gemeindegrenzen) + tm_polygons(col = \"EINWOHNERZ\", style = \"cont\")\n```\n\n::: {.cell-output-display}\n![](uebung_2_files/figure-pdf/uebung-2-7-1.pdf){fig-pos='H'}\n:::\n:::\n\n\n\n\n\n\n:::\n::::\n\n",
+    "supporting": [
+      "uebung_2_files/figure-pdf"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}
