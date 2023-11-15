@@ -69,7 +69,9 @@ Der gleiche Datensatz (`DHM25 200`) in 3 unterschiedlichen Datenformaten:
 - ~~DHM200_polyface.dxf~~ (← CAD bereich)
 
 
-### ESRI ArcInfo ASCII Grid  <!--1-->
+:::{.callout-note collapse="true"}
+
+## ESRI ArcInfo ASCII Grid  <!--1-->
 
 - Dateierweiterung \*.asc
 - ein Datenformat von ESRI (siehe die [Spezifikationen](http://old.geotools.org/ArcInfo-ASCII-Grid-format_5250.html))
@@ -90,20 +92,26 @@ NODATA_VALUE -9999.
 835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816 799.2  
 ```
 
+:::
 
 
-### ASCII Gridded XYZ  <!--1-->
+:::{.callout-note collapse="true"}
+
+## ASCII Gridded XYZ  <!--1-->
 
 - Dateierweiterung \*.xyz
 - Ein offenes Format
 - Beinhaltet 3 Spalten: x- und y- Koordinaten sowie Zellwert
 - kann in einem Texteditor geöffnet werden:
 
-```{}
+```{.default}
 655000.00 302000.00 835.01
 655200.00 302000.00 833.11
 655400.00 302000.00 831.20
 ```
+
+:::
+
 
 ### Raster in `R`
 
@@ -293,7 +301,8 @@ tm_shape(gemeindegrenzen) + tm_polygons()
 #| label: uebung-3-16
 #| 
 # tmap_mode("view") # optional
-tm_shape(dhm200_2056) + tm_raster()
+tm_shape(dhm200_2056) + 
+  tm_raster()
 ```
 
 

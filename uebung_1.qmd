@@ -409,7 +409,7 @@ tm_shape(ausserberg_sf) +
   - ist nur sinnvoll, wenn das Koordinatensystem nicht oder falsch zugewiesen wurde
 - Koordinatenbezugssystem*transformieren* 
   - verändert die Koordinatenwerte 
-    - ist unter verschiedenen Szenarien sinnvoll (um versch. Datequellen zu integrieren)
+  - ist unter verschiedenen Szenarien sinnvoll (um versch. Datequellen zu integrieren)
 
 
 
@@ -446,9 +446,8 @@ Zudem haben sich die Koordinatenwerte verändert. Neu: `POINT (7.843859 46.31987
 :::
 ::::
 
-exclude: true
 
-## Übung 1.12 <!--4-->
+## Übung 1.12 (Optional) <!--3-->
 
 Wiederhole nochmal den letzten `tmap` plot , diesmal mit dem Datensatz `ausserberg_sf_wgs84`. Wie unterscheiden sich die Plots? 
 
@@ -552,7 +551,7 @@ tm_shape(hangenmoos_sf_wgs84) +
 tm_shape(hangenmoos_sf_wgs84) +
   tm_bubbles(size = .2, col = "Bereich")  +
   tm_layout(legend.outside = TRUE) +
- {{tm_facets("Jahr",nrow = 1)}}
+  tm_facets("Jahr",nrow = 1)
 ```
 
 
@@ -570,12 +569,15 @@ tm_shape(hangenmoos_sf_wgs84) +
 
 ```{r}
 #| label: uebung-1-36
+#| eval: false
 tmap_mode("view")
-
-tm_shape(hangenmoos_sf_wgs84) +  tm_bubbles(col = "Bereich")  +  tm_layout(legend.outside = TRUE)
 ```
 
-
+```{r}
+tm_shape(hangenmoos_sf_wgs84) +  
+  tm_bubbles(col = "Bereich")  +  
+  tm_layout(legend.outside = TRUE)
+```
 
 :::
 ::::

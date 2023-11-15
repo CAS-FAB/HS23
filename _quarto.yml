@@ -4,9 +4,12 @@ project:
 
 
 book:
-  title: "CAS Vegetationsanalyse"
+  title: "CAS"
   author: "Nils Ratnaweera"
   date: "11/13/2023"
+  reader-mode: true
+  sidebar: 
+    logo: images/zhaw_rgb.png
   chapters:
     - index.qmd
     - uebung_1.qmd
@@ -27,8 +30,9 @@ execute:
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
+    css: style.css
+    include-in-header:
+      - script.html
 
-
+ 
 

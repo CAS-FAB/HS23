@@ -103,8 +103,13 @@ tmap_mode("plot")
 
 ```{r}
 #| label: uebung-4-6
+#| output: false
 
 swissimage_10 <- aggregate(swissimage, fact = 10)
+```
+
+```{r}
+#| label: uebung-4-7
 
 tm_shape(swissimage_10) + 
   tm_rgb()
@@ -121,7 +126,7 @@ tm_shape(swissimage_10) +
 
 - Heute haben wir das Höhenmodell `dhm200` importiert
 - Höhenmodell mit 200m Auflösung (&rarr; grob! )
-- swisstopo stellt zusätzlich das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung zur Verfügung (https://bit.ly/3kFgZrF)
+- swisstopo stellt zusätzlich das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung zur Verfügung (<https://bit.ly/3kFgZrF>)
 - durch die höhere Auflösung dauert das transformieren in ein neues Koordinatensystem etwas länger
 
 
@@ -129,7 +134,7 @@ tm_shape(swissimage_10) +
 
 ## Übung 4.4
 
-- Ladet euch das das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung herunter (https://bit.ly/3kFgZrF)
+- Ladet euch das das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung herunter (<https://bit.ly/3kFgZrF>)
 - importiert es in R
 - setzt das korrekte CRS
 - transformiert es in EPSG 2056 und verwendet dabei folgende Optionen: 
@@ -160,6 +165,7 @@ dhm25
 ## Übung 4.5 (Optional und Open End)
 
 Suche dir auf den gängigen Portalen (s.u.) einen spannenden Datensatz und visualisiere diesen
+
   - [opendata.swiss](https://opendata.swiss/)
   - [map.geo.admin.ch](https://map.geo.admin.ch)
   - [swisstopo.admin.ch](https://www.swisstopo.admin.ch)
