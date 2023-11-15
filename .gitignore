@@ -4,3 +4,4 @@ data
 .quarto
 /*_files
 /*.markdown
+/.quarto/
