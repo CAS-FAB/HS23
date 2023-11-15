@@ -1,1 +1,6 @@
-/.quarto/
+_book
+data
+.vscode
+.quarto
+/*_files
+/*.markdown
