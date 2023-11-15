@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "CAS Vegetationsanalyse",
+    "title": "CAS",
     "section": "",
     "text": "CAS Vegetationsanalyse & Feldbotanik\nWilkommen bei den Kursunterlagen zum Kurstag 17 Geographische Kartendarstellungen mit R, im Rahmen des Modul 2 im CAS Vegetationsanalyse & Feldbotanik. Diese Kursunterlagen sollen Vegetationsökologen und Feldbotaniker in die Lage versetzen, ihre Daten mit Hilfe von R zu analysieren und zu visualisieren. Der Kurs ist als Workshop aufgebaut: Die Inputs sind relativ kurz, dafür programmieren wir viel gemeinsam. Dabei werden am Kurstag die Übungen 1 bis 6 so weit wie möglich gemeinsam durchgearbeitet, der Rest ist als Hausaufgabe gedacht.\nJede Übung wird auf dem Beamer projeziert und sofern nötig mündlich ergänzt. Danach haben die Kursteilnehmer Zeit, die Übung selbständig zu lösen. Nach einer Weile wird eine Lösung präsentiert (live coding) und die Teilnehmer können Fragen stellen. Für Personen, denen das Tempo zu langsam ist, können die Übungen auch selbständig durcharbeiten. Nach dem Kurstag werden die Musterlösungen aufgeschaltet.\n\nUngefährer Zeitplan für den Kurstag\n\n\nvon\nbis\nThema\n\n\n\n\n09:00\n09:35\nBegrüssung und Einführung räumliche Daten\n\n\n09:50\n10:35\nVektordaten: Übung 1\n\n\n10:50\n12:00\nVektordaten: Übung 1 & 2\n\n\n12:00\n13:00\nMittagspause\n\n\n13:00\n13:35\nRasterdaten: Input und Übung 3\n\n\n13:50\n14:35\nRasterdaten: Übung 3 & 4\n\n\n14:50\n15:35\nIntegration von Geodaten: Übung 5\n\n\n15:50\n17:00\nSampling Design: Übung 6",
     "crumbs": [
@@ -134,7 +134,7 @@
     "href": "uebung_1.html#input-crs-wechseln",
     "title": "Übung 1",
     "section": "Input CRS wechseln ",
-    "text": "Input CRS wechseln \n\nBisher: Dem Datensatz ein Koordinatensystem zuweisen.\nAuch häufig: Koordinaten vom einen Koordinantensystem in ein anderes übersetzen (transformieren)\nWichtig unterschied!\nKoordinatenbezugssystem zuweisen\n\nverändert die Koordinatenwerte nicht,\nist nur sinnvoll, wenn das Koordinatensystem nicht oder falsch zugewiesen wurde\n\nKoordinatenbezugssystemtransformieren\n\nverändert die Koordinatenwerte\n\nist unter verschiedenen Szenarien sinnvoll (um versch. Datequellen zu integrieren)",
+    "text": "Input CRS wechseln \n\nBisher: Dem Datensatz ein Koordinatensystem zuweisen.\nAuch häufig: Koordinaten vom einen Koordinantensystem in ein anderes übersetzen (transformieren)\nWichtig unterschied!\nKoordinatenbezugssystem zuweisen\n\nverändert die Koordinatenwerte nicht,\nist nur sinnvoll, wenn das Koordinatensystem nicht oder falsch zugewiesen wurde\n\nKoordinatenbezugssystemtransformieren\n\nverändert die Koordinatenwerte\nist unter verschiedenen Szenarien sinnvoll (um versch. Datequellen zu integrieren)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -144,17 +144,17 @@
     "href": "uebung_1.html#übung-1.11",
     "title": "Übung 1",
     "section": "Übung 1.11 ",
-    "text": "Übung 1.11 \n\nTransformiert ausserberg_sf in das Koordinatenbezugssystem WGS84\nSpeichert den output in einer neuen Variabel (z.B ausserberg_sf_wgs84)\nSchaut euch diesen Datensatz an, was hat sich verändert?\nTipp: Nutzt dafür die Funktion st_transform()\n\nexclude: true",
+    "text": "Übung 1.11 \n\nTransformiert ausserberg_sf in das Koordinatenbezugssystem WGS84\nSpeichert den output in einer neuen Variabel (z.B ausserberg_sf_wgs84)\nSchaut euch diesen Datensatz an, was hat sich verändert?\nTipp: Nutzt dafür die Funktion st_transform()",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
   },
   {
-    "objectID": "uebung_1.html#übung-1.12",
-    "href": "uebung_1.html#übung-1.12",
+    "objectID": "uebung_1.html#übung-1.12-optional",
+    "href": "uebung_1.html#übung-1.12-optional",
     "title": "Übung 1",
-    "section": "Übung 1.12 ",
-    "text": "Übung 1.12 \nWiederhole nochmal den letzten tmap plot , diesmal mit dem Datensatz ausserberg_sf_wgs84. Wie unterscheiden sich die Plots?",
+    "section": "Übung 1.12 (Optional) ",
+    "text": "Übung 1.12 (Optional) \nWiederhole nochmal den letzten tmap plot , diesmal mit dem Datensatz ausserberg_sf_wgs84. Wie unterscheiden sich die Plots?",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -184,7 +184,7 @@
     "href": "uebung_1.html#input-small-multiples",
     "title": "Übung 1",
     "section": "Input Small Multiples",
-    "text": "Input Small Multiples\n\nDer Datensatz Hangenmoos beinhaltet Erhebungen an den gleichen Standorten in verschiedenen Jahren.\nDies führt dazu, dass sich Punkte überlagern (gleiche Koordinaten)\nUm dies zu vermeiden, können wir mit der facet option in tmap arbeiten\n\n\ntm_shape(hangenmoos_sf_wgs84) +\n  tm_bubbles(size = .2, col = \"Bereich\")  +\n  tm_layout(legend.outside = TRUE) +\n {{tm_facets(\"Jahr\",nrow = 1)}}",
+    "text": "Input Small Multiples\n\nDer Datensatz Hangenmoos beinhaltet Erhebungen an den gleichen Standorten in verschiedenen Jahren.\nDies führt dazu, dass sich Punkte überlagern (gleiche Koordinaten)\nUm dies zu vermeiden, können wir mit der facet option in tmap arbeiten\n\n\ntm_shape(hangenmoos_sf_wgs84) +\n  tm_bubbles(size = .2, col = \"Bereich\")  +\n  tm_layout(legend.outside = TRUE) +\n  tm_facets(\"Jahr\",nrow = 1)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -304,7 +304,7 @@
     "href": "uebung_3.html#input-raster-datenformate",
     "title": "Übung 3",
     "section": "Input: Raster Datenformate ",
-    "text": "Input: Raster Datenformate \nInhalt des heruntergeladenen zip-Files:\n\nEigentliche Daten:\n\nDHM200_polyface.dxf\nDHM200.asc\nDHM200.xyz\n\nMetadaten und Lizenzbedigungen:\n\nlicense.txt\nMetadata_gm03.xml\nMetadata_PDF.pdf\nMetadata_xml_iso19139.xml\n\n\nDer gleiche Datensatz (DHM25 200) in 3 unterschiedlichen Datenformaten:\n\nDHM200.asc\nDHM200.xyz\nDHM200_polyface.dxf (← CAD bereich)\n\n\nESRI ArcInfo ASCII Grid \n\nDateierweiterung *.asc\nein Datenformat von ESRI (siehe die Spezifikationen)\nbeginnt mit mehreren Zeilen Metaadaten, darauf folgen die eigentlichen Werte\nkann in einem Texteditor geöffnet werden:\n\nNCOLS 1926\nNROWS 1201\nXLLCORNER 479900.\nYLLCORNER 61900.\nCELLSIZE 200.\nNODATA_VALUE -9999.\n-9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. \n...\n...\n...\n835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816 799.2  \n\n\nASCII Gridded XYZ \n\nDateierweiterung *.xyz\nEin offenes Format\nBeinhaltet 3 Spalten: x- und y- Koordinaten sowie Zellwert\nkann in einem Texteditor geöffnet werden:\n\n655000.00 302000.00 835.01\n655200.00 302000.00 833.11\n655400.00 302000.00 831.20\n\n\nRaster in R\nUm Rasterdaten in R zu importieren verwenden wir das Package terra.\n\ninstall.packages(\"terra\")\n\n\nlibrary(\"terra\")\n\nterra 1.7.39\n\ndhm200 &lt;- rast(\"data/original/dhm25_200/DHM200.xyz\")\n\n\nAus terra benötigen wir die Funktion rast\ndas Importieren funktioniert gleich, unabhängig von der Dateierweiterung\neine summarische Zusammenfassung erhält man via Konsole:\n\n\ndhm200\n\nclass       : SpatRaster \ndimensions  : 1141, 1926, 1  (nrow, ncol, nlyr)\nresolution  : 200, 200  (x, y)\nextent      : 479900, 865100, 73900, 302100  (xmin, xmax, ymin, ymax)\ncoord. ref. :  \nsource      : DHM200.xyz \nname        :  DHM200 \nmin value   :  193.00 \nmax value   : 4556.63 \n\nplot(dhm200)  # für einfache visualisierungen",
+    "text": "Input: Raster Datenformate \nInhalt des heruntergeladenen zip-Files:\n\nEigentliche Daten:\n\nDHM200_polyface.dxf\nDHM200.asc\nDHM200.xyz\n\nMetadaten und Lizenzbedigungen:\n\nlicense.txt\nMetadata_gm03.xml\nMetadata_PDF.pdf\nMetadata_xml_iso19139.xml\n\n\nDer gleiche Datensatz (DHM25 200) in 3 unterschiedlichen Datenformaten:\n\nDHM200.asc\nDHM200.xyz\nDHM200_polyface.dxf (← CAD bereich)\n\n\n\n\n\n\n\nESRI ArcInfo ASCII Grid \n\n\n\n\n\n\nDateierweiterung *.asc\nein Datenformat von ESRI (siehe die Spezifikationen)\nbeginnt mit mehreren Zeilen Metaadaten, darauf folgen die eigentlichen Werte\nkann in einem Texteditor geöffnet werden:\n\nNCOLS 1926\nNROWS 1201\nXLLCORNER 479900.\nYLLCORNER 61900.\nCELLSIZE 200.\nNODATA_VALUE -9999.\n-9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. \n...\n...\n...\n835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816 799.2  \n\n\n\n\n\n\n\n\n\nASCII Gridded XYZ \n\n\n\n\n\n\nDateierweiterung *.xyz\nEin offenes Format\nBeinhaltet 3 Spalten: x- und y- Koordinaten sowie Zellwert\nkann in einem Texteditor geöffnet werden:\n\n655000.00 302000.00 835.01\n655200.00 302000.00 833.11\n655400.00 302000.00 831.20\n\n\n\n\nRaster in R\nUm Rasterdaten in R zu importieren verwenden wir das Package terra.\n\ninstall.packages(\"terra\")\n\n\nlibrary(\"terra\")\n\nterra 1.7.39\n\ndhm200 &lt;- rast(\"data/original/dhm25_200/DHM200.xyz\")\n\n\nAus terra benötigen wir die Funktion rast\ndas Importieren funktioniert gleich, unabhängig von der Dateierweiterung\neine summarische Zusammenfassung erhält man via Konsole:\n\n\ndhm200\n\nclass       : SpatRaster \ndimensions  : 1141, 1926, 1  (nrow, ncol, nlyr)\nresolution  : 200, 200  (x, y)\nextent      : 479900, 865100, 73900, 302100  (xmin, xmax, ymin, ymax)\ncoord. ref. :  \nsource      : DHM200.xyz \nname        :  DHM200 \nmin value   :  193.00 \nmax value   : 4556.63 \n\nplot(dhm200)  # für einfache visualisierungen",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Übung 3</span>"
     ]
@@ -444,7 +444,7 @@
     "href": "uebung_4.html#input-rgb-plots-mit-tmap",
     "title": "Übung 4",
     "section": "Input: RGB Plots mit tmap",
-    "text": "Input: RGB Plots mit tmap\n\nUm ein rgb Datensatz mit tmap zu plotten, verwenden wir nicht mehr tm_raster() sondern tm_rgb\n\n\ntmap_mode(\"plot\")\n\ntmap mode set to plotting\n\n\n\nswissimage_10 &lt;- aggregate(swissimage, fact = 10)\n\n\n|---------|---------|---------|---------|\n=========================================\n                                          \n\ntm_shape(swissimage_10) + \n  tm_rgb()\n\nstars object downsampled to 1215 by 823 cells. See tm_shape manual (argument raster.downsample)",
+    "text": "Input: RGB Plots mit tmap\n\nUm ein rgb Datensatz mit tmap zu plotten, verwenden wir nicht mehr tm_raster() sondern tm_rgb\n\n\ntmap_mode(\"plot\")\n\ntmap mode set to plotting\n\n\n\nswissimage_10 &lt;- aggregate(swissimage, fact = 10)\n\n\ntm_shape(swissimage_10) + \n  tm_rgb()\n\nstars object downsampled to 1215 by 823 cells. See tm_shape manual (argument raster.downsample)",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
     ]
@@ -474,7 +474,7 @@
     "href": "uebung_4.html#übung-4.5-optional-und-open-end",
     "title": "Übung 4",
     "section": "Übung 4.5 (Optional und Open End)",
-    "text": "Übung 4.5 (Optional und Open End)\nSuche dir auf den gängigen Portalen (s.u.) einen spannenden Datensatz und visualisiere diesen - opendata.swiss - map.geo.admin.ch - swisstopo.admin.ch",
+    "text": "Übung 4.5 (Optional und Open End)\nSuche dir auf den gängigen Portalen (s.u.) einen spannenden Datensatz und visualisiere diesen\n\nopendata.swiss\nmap.geo.admin.ch\nswisstopo.admin.ch",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
     ]

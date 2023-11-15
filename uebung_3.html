@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CAS Vegetationsanalyse - Übung 3</title>
+<title>CAS - Übung 3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,6 +103,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script>
+
+// the following function adds padding to all h2/h3 elements, so that I can 
+// easily present the content of the page in a more readable way
+function presenter(){
+    var paragraphs = document.querySelectorAll("h2", "h3");
+    paragraphs.forEach(function (paragraph) {
+        paragraph.classList.toggle("presenter-mode");
+    });
+}
+
+// once the page is loaded, the button is injected into the sidebar. This button
+// calls the presenter function (see above)
+window.onload = function() {
+    // create the button (similar to the buttons already availables)
+    const linkElement = document.createElement('a');
+
+    linkElement.classList.add('quarto-navigation-tool');
+    linkElement.classList.add('px-1');
+    linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+    linkElement.href = '#';
+    linkElement.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        presenter();
+    });
+
+    // Find the target element by its class name
+    const sidebar_tools = document.querySelector(".sidebar-tools-main")
+    sidebar_tools.appendChild(linkElement);
+};
+
+</script>
+
+
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -127,9 +164,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/zhaw_rgb.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">CAS Vegetationsanalyse</a> 
+      <a href="./">CAS</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Lesemodus umschalten">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -189,8 +236,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#übung-3.1" id="toc-übung-3.1" class="nav-link" data-scroll-target="#übung-3.1">Übung 3.1 <!--10--></a></li>
   <li><a href="#input-raster-datenformate" id="toc-input-raster-datenformate" class="nav-link" data-scroll-target="#input-raster-datenformate">Input: Raster Datenformate <!--4--></a>
   <ul class="collapse">
-  <li><a href="#esri-arcinfo-ascii-grid" id="toc-esri-arcinfo-ascii-grid" class="nav-link" data-scroll-target="#esri-arcinfo-ascii-grid">ESRI ArcInfo ASCII Grid <!--1--></a></li>
-  <li><a href="#ascii-gridded-xyz" id="toc-ascii-gridded-xyz" class="nav-link" data-scroll-target="#ascii-gridded-xyz">ASCII Gridded XYZ <!--1--></a></li>
   <li><a href="#raster-in-r" id="toc-raster-in-r" class="nav-link" data-scroll-target="#raster-in-r">Raster in <code>R</code></a></li>
   </ul></li>
   <li><a href="#übung-3.2" id="toc-übung-3.2" class="nav-link" data-scroll-target="#übung-3.2">Übung 3.2 <!--3--></a></li>
@@ -276,8 +321,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>DHM200.xyz</li>
 <li><del>DHM200_polyface.dxf</del> (← CAD bereich)</li>
 </ul>
-<section id="esri-arcinfo-ascii-grid" class="level3">
-<h3 class="anchored" data-anchor-id="esri-arcinfo-ascii-grid">ESRI ArcInfo ASCII Grid <!--1--></h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+ESRI ArcInfo ASCII Grid <!--1-->
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
 <li>Dateierweiterung *.asc</li>
 <li>ein Datenformat von ESRI (siehe die <a href="http://old.geotools.org/ArcInfo-ASCII-Grid-format_5250.html">Spezifikationen</a>)</li>
@@ -295,19 +350,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>...</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>...</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816 799.2  </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="ascii-gridded-xyz" class="level3">
-<h3 class="anchored" data-anchor-id="ascii-gridded-xyz">ASCII Gridded XYZ <!--1--></h3>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+ASCII Gridded XYZ <!--1-->
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
 <li>Dateierweiterung *.xyz</li>
 <li>Ein offenes Format</li>
 <li>Beinhaltet 3 Spalten: x- und y- Koordinaten sowie Zellwert</li>
 <li>kann in einem Texteditor geöffnet werden:</li>
 </ul>
-<pre><code>655000.00 302000.00 835.01
-655200.00 302000.00 833.11
-655400.00 302000.00 831.20</code></pre>
-</section>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>655000.00 302000.00 835.01</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>655200.00 302000.00 833.11</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>655400.00 302000.00 831.20</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <section id="raster-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="raster-in-r">Raster in <code>R</code></h3>
 <p>Um Rasterdaten in R zu importieren verwenden wir das Package <code>terra</code>.</p>

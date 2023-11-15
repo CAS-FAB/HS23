@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CAS Vegetationsanalyse - Übung 4</title>
+<title>CAS - Übung 4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,6 +103,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script>
+
+// the following function adds padding to all h2/h3 elements, so that I can 
+// easily present the content of the page in a more readable way
+function presenter(){
+    var paragraphs = document.querySelectorAll("h2", "h3");
+    paragraphs.forEach(function (paragraph) {
+        paragraph.classList.toggle("presenter-mode");
+    });
+}
+
+// once the page is loaded, the button is injected into the sidebar. This button
+// calls the presenter function (see above)
+window.onload = function() {
+    // create the button (similar to the buttons already availables)
+    const linkElement = document.createElement('a');
+
+    linkElement.classList.add('quarto-navigation-tool');
+    linkElement.classList.add('px-1');
+    linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+    linkElement.href = '#';
+    linkElement.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        presenter();
+    });
+
+    // Find the target element by its class name
+    const sidebar_tools = document.querySelector(".sidebar-tools-main")
+    sidebar_tools.appendChild(linkElement);
+};
+
+</script>
+
+
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -127,9 +164,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/zhaw_rgb.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">CAS Vegetationsanalyse</a> 
+      <a href="./">CAS</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Lesemodus umschalten">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -277,19 +324,15 @@ names       : SI25-2012-2013-2014_1, SI25-2012-2013-2014_2, SI25-2012-2013-2014_
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>swissimage_10 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(swissimage, <span class="at">fact =</span> <span class="dv">10</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-|---------|---------|---------|---------|
-=========================================
-                                          </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(swissimage_10) <span class="sc">+</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_rgb</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(swissimage_10) <span class="sc">+</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_rgb</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>stars object downsampled to 1215 by 823 cells. See tm_shape manual (argument raster.downsample)</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="uebung_4_files/figure-html/uebung-4-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="uebung_4_files/figure-html/uebung-4-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -298,14 +341,14 @@ names       : SI25-2012-2013-2014_1, SI25-2012-2013-2014_2, SI25-2012-2013-2014_
 <ul>
 <li>Heute haben wir das Höhenmodell <code>dhm200</code> importiert</li>
 <li>Höhenmodell mit 200m Auflösung (→ grob! )</li>
-<li>swisstopo stellt zusätzlich das <a href="https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html"><code>dhm25</code></a> mit 25m Auflösung zur Verfügung (https://bit.ly/3kFgZrF)</li>
+<li>swisstopo stellt zusätzlich das <a href="https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html"><code>dhm25</code></a> mit 25m Auflösung zur Verfügung (<a href="https://bit.ly/3kFgZrF" class="uri">https://bit.ly/3kFgZrF</a>)</li>
 <li>durch die höhere Auflösung dauert das transformieren in ein neues Koordinatensystem etwas länger</li>
 </ul>
 </section>
 <section id="übung-4.4" class="level2">
 <h2 class="anchored" data-anchor-id="übung-4.4">Übung 4.4</h2>
 <ul>
-<li>Ladet euch das das <a href="https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html"><code>dhm25</code></a> mit 25m Auflösung herunter (https://bit.ly/3kFgZrF)</li>
+<li>Ladet euch das das <a href="https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html"><code>dhm25</code></a> mit 25m Auflösung herunter (<a href="https://bit.ly/3kFgZrF" class="uri">https://bit.ly/3kFgZrF</a>)</li>
 <li>importiert es in R</li>
 <li>setzt das korrekte CRS</li>
 <li>transformiert es in EPSG 2056 und verwendet dabei folgende Optionen:
@@ -318,7 +361,12 @@ names       : SI25-2012-2013-2014_1, SI25-2012-2013-2014_2, SI25-2012-2013-2014_
 </section>
 <section id="übung-4.5-optional-und-open-end" class="level2">
 <h2 class="anchored" data-anchor-id="übung-4.5-optional-und-open-end">Übung 4.5 (Optional und Open End)</h2>
-<p>Suche dir auf den gängigen Portalen (s.u.) einen spannenden Datensatz und visualisiere diesen - <a href="https://opendata.swiss/">opendata.swiss</a> - <a href="https://map.geo.admin.ch">map.geo.admin.ch</a> - <a href="https://www.swisstopo.admin.ch">swisstopo.admin.ch</a></p>
+<p>Suche dir auf den gängigen Portalen (s.u.) einen spannenden Datensatz und visualisiere diesen</p>
+<ul>
+<li><a href="https://opendata.swiss/">opendata.swiss</a></li>
+<li><a href="https://map.geo.admin.ch">map.geo.admin.ch</a></li>
+<li><a href="https://www.swisstopo.admin.ch">swisstopo.admin.ch</a></li>
+</ul>
 </section>
 <section id="übung-4.6-optional-und-open-end" class="level2">
 <h2 class="anchored" data-anchor-id="übung-4.6-optional-und-open-end">Übung 4.6 (Optional und Open End)</h2>
@@ -337,15 +385,15 @@ names       : SI25-2012-2013-2014_1, SI25-2012-2013-2014_2, SI25-2012-2013-2014_
 <section id="übung-4.7" class="level2">
 <h2 class="anchored" data-anchor-id="übung-4.7">Übung 4.7</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tww_landquart <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"data/processed/tww_landquart.gpkg"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>swissimage <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">"data/processed/swissimage_2m_landquart.tif"</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(swissimage) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_rgb</span>() <span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(tww_landquart, <span class="at">is.master =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>() <span class="sc">+</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">position =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">just =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>),<span class="at">bg.color =</span> <span class="st">"white"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tww_landquart <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"data/processed/tww_landquart.gpkg"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>swissimage <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">"data/processed/swissimage_2m_landquart.tif"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(swissimage) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_rgb</span>() <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(tww_landquart, <span class="at">is.master =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>() <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">position =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">just =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>),<span class="at">bg.color =</span> <span class="st">"white"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>stars object downsampled to 1000 by 1000 cells. See tm_shape manual (argument raster.downsample)</code></pre>
 </div>
