@@ -134,13 +134,10 @@ window.onload = function() {
     // Find the target element by its class name
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
     sidebar_tools.appendChild(linkElement);
+
+    // the following function removes the title of the sidebar (which is the same as the title of the page)
+    document.querySelector(".sidebar-title>a").innerHTML = ""
 };
-
-
-// the following function removes the title of the sidebar (which is the same as the title of the page)
-window.onload = function(){
-    document.getElementsByClassName("sidebar-title")[0].innerHTML = ""
-}
 
 </script>
 
@@ -196,7 +193,7 @@ window.onload = function(){
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CAS Vegetationsanalyse &amp; Feldbotanik</span></a>
+ <span class="menu-text">Einführung</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -285,7 +282,7 @@ window.onload = function(){
 <li>Wenn wir alle Datensätze ins gleiche Bezugssystem bringen, können wir diese <em>integrieren</em> bzw. überlagern</li>
 <li>Überlagern kann heissen:
 <ul>
-<li>gemeinsam Visualisieren</li>
+<li>gemeinsam visualisieren</li>
 <li>Information übertragen</li>
 </ul></li>
 </ul>
@@ -304,7 +301,7 @@ window.onload = function(){
 </div>
 <section id="übung-5.1" class="level2">
 <h2 class="anchored" data-anchor-id="übung-5.1">Übung 5.1</h2>
-<p>Importiere die Datensätze <code>ausserberg.gpkg</code> (aus Übung 2) sowie <code>dhm200_2056.tif</code> (aus Übung 3, <code>data/processed/ausserberg.gpkg</code> bzw. <code>data/processed/dhm200_2056.tif</code>)</p>
+<p>Importiere die Datensätze <code>ausserberg.gpkg</code> (aus Übung 2) sowie <code>dhm200_2056.tif</code> (aus Übung 3, <code>data-processed/ausserberg.gpkg</code> bzw. <code>data-processed/dhm200_2056.tif</code>)</p>
 </section>
 <section id="übung-5.2" class="level2">
 <h2 class="anchored" data-anchor-id="übung-5.2">Übung 5.2</h2>
@@ -338,9 +335,7 @@ window.onload = function(){
 <section id="übung-5.5" class="level2">
 <h2 class="anchored" data-anchor-id="übung-5.5">Übung 5.5</h2>
 <ul>
-<li>Wandle <code>ausserberg</code> mit der Funktion <code>vect()</code> in ein <code>SpatVector</code> Objekt und speichere es als <code>ausserberg_vect</code></li>
-<li>Schau dir <code>ausserberg_vect</code> an, was hat sich verändert?</li>
-<li>Verwende die Funktion <code>extract</code> mit <code>ausserberg_vect</code> um die Höhenwerte aus <code>dhm25</code> zu extrahieren</li>
+<li>Verwende die Funktion <code>extract</code> mit <code>ausserberg</code> um die Höhenwerte aus <code>dhm25</code> zu extrahieren</li>
 <li>Speichere den output in einer Variabel und beguteachte diese</li>
 </ul>
 </section>
@@ -356,8 +351,16 @@ window.onload = function(){
 <li>nun wollen wir zwei Vektordatensätze miteinander verschneiden</li>
 <li>Ausgangslage:
 <ul>
-<li>wir verfügen über einen <a href="https://www.bafu.admin.ch/bafu/de/home/themen/biodiversitaet/zustand/karten/geodaten.html">TWW Datensatz der Schweiz</a> (https://bit.ly/3CqNRKT)</li>
-<li>wir verfügen über den <a href="https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/shp/2056/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill.zip">Gemeindelayer der Schweiz</a> (https://bit.ly/3CaAj5W)</li>
+<li>wir verfügen über einen TWW Datensatz der Schweiz
+<ul>
+<li>URL: <a href="https://www.bafu.admin.ch/bafu/de/home/themen/biodiversitaet/zustand/karten/geodaten.html" class="uri">https://www.bafu.admin.ch/bafu/de/home/themen/biodiversitaet/zustand/karten/geodaten.html</a>)</li>
+<li>Shorturl: <a href="https://bit.ly/3CqNRKT" class="uri">https://bit.ly/3CqNRKT</a></li>
+</ul></li>
+<li>wir verfügen über den Gemeindelayer der Schweiz
+<ul>
+<li>URL: <a href="https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d/swissboundaries3d_2023-01/swissboundaries3d_2023-01_2056_5728.gpkg.zip" class="uri">https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d/swissboundaries3d_2023-01/swissboundaries3d_2023-01_2056_5728.gpkg.zip</a>)</li>
+<li>Shorturl: <a href="https://bit.ly/47wCOzo" class="uri">https://bit.ly/47wCOzo</a>)</li>
+</ul></li>
 <li>wir wollen alle TWW Flächen innerhalb der Gemeinde Landquart erhalten</li>
 </ul></li>
 </ul>

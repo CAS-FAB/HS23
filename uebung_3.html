@@ -134,13 +134,10 @@ window.onload = function() {
     // Find the target element by its class name
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
     sidebar_tools.appendChild(linkElement);
+
+    // the following function removes the title of the sidebar (which is the same as the title of the page)
+    document.querySelector(".sidebar-title>a").innerHTML = ""
 };
-
-
-// the following function removes the title of the sidebar (which is the same as the title of the page)
-window.onload = function(){
-    document.getElementsByClassName("sidebar-title")[0].innerHTML = ""
-}
 
 </script>
 
@@ -196,7 +193,7 @@ window.onload = function(){
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CAS Vegetationsanalyse &amp; Feldbotanik</span></a>
+ <span class="menu-text">Einführung</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -252,10 +249,9 @@ window.onload = function(){
   <li><a href="#input-koordinatenbezugssystem-festlegen" id="toc-input-koordinatenbezugssystem-festlegen" class="nav-link" data-scroll-target="#input-koordinatenbezugssystem-festlegen">Input: Koordinatenbezugssystem <em>festlegen</em></a></li>
   <li><a href="#input-koordinatenbezugssystem-transformieren" id="toc-input-koordinatenbezugssystem-transformieren" class="nav-link" data-scroll-target="#input-koordinatenbezugssystem-transformieren">Input: Koordinatenbezugssystem <em>transformieren</em></a></li>
   <li><a href="#übung-3.4" id="toc-übung-3.4" class="nav-link" data-scroll-target="#übung-3.4">Übung 3.4 <!--4--></a></li>
+  <li><a href="#input-raster-exportieren" id="toc-input-raster-exportieren" class="nav-link" data-scroll-target="#input-raster-exportieren">Input Raster exportieren<!--3--></a></li>
   <li><a href="#übung-3.5" id="toc-übung-3.5" class="nav-link" data-scroll-target="#übung-3.5">Übung 3.5 <!--4--></a></li>
   <li><a href="#übung-3.6" id="toc-übung-3.6" class="nav-link" data-scroll-target="#übung-3.6">Übung 3.6 <!--4--></a></li>
-  <li><a href="#input-raster-exportieren" id="toc-input-raster-exportieren" class="nav-link" data-scroll-target="#input-raster-exportieren">Input Raster exportieren<!--3--></a></li>
-  <li><a href="#übung-3.7" id="toc-übung-3.7" class="nav-link" data-scroll-target="#übung-3.7">Übung 3.7 <!--4--></a></li>
   </ul>
 </nav>
     </div>
@@ -301,7 +297,8 @@ window.onload = function(){
 <li><a href="https://map.geo.admin.ch">map.geo.admin.ch</a></li>
 <li><a href="https://www.swisstopo.admin.ch">swisstopo.admin.ch</a></li>
 </ul></li>
-<li>Entzippe das File (sofern nötig) und schau dir den Inhalt an</li>
+<li>Entzippe ein allfälliges Zip-File und schau dir den Inhalt an</li>
+<li>Öffne das Tif-File in QGIS</li>
 </ul>
 </section>
 <section id="input-raster-datenformate" class="level2">
@@ -352,11 +349,11 @@ ESRI ArcInfo ASCII Grid <!--1-->
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>YLLCORNER 61900.</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>CELLSIZE 200.</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>NODATA_VALUE -9999.</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>-9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>-9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999.</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>...</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>...</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>...</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816 799.2  </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -395,7 +392,7 @@ ASCII Gridded XYZ <!--1-->
 <div class="cell-output cell-output-stderr">
 <pre><code>terra 1.7.39</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dhm200 <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"data/original/dhm25_200/DHM200.xyz"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dhm200 <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"data-original/dhm25_200/DHM200.xyz"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Aus <code>terra</code> benötigen wir die Funktion <code>rast</code></li>
@@ -517,36 +514,24 @@ max value   : 4555.624 </code></pre>
 <li>Speichere den Output als <code>dhm200_2056</code></li>
 </ul>
 </section>
-<section id="übung-3.5" class="level2">
-<h2 class="anchored" data-anchor-id="übung-3.5">Übung 3.5 <!--4--></h2>
-<p>Visualisiere <code>dhm200_2056</code> mit <code>tmap</code>.</p>
-<p>Tipp: Um ein Polygon zu visualisieren sind wir wie folgt vorgegangen</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(gemeindegrenzen) <span class="sc">+</span> <span class="fu">tm_polygons</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="übung-3.6" class="level2">
-<h2 class="anchored" data-anchor-id="übung-3.6">Übung 3.6 <!--4--></h2>
-<p>Verändere die Darstellungsweise des Rasters mithilfe von <code>style</code> und <code>palette</code>. Tipp, schau dir die Hilfe von <code>?tm_raster</code> an.</p>
-</section>
 <section id="input-raster-exportieren" class="level2">
 <h2 class="anchored" data-anchor-id="input-raster-exportieren">Input Raster exportieren<!--3--></h2>
 <ul>
 <li>Wir haben das DHM auf unsere Bedürfnisse angepasst (CRS gesetzt und transformiert)</li>
-<li>Wir können unser verändertes Objekt (<code>dhm200_2056</code>) exportieren, so dass diese Änderungen abgespeichert werden</li>
+<li>Wir können unser verändertes Objekt (<code>dhm200_2056</code>) als GeoTiff exportieren, so dass diese Änderungen abgespeichert werden</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">writeRaster</span>(dhm200_2056,<span class="st">"data/processed/dhm200_2056.tif"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">writeRaster</span>(dhm200_2056,<span class="st">"data-processed/dhm200_2056.tif"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>beim Import ist die CRS Information bekannt (CRS setzen und transformieren ist nicht mehr nötig)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dhm200_2056 <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"data/processed/dhm200_2056.tif"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>dhm200_2056</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dhm200_2056 <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"data-processed/dhm200_2056.tif"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>dhm200_2056</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>class       : SpatRaster 
 dimensions  : 1141, 1926, 1  (nrow, ncol, nlyr)
@@ -560,9 +545,17 @@ max value   : 4555.624 </code></pre>
 </div>
 </div>
 </section>
-<section id="übung-3.7" class="level2">
-<h2 class="anchored" data-anchor-id="übung-3.7">Übung 3.7 <!--4--></h2>
-<p>Exportiere <code>dhm200_2056</code> als <code>tif</code> File</p>
+<section id="übung-3.5" class="level2">
+<h2 class="anchored" data-anchor-id="übung-3.5">Übung 3.5 <!--4--></h2>
+<p>Visualisiere <code>dhm200_2056</code> mit <code>tmap</code>.</p>
+<p>Tipp: Um ein Polygon zu visualisieren sind wir wie folgt vorgegangen</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(gemeindegrenzen) <span class="sc">+</span> <span class="fu">tm_polygons</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="übung-3.6" class="level2">
+<h2 class="anchored" data-anchor-id="übung-3.6">Übung 3.6 <!--4--></h2>
+<p>Verändere die Darstellungsweise des Rasters mithilfe von <code>style</code> und <code>palette</code>. Tipp, schau dir die Hilfe von <code>?tm_raster</code> an.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

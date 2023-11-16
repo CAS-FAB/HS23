@@ -133,13 +133,10 @@ window.onload = function() {
     // Find the target element by its class name
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
     sidebar_tools.appendChild(linkElement);
+
+    // the following function removes the title of the sidebar (which is the same as the title of the page)
+    document.querySelector(".sidebar-title>a").innerHTML = ""
 };
-
-
-// the following function removes the title of the sidebar (which is the same as the title of the page)
-window.onload = function(){
-    document.getElementsByClassName("sidebar-title")[0].innerHTML = ""
-}
 
 </script>
 
@@ -197,7 +194,7 @@ window.onload = function(){
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CAS Vegetationsanalyse &amp; Feldbotanik</span></a>
+ <span class="menu-text">Einführung</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -370,7 +367,7 @@ Abbildung&nbsp;6.2: Drei verschiedene Sampling Strategien
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1920</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>tww <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"data/original/TWW/TWW_LV95/trockenwiesenweiden.shp"</span>)</span>
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>tww <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"data-original/TWW/TWW_LV95/trockenwiesenweiden.shp"</span>)</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Marièrs"</span>, <span class="st">"Buzzera"</span>, <span class="st">"Truois"</span>)</span>
 <span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a>tww <span class="ot">&lt;-</span> tww[tww<span class="sc">$</span>Name <span class="sc">%in%</span> filter,]</span>

@@ -4,9 +4,9 @@
     "href": "index.html",
     "title": "CAS Vegetationsanalyse und Feldbotanik",
     "section": "",
-    "text": "Einführung\nWilkommen bei den Kursunterlagen zum Kurstag 17 Geographische Kartendarstellungen mit R, im Rahmen des Modul 2 im CAS Vegetationsanalyse & Feldbotanik. Diese Kursunterlagen sollen Vegetationsökologen und Feldbotaniker in die Lage versetzen, ihre Daten mit Hilfe von R zu analysieren und zu visualisieren. Der Kurs ist als Workshop aufgebaut: Die Inputs sind relativ kurz, dafür programmieren wir viel und gemeinsam. Dabei werden am Kurstag die Übungen 1 bis Übungen 6 so weit wie möglich gemeinsam durchgearbeitet: Was wir nicht gemeinsam schaffen kann selbständig als Hausaufgabe gelöst werden.\nJede Übung wird auf dem Beamer projeziert und sofern nötig mündlich ergänzt. Danach haben die Kursteilnehmer Zeit, die Übung selbständig zu lösen. Nach einer Weile wird eine Lösung präsentiert (live coding) und die Teilnehmer können Fragen stellen. Für Personen, denen das Tempo zu langsam ist, können die Übungen auch selbständig durcharbeiten.\nDiese Unterlagen stehen sowohl als Website cas-vegetationsanalyse-feldbotanik.github.io sowie auch als PDF zur Verfügung. Die PDF-Version kann auf der genannten Website heruntergeladen werden (siehe PDF-Symbol oberhalb des Menübalkens links).\nNach der Durchführung des Kurses werden Musterlösungen\n\nUngefährer Zeitplan für den Kurstag\n\n\nvon\nbis\nThema\n\n\n\n\n09:00\n09:35\nBegrüssung und Einführung räumliche Daten\n\n\n09:50\n10:35\nVektordaten: Übung 1\n\n\n10:50\n12:00\nVektordaten: Übung 1 & Übung 2\n\n\n12:00\n13:00\nMittagspause\n\n\n13:00\n13:35\nRasterdaten: Input und Übung 3 beginnen\n\n\n13:50\n14:35\nRasterdaten: Übung 3 & Übung 4\n\n\n14:50\n15:35\nIntegration von Geodaten: Übung 5\n\n\n15:50\n17:00\nSampling Design: Übung 6",
+    "text": "Einführung\nWilkommen bei den Kursunterlagen zum Kurstag 17 Geografische Kartendarstellungen mit R, im Rahmen des Modul 2 im CAS Vegetationsanalyse und Feldbotanik. Diese Kursunterlagen sollen Vegetationsökologen und Feldbotaniker in die Lage versetzen, ihre Daten mit Hilfe von R zu analysieren und zu visualisieren. Der Kurs ist als Workshop aufgebaut: Die Inputs sind relativ kurz, dafür programmieren wir viel und gemeinsam. Dabei werden am Kurstag die Übungen 1 bis Übungen 6 so weit wie möglich gemeinsam durchgearbeitet: Was wir nicht gemeinsam schaffen kann selbständig als Hausaufgabe gelöst werden.\nJede Übung wird auf dem Beamer projeziert und sofern nötig mündlich ergänzt. Danach haben die Kursteilnehmer Zeit, die Übung selbständig zu lösen. Nach einer Weile wird eine Lösung präsentiert (live coding) und die Teilnehmer können Fragen stellen. Für Personen, denen das Tempo zu langsam ist, können die Übungen auch selbständig durcharbeiten.\nDiese Unterlagen stehen sowohl als Website (cas-vegetationsanalyse-feldbotanik.github.io/HS23) wie auch als PDF zur Verfügung. Die PDF-Version kann auf der genannten Website heruntergeladen werden (siehe PDF-Symbol oberhalb des Menübalkens links). Nach der Durchführung des Kurses werden Musterlösungen zur Verfügung gestellt.\n\nUngefährer Zeitplan für den Kurstag\n\n\nvon\nbis\nThema\n\n\n\n\n09:00\n09:35\nBegrüssung und Einführung räumliche Daten\n\n\n09:50\n10:35\nVektordaten: Übung 1\n\n\n10:50\n12:00\nVektordaten: Übung 1 & Übung 2\n\n\n12:00\n13:00\nMittagspause\n\n\n13:00\n13:35\nRasterdaten: Input und Übung 3 beginnen\n\n\n13:50\n14:35\nRasterdaten: Übung 3 & Übung 4\n\n\n14:50\n15:35\nIntegration von Geodaten: Übung 5\n\n\n15:50\n17:00\nSampling Design: Übung 6",
     "crumbs": [
-      "CAS Vegetationsanalyse & Feldbotanik"
+      "Einführung"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "href": "uebung_1.html#vorbereitung",
     "title": "Übung 1",
     "section": "Vorbereitung",
-    "text": "Vorbereitung\n\nErstelle ein neues RStudio Projekt\nErstelle ein neues R-Script mit dem Namen Uebung_1.R\nLade dir Vegauf_Aussenberg_2019_Kopfdaten.csv (von Moodle, Kurstag 12) herunter",
+    "text": "Vorbereitung\n\nErstelle ein neues RStudio Projekt\nErstelle ein neues R-Script mit dem Namen Uebung_1.R\nLade dir den Datensatz Datensatz Ausserberg für Hausaufgabe 1 herunter (Vegauf_Ausserberg_2019.xlsx)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -24,7 +24,7 @@
     "href": "uebung_1.html#übung-1.1",
     "title": "Übung 1",
     "section": "Übung 1.1 ",
-    "text": "Übung 1.1 \n\nImportiere die CSV Vegauf_Aussenberg_2019_Kopfdaten.csv gewohnt als data.frame in R.\nSpeichere die data.frame in der Variabel ausserberg",
+    "text": "Übung 1.1 \n\nImportiere Vegauf_Ausserberg_2019.xlsx wie gewohnt als data.frame in R.\nSpeichere die data.frame in der Variabel ausserberg",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -114,7 +114,7 @@
     "href": "uebung_1.html#input-tmap",
     "title": "Übung 1",
     "section": "Input tmap ",
-    "text": "Input tmap \n\nIn R gibt es dezidierte libraries, um geografische Daten zu visualisieren\nWir werden im Unterricht die library tmap verwenden.\nInstalliere dieses Package und lade es in die aktuelle session.\n\n\ninstall.packages(\"tmap\")\n\n\nlibrary(\"tmap\")\n\n\ntmap funktioniert nach einem “layer”-Prinzip\nein Layer besteht aus 2 Komponenten:\n\ntm_shape(): der Datensatz\ntm_dots (oder tm_lines, tm_polygons…): die Darstellungsform\n\n\ntm_shape(ausserberg_sf) + # datensatz        \n  tm_dots()               # darstellungsform \ntm_shape(ausserberg_sf) +  \n  tm_bubbles()            \ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\")\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\",\n             shape = \"Vegetationstyp\")\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\",\n             shape = \"Vegetationstyp\") +\n  tm_layout(legend.outside = TRUE)\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\",\n             shape = \"Vegetationstyp\") +\n  tm_layout(legend.outside = TRUE,\n            legend.position = c(\"right\",\"bottom\"))\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\",\n             shape = \"Vegetationstyp\") +\n  tm_layout(legend.outside = TRUE,\n            legend.position = c(\"right\",\"bottom\")) +\n  tm_grid(labels.rot = c(90, 0), lines = FALSE)",
+    "text": "Input tmap \n\nIn R gibt es dezidierte libraries, um geografische Daten zu visualisieren\nWir werden im Unterricht die library tmap verwenden.\nInstalliere dieses Package und lade es in die aktuelle session.\n\n\ninstall.packages(\"tmap\")\n\n\nlibrary(\"tmap\")\n\n\ntmap funktioniert nach einem “layer”-Prinzip\nein Layer besteht aus 2 Komponenten:\n\ntm_shape(): der Datensatz\ntm_dots (oder tm_lines, tm_polygons…): die Darstellungsform\n\n\ntm_shape(ausserberg_sf) + # datensatz        \n  tm_dots()               # darstellungsform \n#\ntm_shape(ausserberg_sf) +  \n  tm_bubbles()            \n#\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\")\n#\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\", shape = \"Vegetationstyp\")\n#\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\", shape = \"Vegetationstyp\") +\n  tm_layout(legend.outside = TRUE)\n#\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\", shape = \"Vegetationstyp\") +\n  tm_layout(legend.outside = TRUE, legend.position = c(\"right\",\"bottom\"))\n#\ntm_shape(ausserberg_sf) +\n  tm_bubbles(col = \"Verbuschung\", shape = \"Vegetationstyp\") +\n  tm_layout(legend.outside = TRUE, legend.position = c(\"right\",\"bottom\")) +\n  tm_grid(labels.rot = c(90, 0), lines = FALSE)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -164,7 +164,7 @@
     "href": "uebung_1.html#input-räumliche-datenformate",
     "title": "Übung 1",
     "section": "Input Räumliche Datenformate",
-    "text": "Input Räumliche Datenformate\n\nCSVs eignen sich nur bedingt um räumliche Daten abzuspeichern\nUm aus Vegauf_Ausserberg_2019_Kopfdaten.csv ein räumliches Objekt zu machen mussten wir verschiedene Schritte erledigen\n\nCSV als Dataframe einlesen\nCSV in sf objekt konvertieren\nCRS Zuweisen\n\nWir können ausserberg_sf in einem explizit räumlichen Datenformat abspeichern, sodass die obigen Schritte beim importieren nicht nötig sind:\n\n\nwrite_sf(ausserberg_sf, \"data/processed/ausserberg.gpkg\")\n\nBeim Einlesen von ausserberg.gpkg ist R nun sofort klar, dass es sich um Punktdaten im Koordinatenbezugssystem EPSG 2056 handelt.\n\nausserberg_sf &lt;- read_sf(\"data/processed/ausserberg.gpkg\")",
+    "text": "Input Räumliche Datenformate\n\nCSVs eignen sich nur bedingt um räumliche Daten abzuspeichern\nUm aus Vegauf_Ausserberg_2019_Kopfdaten.csv ein räumliches Objekt zu machen mussten wir verschiedene Schritte erledigen\n\nCSV als Dataframe einlesen\nCSV in sf objekt konvertieren\nCRS Zuweisen\n\nWir können ausserberg_sf in einem explizit räumlichen Datenformat abspeichern, sodass die obigen Schritte beim importieren nicht nötig sind:\n\n\nwrite_sf(ausserberg_sf, \"data-processed/ausserberg.gpkg\")\n\nDas File aussenberg.gpkg kann in verschiedenen GIS-Programmen geöffnet werden. Versucht mal, das File in QGIS zu öffnen.\nAuch beim Einlesen in R ist klar, dass es sich dabei um räumliche Daten handelt. Das Koordinatenbezugssstem EPSG 2045 ist jetzt automatisch zugewiesen.\n\nrm(ausserberg_sf)\n\nausserberg_sf &lt;- read_sf(\"data-processed/ausserberg.gpkg\")\n\nausserberg_sf\n\nSimple feature collection with 15 features and 34 fields\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 2631175 ymin: 1129737 xmax: 2631510 ymax: 1129986\nProjected CRS: CH1903+ / LV95\n# A tibble: 15 × 35\n   Plot    Verbuschung Vegetationstyp Date    Genauigkeit Meereshoehe Exposition\n   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;         &lt;int&gt;       &lt;int&gt;      &lt;int&gt;\n 1 VS19_1  Verbuscht   Trocken        18.06.…           5        1298        171\n 2 VS19_2  Unverbuscht Halbtrocken    18.06.…           5        1263        190\n 3 VS19_3  Verbuscht   Halbtrocken    19.06.…          10        1282        144\n 4 VS19_4  Unverbuscht Halbtrocken    18.06.…           3        1295        140\n 5 VS19_5  Unverbuscht Trocken        18.06.…           3        1284        180\n 6 VS19_6  Unverbuscht Trocken        19.06.…           3        1280        165\n 7 VS19_7  Unverbuscht Halbtrocken    18.06.…          30        1320        180\n 8 VS19_8  Unverbuscht Halbtrocken    18.06.…          30        1287        180\n 9 VS19_9  Verbuscht   Trocken        19.06.…          30        1266        180\n10 VS19_10 Unverbuscht Trocken        18.06.…           5        1306        133\n11 VS19_11 Verbuscht   Halbtrocken    19.06.…           5        1277        133\n12 VS19_12 Verbuscht   Trocken        18.06.…           5        1280        133\n13 VS19_13 Unverbuscht Trocken        18.06.…           5        1291        165\n14 VS19_14 Verbuscht   Halbtrocken    18.06.…           5        1242        125\n15 VS19_15 Verbuscht   Halbtrocken    19.06.…           5        1299        135\n# ℹ 28 more variables: Neigung &lt;int&gt;, Veghoehe_1 &lt;int&gt;, Veghoehe_2 &lt;int&gt;,\n#   Veghoehe_3 &lt;dbl&gt;, Veghoehe_4 &lt;int&gt;, Veghoehe_5 &lt;int&gt;, Veghoehe_mean &lt;dbl&gt;,\n#   Veghoehe_max &lt;int&gt;, Veg.Schicht &lt;dbl&gt;, Baumsch. &lt;dbl&gt;, Strauchsch. &lt;dbl&gt;,\n#   Krautsch. &lt;dbl&gt;, Moossch. &lt;int&gt;, Streu &lt;dbl&gt;, Toth. &lt;int&gt;,\n#   Steine.Fels &lt;dbl&gt;, Kies.Grus &lt;int&gt;, Feinboden &lt;dbl&gt;,\n#   gew_Temperaturzahl &lt;dbl&gt;, gew_Kontinentalitaetszahl &lt;dbl&gt;,\n#   gew_Lichtzahl &lt;dbl&gt;, gew_Feuchtezahl &lt;dbl&gt;, gew_Reaktionszahl &lt;dbl&gt;, …",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -174,7 +174,7 @@
     "href": "uebung_1.html#übung-1.13",
     "title": "Übung 1",
     "section": "Übung 1.13 ",
-    "text": "Übung 1.13 \n\nImportiere nun aus dem Excel Hagenmoos.xlsx das Datenblatt KopfdatenVertikal als data.frame.\nKonvertiere den Dataframe in ein sf objekt\nWeise das korrekte Koordinatensytem zu\nTransformiere die Koordinaten anschliessend in WGS84\nerstelle eine Karte mit tmap",
+    "text": "Übung 1.13 \n\nLade das Zipfile Kursdaten_VEGEDAZ.zip herunter: Kurstag 13 &gt; Arbeitsmaterial &gt; Daten (Kursdaten_VEGEDAZ.zip)\nEntzippe es anschliessen\nImportiere nun aus dem Excelfile Hagenmoos.xlsx das Datenblatt KopfdatenVertikal als data.frame in R\nKonvertiere den Dataframe in ein sf objekt\nWeise das korrekte Koordinatensytem zu\nTransformiere die Koordinaten anschliessend in WGS84\nErstelle eine Karte mit tmap",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -194,7 +194,7 @@
     "href": "uebung_1.html#übung-1.14",
     "title": "Übung 1",
     "section": "Übung 1.14 ",
-    "text": "Übung 1.14 \n\nBisher haben wir nur s\nMit tmap lassen sich aber auch sehr leicht interaktive Karten erstellen\nSetze dafür tmap_mode(\"view\") und führe dein letzter Code für die Erstellung eines tmap-Plots nochmals aus",
+    "text": "Übung 1.14 \n\nBisher haben wir nur statische Karten (ohne Hintergrundkarte) erstellt.\nMit tmap lassen sich aber auch sehr leicht interaktive Karten erstellen\nSetze dafür tmap_mode(\"view\") und führe dein letzter Code für die Erstellung eines tmap-Plots nochmals aus",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -224,7 +224,7 @@
     "href": "uebung_2.html#übung-2.1",
     "title": "Übung 2",
     "section": "Übung 2.1 ",
-    "text": "Übung 2.1 \n\nSuche dir die Gemeindegrenzen der Schweiz.\nDrei nützliche Adressen hierfür sind:\n\nopendata.swiss\nmap.geo.admin.ch\nswisstopo.admin.ch\n\nWenn du die Wahl hast, versuche das File als Geopackage herunterzuladen. Ansonsten als Shapefile oder als File Geodatabase\nEntzippe das File (sofern nötig) und schau dir den Inhalt an",
+    "text": "Übung 2.1 \n\nSuche dir die Gemeindegrenzen der Schweiz.\nDrei nützliche Adressen hierfür sind:\n\nopendata.swiss\nmap.geo.admin.ch\nswisstopo.admin.ch\n\nWenn du die Wahl hast, versuche das File als Geopackage herunterzuladen. Ansonsten als Shapefile oder als File Geodatabase\nEntzippe das File (sofern nötig) und schau dir den Inhalt an\nÖffne das File in QGIS und schau dir die Attribute an",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Übung 2</span>"
     ]
@@ -294,7 +294,7 @@
     "href": "uebung_3.html#übung-3.1",
     "title": "Übung 3",
     "section": "Übung 3.1 ",
-    "text": "Übung 3.1 \n\nSuch das digitale Höhenmodell der Schweiz (200m Auflösung)\nAuch hier kannst du die folgenden Adressen nutzen:\n\nopendata.swiss\nmap.geo.admin.ch\nswisstopo.admin.ch\n\nEntzippe das File (sofern nötig) und schau dir den Inhalt an",
+    "text": "Übung 3.1 \n\nSuch das digitale Höhenmodell der Schweiz (200m Auflösung)\nAuch hier kannst du die folgenden Adressen nutzen:\n\nopendata.swiss\nmap.geo.admin.ch\nswisstopo.admin.ch\n\nEntzippe ein allfälliges Zip-File und schau dir den Inhalt an\nÖffne das Tif-File in QGIS",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Übung 3</span>"
     ]
@@ -304,7 +304,7 @@
     "href": "uebung_3.html#input-raster-datenformate",
     "title": "Übung 3",
     "section": "Input: Raster Datenformate ",
-    "text": "Input: Raster Datenformate \nInhalt des heruntergeladenen zip-Files:\n\nEigentliche Daten:\n\nDHM200_polyface.dxf\nDHM200.asc\nDHM200.xyz\n\nMetadaten und Lizenzbedigungen:\n\nlicense.txt\nMetadata_gm03.xml\nMetadata_PDF.pdf\nMetadata_xml_iso19139.xml\n\n\nDer gleiche Datensatz (DHM25 200) in 3 unterschiedlichen Datenformaten:\n\nDHM200.asc\nDHM200.xyz\nDHM200_polyface.dxf (← CAD bereich)\n\n\n\n\n\n\n\nESRI ArcInfo ASCII Grid \n\n\n\n\n\n\nDateierweiterung *.asc\nein Datenformat von ESRI (siehe die Spezifikationen)\nbeginnt mit mehreren Zeilen Metaadaten, darauf folgen die eigentlichen Werte\nkann in einem Texteditor geöffnet werden:\n\nNCOLS 1926\nNROWS 1201\nXLLCORNER 479900.\nYLLCORNER 61900.\nCELLSIZE 200.\nNODATA_VALUE -9999.\n-9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. \n...\n...\n...\n835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816 799.2  \n\n\n\n\n\n\n\n\n\nASCII Gridded XYZ \n\n\n\n\n\n\nDateierweiterung *.xyz\nEin offenes Format\nBeinhaltet 3 Spalten: x- und y- Koordinaten sowie Zellwert\nkann in einem Texteditor geöffnet werden:\n\n655000.00 302000.00 835.01\n655200.00 302000.00 833.11\n655400.00 302000.00 831.20\n\n\n\n\nRaster in R\nUm Rasterdaten in R zu importieren verwenden wir das Package terra.\n\ninstall.packages(\"terra\")\n\n\nlibrary(\"terra\")\n\nterra 1.7.39\n\ndhm200 &lt;- rast(\"data/original/dhm25_200/DHM200.xyz\")\n\n\nAus terra benötigen wir die Funktion rast\ndas Importieren funktioniert gleich, unabhängig von der Dateierweiterung\neine summarische Zusammenfassung erhält man via Konsole:\n\n\ndhm200\n\nclass       : SpatRaster \ndimensions  : 1141, 1926, 1  (nrow, ncol, nlyr)\nresolution  : 200, 200  (x, y)\nextent      : 479900, 865100, 73900, 302100  (xmin, xmax, ymin, ymax)\ncoord. ref. :  \nsource      : DHM200.xyz \nname        :  DHM200 \nmin value   :  193.00 \nmax value   : 4556.63 \n\nplot(dhm200)  # für einfache visualisierungen",
+    "text": "Input: Raster Datenformate \nInhalt des heruntergeladenen zip-Files:\n\nEigentliche Daten:\n\nDHM200_polyface.dxf\nDHM200.asc\nDHM200.xyz\n\nMetadaten und Lizenzbedigungen:\n\nlicense.txt\nMetadata_gm03.xml\nMetadata_PDF.pdf\nMetadata_xml_iso19139.xml\n\n\nDer gleiche Datensatz (DHM25 200) in 3 unterschiedlichen Datenformaten:\n\nDHM200.asc\nDHM200.xyz\nDHM200_polyface.dxf (← CAD bereich)\n\n\n\n\n\n\n\nESRI ArcInfo ASCII Grid \n\n\n\n\n\n\nDateierweiterung *.asc\nein Datenformat von ESRI (siehe die Spezifikationen)\nbeginnt mit mehreren Zeilen Metaadaten, darauf folgen die eigentlichen Werte\nkann in einem Texteditor geöffnet werden:\n\nNCOLS 1926\nNROWS 1201\nXLLCORNER 479900.\nYLLCORNER 61900.\nCELLSIZE 200.\nNODATA_VALUE -9999.\n-9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999.\n...\n...\n...\n835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816\n\n\n\n\n\n\n\n\n\nASCII Gridded XYZ \n\n\n\n\n\n\nDateierweiterung *.xyz\nEin offenes Format\nBeinhaltet 3 Spalten: x- und y- Koordinaten sowie Zellwert\nkann in einem Texteditor geöffnet werden:\n\n655000.00 302000.00 835.01\n655200.00 302000.00 833.11\n655400.00 302000.00 831.20\n\n\n\n\nRaster in R\nUm Rasterdaten in R zu importieren verwenden wir das Package terra.\n\ninstall.packages(\"terra\")\n\n\nlibrary(\"terra\")\n\nterra 1.7.39\n\ndhm200 &lt;- rast(\"data-original/dhm25_200/DHM200.xyz\")\n\n\nAus terra benötigen wir die Funktion rast\ndas Importieren funktioniert gleich, unabhängig von der Dateierweiterung\neine summarische Zusammenfassung erhält man via Konsole:\n\n\ndhm200\n\nclass       : SpatRaster \ndimensions  : 1141, 1926, 1  (nrow, ncol, nlyr)\nresolution  : 200, 200  (x, y)\nextent      : 479900, 865100, 73900, 302100  (xmin, xmax, ymin, ymax)\ncoord. ref. :  \nsource      : DHM200.xyz \nname        :  DHM200 \nmin value   :  193.00 \nmax value   : 4556.63 \n\nplot(dhm200)  # für einfache visualisierungen",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Übung 3</span>"
     ]
@@ -380,6 +380,16 @@
     ]
   },
   {
+    "objectID": "uebung_3.html#input-raster-exportieren",
+    "href": "uebung_3.html#input-raster-exportieren",
+    "title": "Übung 3",
+    "section": "Input Raster exportieren",
+    "text": "Input Raster exportieren\n\nWir haben das DHM auf unsere Bedürfnisse angepasst (CRS gesetzt und transformiert)\nWir können unser verändertes Objekt (dhm200_2056) als GeoTiff exportieren, so dass diese Änderungen abgespeichert werden\n\n\n#| eval: false\n#| \nwriteRaster(dhm200_2056,\"data-processed/dhm200_2056.tif\", overwrite = TRUE)\n\n\nbeim Import ist die CRS Information bekannt (CRS setzen und transformieren ist nicht mehr nötig)\n\n\ndhm200_2056 &lt;- rast(\"data-processed/dhm200_2056.tif\")\n\ndhm200_2056\n\nclass       : SpatRaster \ndimensions  : 1141, 1926, 1  (nrow, ncol, nlyr)\nresolution  : 200, 200  (x, y)\nextent      : 2479900, 2865100, 1073900, 1302100  (xmin, xmax, ymin, ymax)\ncoord. ref. : CH1903+ / LV95 (EPSG:2056) \nsource      : dhm200_2056.tif \nname        :   DHM200 \nmin value   :  193.000 \nmax value   : 4555.624",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Übung 3</span>"
+    ]
+  },
+  {
     "objectID": "uebung_3.html#übung-3.5",
     "href": "uebung_3.html#übung-3.5",
     "title": "Übung 3",
@@ -394,27 +404,7 @@
     "href": "uebung_3.html#übung-3.6",
     "title": "Übung 3",
     "section": "Übung 3.6 ",
-    "text": "Übung 3.6 \nVerändere die Darstellungsweise des Rasters mithilfe von style und palette. Tipp, schau dir die Hilfe von ?tm_raster an.",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Übung 3</span>"
-    ]
-  },
-  {
-    "objectID": "uebung_3.html#input-raster-exportieren",
-    "href": "uebung_3.html#input-raster-exportieren",
-    "title": "Übung 3",
-    "section": "Input Raster exportieren",
-    "text": "Input Raster exportieren\n\nWir haben das DHM auf unsere Bedürfnisse angepasst (CRS gesetzt und transformiert)\nWir können unser verändertes Objekt (dhm200_2056) exportieren, so dass diese Änderungen abgespeichert werden\n\n\n#| eval: false\n#| \nwriteRaster(dhm200_2056,\"data/processed/dhm200_2056.tif\", overwrite = TRUE)\n\n\nbeim Import ist die CRS Information bekannt (CRS setzen und transformieren ist nicht mehr nötig)\n\n\ndhm200_2056 &lt;- rast(\"data/processed/dhm200_2056.tif\")\n\ndhm200_2056\n\nclass       : SpatRaster \ndimensions  : 1141, 1926, 1  (nrow, ncol, nlyr)\nresolution  : 200, 200  (x, y)\nextent      : 2479900, 2865100, 1073900, 1302100  (xmin, xmax, ymin, ymax)\ncoord. ref. : CH1903+ / LV95 (EPSG:2056) \nsource      : dhm200_2056.tif \nname        :   DHM200 \nmin value   :  193.000 \nmax value   : 4555.624",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Übung 3</span>"
-    ]
-  },
-  {
-    "objectID": "uebung_3.html#übung-3.7",
-    "href": "uebung_3.html#übung-3.7",
-    "title": "Übung 3",
-    "section": "Übung 3.7 ",
-    "text": "Übung 3.7 \nExportiere dhm200_2056 als tif File\n\n\n\n\n\n\nRückblick\n\n\n\nWir haben…\n\nein Höhenmodell der Schweiz heruntergeladen\n3 unterschiedliche Datenformaten von Rasterdaten kennengelernt\nein Rasterdatensatz mithilfe von rast aus terra in R importiert\ndiesem Rasterdatensatz das korrekte Koordinatenbezugssystem zugewiesen (crs)\ndiesen Rasterdatensatz in ein anderes Koordinatensystem transformiert (project)\ndiesen Rasterdatensatz mit plot() sowie tmap visualisert\nmit verschiedenen Darstellungformen in tmap gearbeitet (optionen style und palette)\nDHM: ein Wert pro Zelle. Es gibt aber Situationen, wo wir mehreren Werten pro Zelle benötigen",
+    "text": "Übung 3.6 \nVerändere die Darstellungsweise des Rasters mithilfe von style und palette. Tipp, schau dir die Hilfe von ?tm_raster an.\n\n\n\n\n\n\nRückblick\n\n\n\nWir haben…\n\nein Höhenmodell der Schweiz heruntergeladen\n3 unterschiedliche Datenformaten von Rasterdaten kennengelernt\nein Rasterdatensatz mithilfe von rast aus terra in R importiert\ndiesem Rasterdatensatz das korrekte Koordinatenbezugssystem zugewiesen (crs)\ndiesen Rasterdatensatz in ein anderes Koordinatensystem transformiert (project)\ndiesen Rasterdatensatz mit plot() sowie tmap visualisert\nmit verschiedenen Darstellungformen in tmap gearbeitet (optionen style und palette)\nDHM: ein Wert pro Zelle. Es gibt aber Situationen, wo wir mehreren Werten pro Zelle benötigen",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Übung 3</span>"
     ]
@@ -424,7 +414,7 @@
     "href": "uebung_4.html#übung-4.1",
     "title": "Übung 4",
     "section": "Übung 4.1 ",
-    "text": "Übung 4.1 \n\nLadet euch einen Ausschnitt aus dem Datensatz swissimage 10 von Swisstopo herunter: https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage10.html\nShortlink: https://bit.ly/40Fy0Wj\nEnzipped den Inhalt in euer RStudio Projekt und schaut den Inhalt an\nWas ist das Koordinatenbezugssystem? Wie hoch ist die räumliche Auflösung?",
+    "text": "Übung 4.1 \n\nLadet euch einen Ausschnitt aus dem Datensatz swissimage 10 von Swisstopo herunter: https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage10.html\n\nShortlink: https://bit.ly/40Fy0Wj\n\nEnzipped den Inhalt in euer RStudio Projekt und schaut den Inhalt an\nÖffnet das File in QGIS und schaut euch die Metadaten an\nWas ist das Koordinatenbezugssystem? Wie hoch ist die räumliche Auflösung?",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
     ]
@@ -454,17 +444,17 @@
     "href": "uebung_4.html#input",
     "title": "Übung 4",
     "section": "Input",
-    "text": "Input\n\nHeute haben wir das Höhenmodell dhm200 importiert\nHöhenmodell mit 200m Auflösung (→ grob! )\nswisstopo stellt zusätzlich das dhm25 mit 25m Auflösung zur Verfügung (https://bit.ly/3kFgZrF)\ndurch die höhere Auflösung dauert das transformieren in ein neues Koordinatensystem etwas länger",
+    "text": "Input\n\nHeute haben wir das Höhenmodell dhm200 importiert\nHöhenmodell mit 200m Auflösung (→ grob! )\nswisstopo stellt zusätzlich das mit 25m Auflösung zur Verfügung (https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html)\n\nShortlink: https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html\n\ndurch die höhere Auflösung dauert das transformieren in ein neues Koordinatensystem etwas länger",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
     ]
   },
   {
-    "objectID": "uebung_4.html#übung-4.4",
-    "href": "uebung_4.html#übung-4.4",
+    "objectID": "uebung_4.html#übung-4.4-optional",
+    "href": "uebung_4.html#übung-4.4-optional",
     "title": "Übung 4",
-    "section": "Übung 4.4",
-    "text": "Übung 4.4\n\nLadet euch das das dhm25 mit 25m Auflösung herunter (https://bit.ly/3kFgZrF)\nimportiert es in R\nsetzt das korrekte CRS\ntransformiert es in EPSG 2056 und verwendet dabei folgende Optionen:\n\nmit filename = den Output direkt in ein File speichern\nmit progress = TRUE den Fortschritt anzeigen lassen\n\nvisualisiert es mit tmap",
+    "section": "Übung 4.4 (Optional)",
+    "text": "Übung 4.4 (Optional)\n\nLadet euch das dhm25 mit 25m Auflösung herunter (https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html)\nimportiert es in R\nsetzt das korrekte CRS\ntransformiert es in EPSG 2056 und verwendet dabei folgende Optionen:\n\nmit filename = den Output direkt in ein File speichern\nmit progress = TRUE den Fortschritt anzeigen lassen\n\nvisualisiert es mit tmap",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
     ]
@@ -480,31 +470,11 @@
     ]
   },
   {
-    "objectID": "uebung_4.html#übung-4.6-optional-und-open-end",
-    "href": "uebung_4.html#übung-4.6-optional-und-open-end",
-    "title": "Übung 4",
-    "section": "Übung 4.6 (Optional und Open End)",
-    "text": "Übung 4.6 (Optional und Open End)\n\nLade dir swissimage daten in der Auflösung von 2m herunter und importiere sie in R\nAchtung! Sehr anspruchsvoll!!\nTipps: du brauchst dazu:\n\nlist.files()\nlapply\ndo.call\nmosaic",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
-    ]
-  },
-  {
-    "objectID": "uebung_4.html#übung-4.7",
-    "href": "uebung_4.html#übung-4.7",
-    "title": "Übung 4",
-    "section": "Übung 4.7",
-    "text": "Übung 4.7\n\ntww_landquart &lt;- read_sf(\"data/processed/tww_landquart.gpkg\")\n\nswissimage &lt;- terra::rast(\"data/processed/swissimage_2m_landquart.tif\")\n\ntm_shape(swissimage) +\n  tm_rgb() +\n  tm_shape(tww_landquart, is.master = TRUE) +\n  tm_polygons() +\n  tm_scale_bar(position = c(1,0), just = c(1,0),bg.color = \"white\")\n\nstars object downsampled to 1000 by 1000 cells. See tm_shape manual (argument raster.downsample)",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
-    ]
-  },
-  {
     "objectID": "uebung_5.html#übung-5.1",
     "href": "uebung_5.html#übung-5.1",
     "title": "Übung 5",
     "section": "Übung 5.1",
-    "text": "Übung 5.1\nImportiere die Datensätze ausserberg.gpkg (aus Übung 2) sowie dhm200_2056.tif (aus Übung 3, data/processed/ausserberg.gpkg bzw. data/processed/dhm200_2056.tif)",
+    "text": "Übung 5.1\nImportiere die Datensätze ausserberg.gpkg (aus Übung 2) sowie dhm200_2056.tif (aus Übung 3, data-processed/ausserberg.gpkg bzw. data-processed/dhm200_2056.tif)",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Übung 5</span>"
     ]
@@ -554,7 +524,7 @@
     "href": "uebung_5.html#übung-5.5",
     "title": "Übung 5",
     "section": "Übung 5.5",
-    "text": "Übung 5.5\n\nWandle ausserberg mit der Funktion vect() in ein SpatVector Objekt und speichere es als ausserberg_vect\nSchau dir ausserberg_vect an, was hat sich verändert?\nVerwende die Funktion extract mit ausserberg_vect um die Höhenwerte aus dhm25 zu extrahieren\nSpeichere den output in einer Variabel und beguteachte diese",
+    "text": "Übung 5.5\n\nVerwende die Funktion extract mit ausserberg um die Höhenwerte aus dhm25 zu extrahieren\nSpeichere den output in einer Variabel und beguteachte diese",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Übung 5</span>"
     ]
@@ -574,7 +544,7 @@
     "href": "uebung_5.html#input-vektordaten-zuschneiden",
     "title": "Übung 5",
     "section": "Input: Vektordaten zuschneiden",
-    "text": "Input: Vektordaten zuschneiden\n\nnun wollen wir zwei Vektordatensätze miteinander verschneiden\nAusgangslage:\n\nwir verfügen über einen TWW Datensatz der Schweiz (https://bit.ly/3CqNRKT)\nwir verfügen über den Gemeindelayer der Schweiz (https://bit.ly/3CaAj5W)\nwir wollen alle TWW Flächen innerhalb der Gemeinde Landquart erhalten",
+    "text": "Input: Vektordaten zuschneiden\n\nnun wollen wir zwei Vektordatensätze miteinander verschneiden\nAusgangslage:\n\nwir verfügen über einen TWW Datensatz der Schweiz\n\nURL: https://www.bafu.admin.ch/bafu/de/home/themen/biodiversitaet/zustand/karten/geodaten.html)\nShorturl: https://bit.ly/3CqNRKT\n\nwir verfügen über den Gemeindelayer der Schweiz\n\nURL: https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d/swissboundaries3d_2023-01/swissboundaries3d_2023-01_2056_5728.gpkg.zip)\nShorturl: https://bit.ly/47wCOzo)\n\nwir wollen alle TWW Flächen innerhalb der Gemeinde Landquart erhalten",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Übung 5</span>"
     ]
@@ -654,7 +624,7 @@
     "href": "uebung_6.html#vorbereitung",
     "title": "Übung 6",
     "section": "Vorbereitung",
-    "text": "Vorbereitung\n\nlibrary(\"sf\")\nlibrary(\"terra\")\nlibrary(\"tmap\")\ntmap_mode(\"plot\")\n\nset.seed(1920)\n\n\ntww &lt;- read_sf(\"data/original/TWW/TWW_LV95/trockenwiesenweiden.shp\")\n\n1filter &lt;- c(\"Marièrs\", \"Buzzera\", \"Truois\")\ntww &lt;- tww[tww$Name %in% filter,]\n\n2tww &lt;- tww[, \"Name\"]\n\n3tww$area_ha &lt;- as.numeric(st_area(tww))/10000\n\n4samples_total &lt;- 30\n\n\n5base_plot &lt;- tm_shape(tww) +\n  tm_polygons(col = \"Name\") +\n  tm_layout(legend.show = FALSE, asp = 7/5)\n\n\n1\n\nNur 3 Lokaliäten auswählen\n\n2\n\nNur die Spalte “Name” (=Lokalität) behalten. Die Geometrie Spalte kommt automatisch mit.\n\n3\n\nFläche berechnen und in Hektaren umrechnen (als Vorbereitung für die das stratifizierte Sampling)\n\n4\n\nVariabel erstelen für die Summe an Samples, die wir machen können / wollen\n\n5\n\nOptional: Da wir immer wieder die gleiche Karte machen, können wir eine Basis Karte erstellen und immer wieder benutzen.",
+    "text": "Vorbereitung\n\nlibrary(\"sf\")\nlibrary(\"terra\")\nlibrary(\"tmap\")\ntmap_mode(\"plot\")\n\nset.seed(1920)\n\n\ntww &lt;- read_sf(\"data-original/TWW/TWW_LV95/trockenwiesenweiden.shp\")\n\n1filter &lt;- c(\"Marièrs\", \"Buzzera\", \"Truois\")\ntww &lt;- tww[tww$Name %in% filter,]\n\n2tww &lt;- tww[, \"Name\"]\n\n3tww$area_ha &lt;- as.numeric(st_area(tww))/10000\n\n4samples_total &lt;- 30\n\n\n5base_plot &lt;- tm_shape(tww) +\n  tm_polygons(col = \"Name\") +\n  tm_layout(legend.show = FALSE, asp = 7/5)\n\n\n1\n\nNur 3 Lokaliäten auswählen\n\n2\n\nNur die Spalte “Name” (=Lokalität) behalten. Die Geometrie Spalte kommt automatisch mit.\n\n3\n\nFläche berechnen und in Hektaren umrechnen (als Vorbereitung für die das stratifizierte Sampling)\n\n4\n\nVariabel erstelen für die Summe an Samples, die wir machen können / wollen\n\n5\n\nOptional: Da wir immer wieder die gleiche Karte machen, können wir eine Basis Karte erstellen und immer wieder benutzen.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Übung 6</span>"
     ]
