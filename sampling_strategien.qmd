@@ -1,0 +1,12 @@
+
+:::{#fig-sampling-design layout-nrow="1"}
+
+![30 Samples total, 10 Samples pro Lokalität](images/nicht_stratifiziert_plot.png){#fig-zufaellig-nicht-stratifiziert2}
+
+![30 Samples total, verteilt nach Hektaren](images/stratifiziert_plot.png){#fig-zufaellig-stratifiziert2}
+
+![30 Samples total, systematisch / regelmässig verteilt](images/systematisch_plot.png){#fig-systematisch2}
+
+Drei verschiedene Sampling Strategien
+
+:::

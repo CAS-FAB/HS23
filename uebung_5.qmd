@@ -143,7 +143,7 @@ tm_shape(dhm25_crop) +
 
 
 - bisher haben wir zwei Datensätze (Raster und Vektor) visuell überlagert
-- nächster Schritt: **Information** von Raster &rarr; Punkt Datensatz übertragen
+- nächster Schritt: **Information** von Raster → Punkt Datensatz übertragen
 - dazu müssen wir `ausserberg` von einem `sp`- in ein `SpatVector` Objekt konvertieren
 - danach können wir das `SpatVector` Objekt gemeinsam mit `extract` verwenden
 

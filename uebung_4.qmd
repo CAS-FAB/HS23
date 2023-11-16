@@ -25,6 +25,7 @@ subtitle: Komplexe Rasterdaten
 - Ladet euch einen Ausschnitt aus dem Datensatz `swissimage 10` von Swisstopo herunter: <https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage10.html>
 - Shortlink: <https://bit.ly/40Fy0Wj>
 - Enzipped den Inhalt in euer RStudio Projekt und schaut den Inhalt an
+- Öffnet das File in QGIS und schaut euch die Metadaten an
 - Was ist das Koordinatenbezugssystem? Wie hoch ist die räumliche Auflösung?
 
 
@@ -125,14 +126,14 @@ tm_shape(swissimage_10) +
 ## Input
 
 - Heute haben wir das Höhenmodell `dhm200` importiert
-- Höhenmodell mit 200m Auflösung (&rarr; grob! )
+- Höhenmodell mit 200m Auflösung (→ grob! )
 - swisstopo stellt zusätzlich das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung zur Verfügung (<https://bit.ly/3kFgZrF>)
 - durch die höhere Auflösung dauert das transformieren in ein neues Koordinatensystem etwas länger
 
 
 
 
-## Übung 4.4
+## Übung 4.4 (Optional)
 
 - Ladet euch das das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung herunter (<https://bit.ly/3kFgZrF>)
 - importiert es in R

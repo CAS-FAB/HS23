@@ -275,6 +275,31 @@ dhm200_2056 <- project(dhm200, "epsg: 2056")
 :::
 ::::
 
+## Input Raster exportieren<!--3-->
+
+- Wir haben das DHM auf unsere Bedürfnisse angepasst (CRS gesetzt und transformiert)
+- Wir können unser verändertes Objekt (`dhm200_2056`) als GeoTiff exportieren, so dass diese Änderungen abgespeichert werden
+
+```{r}
+#| label: uebung-3-18
+
+#| eval: false
+#| 
+writeRaster(dhm200_2056,"data/processed/dhm200_2056.tif", overwrite = TRUE)
+```
+
+- beim Import ist die CRS Information bekannt (CRS setzen und transformieren ist nicht mehr nötig)
+
+
+```{r}
+#| label: uebung-3-19
+
+dhm200_2056 <- rast("data/processed/dhm200_2056.tif")
+
+dhm200_2056
+```
+
+
 
 
 
@@ -329,50 +354,6 @@ tm_shape(dhm200_2056) + tm_raster(style = "cont", palette = "viridis")
 :::
 ::::
 
-## Input Raster exportieren<!--3-->
-
-- Wir haben das DHM auf unsere Bedürfnisse angepasst (CRS gesetzt und transformiert)
-- Wir können unser verändertes Objekt (`dhm200_2056`) exportieren, so dass diese Änderungen abgespeichert werden
-
-```{r}
-#| label: uebung-3-18
-
-#| eval: false
-#| 
-writeRaster(dhm200_2056,"data/processed/dhm200_2056.tif", overwrite = TRUE)
-```
-
-- beim Import ist die CRS Information bekannt (CRS setzen und transformieren ist nicht mehr nötig)
-
-```{r}
-#| label: uebung-3-19
-
-dhm200_2056 <- rast("data/processed/dhm200_2056.tif")
-
-dhm200_2056
-```
-
-
-
-## Übung 3.7 <!--4-->
-
-Exportiere `dhm200_2056` als `tif` File
-
-::::{.content-visible when-profile="musterloesung"}
-:::{.callout-note}
-## Musterlösung
-
-```{r}
-#| label: uebung-3-20
-#| eval: false
-
-
-writeRaster(dhm200_2056,"data/processed/dhm200_2056.tif")
-```
-
-
-:::
-::::
 
 
 :::{.callout-note}
