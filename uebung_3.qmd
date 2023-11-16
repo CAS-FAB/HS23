@@ -28,8 +28,8 @@ library("tmap")
   - [opendata.swiss](https://opendata.swiss/)
   - [map.geo.admin.ch](https://map.geo.admin.ch)
   - [swisstopo.admin.ch](https://www.swisstopo.admin.ch)
-- Entzippe das File (sofern nötig) und schau dir den Inhalt an
-
+- Entzippe ein allfälliges Zip-File und schau dir den Inhalt an
+- Öffne das Tif-File in QGIS
 
 ::::{.content-visible when-profile="musterloesung"}
 :::{.callout-note}
@@ -85,11 +85,11 @@ XLLCORNER 479900.
 YLLCORNER 61900.
 CELLSIZE 200.
 NODATA_VALUE -9999.
--9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. 
+-9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999. -9999.
 ...
 ...
 ...
-835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816 799.2  
+835.415 863.55 887.424 869.213 855.539 845.878 829.714 815.258 807.458 799.816
 ```
 
 :::
