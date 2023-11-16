@@ -559,7 +559,7 @@ tm_shape(hangenmoos_sf_wgs84) +
 ## Übung 1.14 <!--3-->
 
 
-- Bisher haben wir nur s
+- Bisher haben wir nur statische Karten (ohne Hintergrundkarte) erstellt. 
 - Mit `tmap` lassen sich aber auch sehr leicht interaktive Karten erstellen
 - Setze dafür `tmap_mode("view")` und führe dein letzter Code für die Erstellung eines tmap-Plots nochmals aus
   
