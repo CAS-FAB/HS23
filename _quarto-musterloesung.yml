@@ -1,0 +1,4 @@
+book:
+  output-file: "cas-vab-gis-muterloesung"
+
+no-clean: true

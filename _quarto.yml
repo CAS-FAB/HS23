@@ -4,10 +4,12 @@ project:
 
 
 book:
-  title: "CAS"
+  title: "CAS Vegetationsanalyse und Feldbotanik"
+  subtitle: "Geografische Kartendarstellung mit R"
   author: "Nils Ratnaweera"
   date: "11/13/2023"
   reader-mode: true
+  output-file: "cas-vab-gis"
   sidebar: 
     logo: images/zhaw_rgb.png
   chapters:
@@ -33,6 +35,7 @@ format:
     css: style.css
     include-in-header:
       - script.html
+  pdf: default
 
  
 
