@@ -1,8 +1,6 @@
 project:
   type: book
 
-
-
 book:
   title: "CAS Vegetationsanalyse und Feldbotanik"
   subtitle: "Geografische Kartendarstellung mit R"
@@ -25,9 +23,6 @@ book:
 number-depth: 0
 number-sections: false
 lang: de-CH
-url-uebungen: https://cas-vegetationsanalyse-feldbotanik.github.io/HS23/
-url-loesungen: https://ratnaweera.quarto.pub/cas-vab-musterloesung/
-
 
 execute: 
   freeze: true

@@ -12,7 +12,7 @@ Instead of overwriting the version without sample solution with the version with
 
 ```
 quarto publish gh-pages --no-prompt
-quarto publish quarto-pub --profile musterloesung --no-prompt
+<!-- quarto publish quarto-pub --profile musterloesung --no-prompt -->
 ```
 
 ### Authoring
