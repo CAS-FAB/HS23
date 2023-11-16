@@ -494,15 +494,19 @@ write_sf(ausserberg_sf, "data/processed/ausserberg.gpkg")
 ```
 
 
-Beim Einlesen von `ausserberg.gpkg` ist R nun sofort klar, dass es sich um Punktdaten im Koordinatenbezugssystem `EPSG 2056` handelt. 
+Das File `aussenberg.gpkg` kann in verschiedenen GIS-Programmen geöffnet werden. Versucht mal, das File in QGIS zu öffnen.
+
+Auch beim Einlesen in R ist klar, dass es sich dabei um räumliche Daten handelt. Das Koordinatenbezugssstem `EPSG 2045` ist jetzt automatisch zugewiesen.
 
 ```{r}
 #| label: uebung-1-33
 
+rm(ausserberg_sf)
+
 ausserberg_sf <- read_sf("data/processed/ausserberg.gpkg")
+
+ausserberg_sf
 ```
-
-
 
 
 
