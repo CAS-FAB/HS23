@@ -1,0 +1,66 @@
+
+
+## Übung 4.6 (Optional und Open End)
+
+- Lade dir swissimage daten in der Auflösung von 2m herunter und importiere sie in `R`
+- Achtung! Sehr anspruchsvoll!!
+- Tipps: du brauchst dazu:
+  - `list.files()`
+  - `lapply`
+  - `do.call`
+  - `mosaic`
+
+
+
+
+
+
+```{r}
+#| label: uebung-4-11
+#| eval: false
+
+# Daten herunterladen:
+
+links <- read.csv("data/original/swissimage_2m_landquart/swissimage_2m_urls.csv",header = FALSE)
+
+links <- links$V1
+
+filenames <- basename(links)
+
+for (i in seq_along(links)) {
+  download.file(links[i], file.path("data/original/swissimage_2m_landquart/", filenames[i]))
+}
+
+# Daten importieren:
+
+swissimage_paths <- list.files("data/original/swissimage_2m_landquart",full.names = TRUE)
+
+swissimage_list <- lapply(swissimage_paths, function(x){rast(x)})
+
+swiss_mosaic <- do.call(terra::mosaic, swissimage_list)
+
+writeRaster(swiss_mosaic, "data/processed/swissimage_2m_landquart.tif", overwrite = TRUE)
+
+```
+
+
+
+
+## Übung 4.7 
+
+
+```{r}
+#| label: uebung-4-12
+
+tww_landquart <- read_sf("data/processed/tww_landquart.gpkg")
+
+swissimage <- terra::rast("data/processed/swissimage_2m_landquart.tif")
+
+tm_shape(swissimage) +
+  tm_rgb() +
+  tm_shape(tww_landquart, is.master = TRUE) +
+  tm_polygons() +
+  tm_scale_bar(position = c(1,0), just = c(1,0),bg.color = "white")
+```
+
+
