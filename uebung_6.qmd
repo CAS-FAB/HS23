@@ -8,6 +8,9 @@ subtitle: Sampling Design
 
 R eignet sich hervorragend um ein Sampling Design umzusetzen. Am ersten Tag des CAS habt ihr etwas zu *Sampling Design* gelernt (siehe @fig-sampling-design).
 
+
+
+
 ::::{#fig-sampling-design}
 :::{.callout-note collapse="true"}
 
@@ -28,18 +31,19 @@ Schauen wir uns folgende *Sampling* Strategien an:
 - systematisch / regelmässig (siehe @fig-systematisch2 und @sec-systematisch)
 
 
+:::::{.content-visible when-format="html"}
 ::::{.column-page}
-:::{#fig-sampling-design .column-body-outset layout-ncol="2"}
 
-![30 Samples total, 10 Samples pro Lokalität](`r knitr::fig_chunk("fig-zufaellig-nicht-stratifiziert", "png")`){#fig-zufaellig-nicht-stratifiziert2}
+{{< include sampling_strategien.qmd >}}
 
-![30 Samples total, verteilt nach Hektaren](`r knitr::fig_chunk("fig-zufaellig-stratifiziert", "png")`){#fig-zufaellig-stratifiziert2}
-
-![30 Samples total, systematisch / regelmässig verteilt](`r knitr::fig_chunk("fig-systematisch", "png")`){#fig-systematisch2}
-
-Verschiedene Sampling Strategien
-:::
 ::::
+:::::
+
+:::::{.content-visible when-format="pdf"}
+
+{{< include sampling_strategien.qmd >}}
+
+:::::
 
 ## Vorbereitung
 
@@ -56,6 +60,8 @@ set.seed(1920)
 ```
 
 ```{r}
+#| label: uebung-6-2
+
 
 tww <- read_sf("data/original/TWW/TWW_LV95/trockenwiesenweiden.shp")
 
@@ -85,6 +91,7 @@ base_plot <- tm_shape(tww) +                  # <5>
 Für die zufällige Verteilung der `r samples_total` Samples, gibt es zwei Möglichkeiten: (1) Nicht stratifiziert und (2) Stratifiziert. In jedem Fall brauchen wir eine Spalte mit der Anzahl der Samples für die jeweilige Lokalität:
 
 ```{r}
+#| label: uebung-6-3
 tww$nicht_stratifiziert <- samples_total/nrow(tww)                      #<1>
 
 tww$stratifiziert <- round(samples_total/sum(tww$area_ha)*tww$area_ha)  #<2>
@@ -101,35 +108,53 @@ knitr::kable(tww)
 
 
 
-### Nicht stratifiziert {#sec-zufaellig-nicht-stratifiziert}
+### Zufällig - Nicht stratifiziert {#sec-zufaellig-nicht-stratifiziert}
 
 
 ```{r}
 #| label: fig-zufaellig-nicht-stratifiziert
 sample_plots1 <- st_sample(tww, size = tww$nicht_stratifiziert)
 
-base_plot +
+nicht_stratifiziert_plot <- base_plot +
   tm_shape(sample_plots1) +
   tm_dots(shape = 3, size = 3) +
   tm_layout(title = "Zufällig - Nicht stratifiziert", legend.show = TRUE)
+
+nicht_stratifiziert_plot
 ```
 
 
-### Stratifiziert {#sec-zufaellig-stratifiziert}
+```{r}
+#| echo: false
+#| output: false
+
+tmap_save(nicht_stratifiziert_plot, "images/nicht_stratifiziert_plot.png")
+
+```
+
+### Zufällig - Stratifiziert {#sec-zufaellig-stratifiziert}
 
 
 ```{r}
 #| label: fig-zufaellig-stratifiziert
 sample_plots2 <- st_sample(tww, size = tww$stratifiziert)
 
-base_plot +
+stratifiziert_plot <- base_plot +
   tm_shape(sample_plots2) +
   tm_dots(shape = 3, size = 3) +
   tm_layout(title = "Zufällig - Stratifiziert")
+
+stratifiziert_plot
 ```
 
 
+```{r}
+#| echo: false
+#| output: false
 
+tmap_save(stratifiziert_plot, "images/stratifiziert_plot.png")
+
+```
 
 ## Systematisch / Regelmässig {#sec-systematisch}
 
@@ -138,12 +163,22 @@ base_plot +
 
 sample_plots3 <- st_sample(tww, size = samples_total, type = "regular")
 
-base_plot +
+systematisch_plot <- base_plot +
   tm_shape(sample_plots3) +
   tm_dots(shape = 3, size = 3) +
   tm_layout(title = "Systematisch / Regelmässig")
+
+systematisch_plot
 ```
 
+
+```{r}
+#| echo: false
+#| output: false
+
+tmap_save(systematisch_plot, "images/systematisch_plot.png")
+
+```
 
 
 ## Übung 
