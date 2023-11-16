@@ -27,7 +27,7 @@ library("tmap")
   - [swisstopo.admin.ch](https://www.swisstopo.admin.ch)
 - Wenn du die Wahl hast, versuche das File als Geopackage herunterzuladen. Ansonsten als Shapefile oder als File Geodatabase
 - Entzippe das File (sofern nötig) und schau dir den Inhalt an
-
+- Öffne das File in QGIS und schau dir die Attribute an
 
 ::::{.content-visible when-profile="musterloesung"}
 :::{.callout-note}
