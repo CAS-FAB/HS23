@@ -21,25 +21,25 @@
 
 # Daten herunterladen:
 
-links <- read.csv("data/original/swissimage_2m_landquart/swissimage_2m_urls.csv",header = FALSE)
+links <- read.csv("data-original/swissimage_2m_landquart/swissimage_2m_urls.csv",header = FALSE)
 
 links <- links$V1
 
 filenames <- basename(links)
 
 for (i in seq_along(links)) {
-  download.file(links[i], file.path("data/original/swissimage_2m_landquart/", filenames[i]))
+  download.file(links[i], file.path("data-original/swissimage_2m_landquart/", filenames[i]))
 }
 
 # Daten importieren:
 
-swissimage_paths <- list.files("data/original/swissimage_2m_landquart",full.names = TRUE)
+swissimage_paths <- list.files("data-original/swissimage_2m_landquart",full.names = TRUE)
 
 swissimage_list <- lapply(swissimage_paths, function(x){rast(x)})
 
 swiss_mosaic <- do.call(terra::mosaic, swissimage_list)
 
-writeRaster(swiss_mosaic, "data/processed/swissimage_2m_landquart.tif", overwrite = TRUE)
+writeRaster(swiss_mosaic, "data-processed/swissimage_2m_landquart.tif", overwrite = TRUE)
 
 ```
 
@@ -52,9 +52,9 @@ writeRaster(swiss_mosaic, "data/processed/swissimage_2m_landquart.tif", overwrit
 ```{r}
 #| label: uebung-4-12
 
-tww_landquart <- read_sf("data/processed/tww_landquart.gpkg")
+tww_landquart <- read_sf("data-processed/tww_landquart.gpkg")
 
-swissimage <- terra::rast("data/processed/swissimage_2m_landquart.tif")
+swissimage <- terra::rast("data-processed/swissimage_2m_landquart.tif")
 
 tm_shape(swissimage) +
   tm_rgb() +

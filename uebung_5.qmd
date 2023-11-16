@@ -7,7 +7,7 @@ subtitle: Integration von Geodaten
 - Bisher haben wir alle Datensätze einzeln betrachtet
 - Wenn wir alle Datensätze ins gleiche Bezugssystem bringen, können wir diese *integrieren* bzw. überlagern
 - Überlagern kann heissen: 
-  - gemeinsam Visualisieren
+  - gemeinsam visualisieren
   - Information übertragen
 
 
@@ -34,7 +34,7 @@ tmap_mode("plot")
 
 ## Übung 5.1
 
-Importiere die Datensätze `ausserberg.gpkg` (aus Übung 2) sowie `dhm200_2056.tif` (aus Übung 3, `data/processed/ausserberg.gpkg` bzw. `data/processed/dhm200_2056.tif`)
+Importiere die Datensätze `ausserberg.gpkg` (aus Übung 2) sowie `dhm200_2056.tif` (aus Übung 3, `data-processed/ausserberg.gpkg` bzw. `data-processed/dhm200_2056.tif`)
 
 ::::{.content-visible when-profile="musterloesung"}
 :::{.callout-note}
@@ -45,8 +45,8 @@ Importiere die Datensätze `ausserberg.gpkg` (aus Übung 2) sowie `dhm200_2056.t
 #| output: false
 
 
-ausserberg <- read_sf("data/processed/ausserberg.gpkg")
-dhm200 <- rast("data/processed/dhm200_2056.tif")
+ausserberg <- read_sf("data-processed/ausserberg.gpkg")
+dhm200 <- rast("data-processed/dhm200_2056.tif")
 ```
 
 
@@ -118,7 +118,7 @@ tm_shape(dhm200_cropped) +
 
 ```{r}
 #| label: uebung-5-5
-dhm25 <- rast("data/processed/dhm25_2056.tif") 
+dhm25 <- rast("data-processed/dhm25_2056.tif") 
 dhm25_crop <- crop(dhm25, ausserberg)           
 ```
 
@@ -151,9 +151,7 @@ tm_shape(dhm25_crop) +
 
 ## Übung 5.5
 
-- Wandle `ausserberg` mit der Funktion `vect()` in ein `SpatVector` Objekt und speichere es als `ausserberg_vect`
-- Schau dir `ausserberg_vect` an, was hat sich verändert?
-- Verwende die Funktion `extract` mit `ausserberg_vect` um die Höhenwerte aus `dhm25` zu extrahieren
+- Verwende die Funktion `extract` mit `ausserberg` um die Höhenwerte aus `dhm25` zu extrahieren
 - Speichere den output in einer Variabel und beguteachte diese
 
 
@@ -164,15 +162,9 @@ tm_shape(dhm25_crop) +
 ```{r}
 #| label: uebung-5-7
 
-# ausserberg_vect <- vect(ausserberg)
 elev <- extract(dhm25, ausserberg) # <- die Funktion extract() extrahiert die Information
-```
 
-
-
-```{r}
-#| label: uebung-5-8
-elev                                     # <- der output ist eine data.frame mit 2 Spalten
+elev                               # <- der output ist eine data.frame mit 2 Spalten
 ```
 
 
@@ -237,8 +229,12 @@ tm_shape(ausserberg) +
 
 - nun wollen wir zwei Vektordatensätze miteinander verschneiden
 - Ausgangslage:
-  - wir verfügen über einen [TWW Datensatz der Schweiz](https://www.bafu.admin.ch/bafu/de/home/themen/biodiversitaet/zustand/karten/geodaten.html) (https://bit.ly/3CqNRKT)
-  - wir verfügen über den [Gemeindelayer der Schweiz](https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/shp/2056/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill.zip) (https://bit.ly/3CaAj5W)
+  - wir verfügen über einen TWW Datensatz der Schweiz
+    - URL: {{< var datasets.tww.url >}})
+    - Shorturl: {{< var datasets.tww.shorturl >}}
+  - wir verfügen über den Gemeindelayer der Schweiz
+    - URL: {{< var datasets.swissboundaries3d.url >}})
+    - Shorturl: {{< var datasets.swissboundaries3d.shorturl >}})
   - wir wollen alle TWW Flächen innerhalb der Gemeinde Landquart erhalten
 
 
@@ -256,8 +252,8 @@ tm_shape(ausserberg) +
 ```{r}
 #| label: uebung-5-12
 # Datensätze einlesen:
-tww <- read_sf("data/original/TWW/TWW_LV95/trockenwiesenweiden.shp")
-hoheitsgebiet <- read_sf("data/original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_HOHEITSGEBIET.shp")
+tww <- read_sf("data-original/TWW/TWW_LV95/trockenwiesenweiden.shp")
+hoheitsgebiet <- read_sf("data-original/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/swissBOUNDARIES3D_1_3_TLM_HOHEITSGEBIET.shp")
 
 # Gemeindegrenzenen in EPSG 2056 transformieren und nur Landquart selektieren
 hoheitsgebiet <- st_transform(hoheitsgebiet, 2056)
@@ -397,7 +393,7 @@ Exportiere `tww_landquart2` als Geopackage
 ```{r}
 #| label: uebung-5-20
 #| output: false
-st_write(tww_landquart2, "data/processed/tww_landquart.gpkg", delete_layer = TRUE)
+st_write(tww_landquart2, "data-processed/tww_landquart.gpkg", delete_layer = TRUE)
 ```
 
 

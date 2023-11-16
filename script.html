@@ -31,6 +31,9 @@ window.onload = function() {
     // Find the target element by its class name
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
     sidebar_tools.appendChild(linkElement);
+
+    // the following function removes the title of the sidebar (which is the same as the title of the page)
+    document.querySelector(".sidebar-title>a").innerHTML = ""
 };
 
 </script>

@@ -1,0 +1,32 @@
+urls:
+  uebungen: "[cas-vegetationsanalyse-feldbotanik.github.io/HS23](https://cas-vegetationsanalyse-feldbotanik.github.io/HS23/)"
+  loesungen: "[ratnaweera.quarto.pub/cas-vab-musterloesung](https://ratnaweera.quarto.pub/cas-vab-musterloesung)"
+
+datasets:
+  swissboundaries3d:
+    url: "<https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d/swissboundaries3d_2023-01/swissboundaries3d_2023-01_2056_5728.gpkg.zip>"
+    shorturl: "<https://bit.ly/47wCOzo>"
+    name: swissboundaries3D
+  dhm25200:
+    url: <https://www.swisstopo.admin.ch/de/geodata/height/dhm25200.html>
+    shorturl: <https://bit.ly/3Hj4X0K>
+    name: dhm25200
+  dhm25:
+    url: <https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html>
+    short-url: <https://bit.ly/3kFgZrF>
+    name: dhm25
+  swissimage10:
+    url: <https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage10.html>
+    shorturl: <https://bit.ly/40Fy0Wj>
+    name: swissimage10
+  tww:
+    url: <https://www.bafu.admin.ch/bafu/de/home/themen/biodiversitaet/zustand/karten/geodaten.html>
+    shorturl: <https://bit.ly/3CqNRKT>
+  ausserberg:
+    url: <https://moodle.zhaw.ch/mod/resource/view.php?id=1044817>
+    name: Vegauf_Ausserberg_2019.xlsx
+    description: "Hausaufgaben > Datensatz Ausserberg für Hausaufgabe 1"
+  hangenmoos:
+    url: <https://moodle.zhaw.ch/mod/resource/view.php?id=310996>
+    name: Hangenmoos.xlsx
+    description: "Kurstag 13 > Arbeitsmaterial > Daten (Kursdaten_VEGEDAZ.zip)"

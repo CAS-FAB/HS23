@@ -63,7 +63,7 @@ set.seed(1920)
 #| label: uebung-6-2
 
 
-tww <- read_sf("data/original/TWW/TWW_LV95/trockenwiesenweiden.shp")
+tww <- read_sf("data-original/TWW/TWW_LV95/trockenwiesenweiden.shp")
 
 filter <- c("Marièrs", "Buzzera", "Truois")   # <1>
 tww <- tww[tww$Name %in% filter,]             # <1>

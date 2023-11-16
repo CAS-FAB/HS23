@@ -7,9 +7,10 @@ book:
   title: "CAS Vegetationsanalyse und Feldbotanik"
   subtitle: "Geografische Kartendarstellung mit R"
   author: "Nils Ratnaweera"
-  date: "11/13/2023"
+  date: "11/17/2023"
   reader-mode: true
   output-file: "cas-vab-gis"
+  downloads: [pdf]
   sidebar: 
     logo: images/zhaw_rgb.png
   chapters:
@@ -24,6 +25,9 @@ book:
 number-depth: 0
 number-sections: false
 lang: de-CH
+url-uebungen: https://cas-vegetationsanalyse-feldbotanik.github.io/HS23/
+url-loesungen: https://ratnaweera.quarto.pub/cas-vab-musterloesung/
+
 
 execute: 
   freeze: true

@@ -22,8 +22,8 @@ subtitle: Komplexe Rasterdaten
 ## Übung 4.1 <!-- 3-->
 
 
-- Ladet euch einen Ausschnitt aus dem Datensatz `swissimage 10` von Swisstopo herunter: <https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage10.html>
-- Shortlink: <https://bit.ly/40Fy0Wj>
+- Ladet euch einen Ausschnitt aus dem Datensatz `swissimage 10` von Swisstopo herunter: {{< var datasets.swissimage10.url >}}
+  - Shortlink: {{< var datasets.swissimage10.shorturl >}}
 - Enzipped den Inhalt in euer RStudio Projekt und schaut den Inhalt an
 - Öffnet das File in QGIS und schaut euch die Metadaten an
 - Was ist das Koordinatenbezugssystem? Wie hoch ist die räumliche Auflösung?
@@ -62,7 +62,7 @@ library("sf")
 library("tmap")
 library("terra")
 
-swissimage <- rast("data/original/swissimage25/SWISSIMAGE25m/SI25-2012-2013-2014.tif")
+swissimage <- rast("data-original/swissimage25/SWISSIMAGE25m/SI25-2012-2013-2014.tif")
 
 crs(swissimage) <- "epsg: 2056"
 
@@ -127,7 +127,8 @@ tm_shape(swissimage_10) +
 
 - Heute haben wir das Höhenmodell `dhm200` importiert
 - Höhenmodell mit 200m Auflösung (→ grob! )
-- swisstopo stellt zusätzlich das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung zur Verfügung (<https://bit.ly/3kFgZrF>)
+- swisstopo stellt zusätzlich das mit 25m Auflösung zur Verfügung ({{< var datasets.dhm25.url >}})
+  - Shortlink: {{< var datasets.dhm25.url >}}
 - durch die höhere Auflösung dauert das transformieren in ein neues Koordinatensystem etwas länger
 
 
@@ -135,7 +136,7 @@ tm_shape(swissimage_10) +
 
 ## Übung 4.4 (Optional)
 
-- Ladet euch das das [`dhm25`](https://www.swisstopo.admin.ch/de/geodata/height/dhm25.html) mit 25m Auflösung herunter (<https://bit.ly/3kFgZrF>)
+- Ladet euch das `dhm25` mit 25m Auflösung herunter ({{< var datasets.dhm25.url >}})
 - importiert es in R
 - setzt das korrekte CRS
 - transformiert es in EPSG 2056 und verwendet dabei folgende Optionen: 
@@ -149,12 +150,13 @@ tm_shape(swissimage_10) +
 
 ```{r}
 #| label: uebung-4-10
-dhm25 <- rast("data/original/DHM25_MM_ASCII_GRID/ASCII_GRID_1part/dhm25_grid_raster.asc")
+#| eval: false
+dhm25 <- rast("data-original/DHM25_MM_ASCII_GRID/ASCII_GRID_1part/dhm25_grid_raster.asc")
 crs(dhm25) <- "epsg: 21781"
 
 dhm25
 
-#terra::project(dhm25, "epsg: 2056", filename = "data/dhm25_2056.tif", progress = TRUE)
+terra::project(dhm25, "epsg: 2056", filename = "data-processed/dhm25_2056.tif", progress = TRUE)
 ```
 
 

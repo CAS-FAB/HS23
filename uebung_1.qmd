@@ -9,11 +9,11 @@ subtitle: Einfache Vektordaten
 
 - Erstelle ein neues ***RStudio Projekt***
 - Erstelle ein neues R-Script mit dem Namen `Uebung_1.R`
-- Lade dir `Vegauf_Aussenberg_2019_Kopfdaten.csv` (von Moodle, Kurstag 12) herunter 
+- Lade dir den Datensatz *Datensatz Ausserberg für Hausaufgabe 1* herunter (`Vegauf_Ausserberg_2019.xlsx`)
 
 ## Übung 1.1 <!--10-->
 
-- Importiere die CSV `Vegauf_Aussenberg_2019_Kopfdaten.csv` gewohnt als `data.frame` in R. 
+- Importiere `Vegauf_Ausserberg_2019.xlsx` wie gewohnt als `data.frame` in R. 
 - Speichere die `data.frame` in der Variabel `ausserberg`
 
 ::::{.content-visible when-profile="musterloesung"}
@@ -23,7 +23,7 @@ subtitle: Einfache Vektordaten
 ```{r}
 #| label: uebung-1-1
 
-ausserberg <- read.csv("data/original/Vegauf_Ausserberg_2019_Kopfdaten.csv", sep = "\t")
+ausserberg <- read.csv("data-original/Vegauf_Ausserberg_2019_Kopfdaten.csv", sep = "\t")
 ```
 
 ```{r}
@@ -330,6 +330,9 @@ library("tmap")
   - `tm_dots` (oder `tm_lines`, `tm_polygons`...):  die *Darstellungsform*
 
 
+
+
+
 ```{r}
 #| label: uebung-1-13
 #| layout-ncol: 2
@@ -337,37 +340,29 @@ library("tmap")
 
 tm_shape(ausserberg_sf) + # datensatz        
   tm_dots()               # darstellungsform 
-
+#
 tm_shape(ausserberg_sf) +  
   tm_bubbles()            
-
+#
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "Verbuschung")
-
-
+#
 tm_shape(ausserberg_sf) +
-  tm_bubbles(col = "Verbuschung",
-             shape = "Vegetationstyp")
-
+  tm_bubbles(col = "Verbuschung", shape = "Vegetationstyp")
+#
 tm_shape(ausserberg_sf) +
-  tm_bubbles(col = "Verbuschung",
-             shape = "Vegetationstyp") +
+  tm_bubbles(col = "Verbuschung", shape = "Vegetationstyp") +
   tm_layout(legend.outside = TRUE)
-  
-
+#
 tm_shape(ausserberg_sf) +
-  tm_bubbles(col = "Verbuschung",
-             shape = "Vegetationstyp") +
-  tm_layout(legend.outside = TRUE,
-            legend.position = c("right","bottom"))
-
+  tm_bubbles(col = "Verbuschung", shape = "Vegetationstyp") +
+  tm_layout(legend.outside = TRUE, legend.position = c("right","bottom"))
+#
 tm_shape(ausserberg_sf) +
-  tm_bubbles(col = "Verbuschung",
-             shape = "Vegetationstyp") +
-  tm_layout(legend.outside = TRUE,
-            legend.position = c("right","bottom")) +
+  tm_bubbles(col = "Verbuschung", shape = "Vegetationstyp") +
+  tm_layout(legend.outside = TRUE, legend.position = c("right","bottom")) +
   tm_grid(labels.rot = c(90, 0), lines = FALSE)
-  
+ 
 ```
 
 
@@ -387,10 +382,8 @@ Erstellt nun eine eigene Karte mit `tmap` und euren Daten. Versucht, den unten s
 
 tm_shape(ausserberg_sf) +
   tm_bubbles(col = "gew_Temperaturzahl", palette = "viridis") +
-  tm_layout(legend.outside = TRUE,
-            legend.position = c("right","bottom")) +
-  tm_grid(labels.rot = c(0, 90), 
-          lines = FALSE)
+  tm_layout(legend.outside = TRUE, legend.position = c("right","bottom")) +
+  tm_grid(labels.rot = c(0, 90), lines = FALSE)
 ```
 
 :::
@@ -490,7 +483,7 @@ tm_shape(ausserberg_sf_wgs84) +
 ```{r}
 #| label: uebung-1-32
 
-write_sf(ausserberg_sf, "data/processed/ausserberg.gpkg")
+write_sf(ausserberg_sf, "data-processed/ausserberg.gpkg")
 ```
 
 
@@ -503,7 +496,7 @@ Auch beim Einlesen in R ist klar, dass es sich dabei um räumliche Daten handelt
 
 rm(ausserberg_sf)
 
-ausserberg_sf <- read_sf("data/processed/ausserberg.gpkg")
+ausserberg_sf <- read_sf("data-processed/ausserberg.gpkg")
 
 ausserberg_sf
 ```
@@ -512,11 +505,13 @@ ausserberg_sf
 
 ## Übung 1.13 <!--15-->
 
-- Importiere nun aus dem Excel Hagenmoos.xlsx das Datenblatt `KopfdatenVertikal` als `data.frame`. 
+- Lade das Zipfile `Kursdaten_VEGEDAZ.zip` herunter: {{< var datasets.hangenmoos.description >}}
+- Entzippe es anschliessen
+- Importiere nun aus dem Excelfile `Hagenmoos.xlsx` das Datenblatt `KopfdatenVertikal` als `data.frame` in R
 - Konvertiere den Dataframe in ein `sf` objekt 
 - Weise das korrekte Koordinatensytem zu
 - Transformiere die Koordinaten anschliessend in WGS84
-- erstelle eine Karte mit `tmap`
+- Erstelle eine Karte mit `tmap`
 
 ::::{.content-visible when-profile="musterloesung"}
 :::{.callout-note}
@@ -524,7 +519,7 @@ ausserberg_sf
 
 ```{r}
 #| label: uebung-1-34
-hangenmoos <- readxl::read_excel("data/original/daten_vegedaz/Hagenmoos.xlsx", "KopfdatenVertikal")
+hangenmoos <- readxl::read_excel("data-original/daten_vegedaz/Hagenmoos.xlsx", "KopfdatenVertikal")
 
 hangenmoos_sf <- st_as_sf(hangenmoos, coords = c("X", "Y"))
 st_crs(hangenmoos_sf) <- 21781
@@ -612,13 +607,3 @@ tm_shape(hangenmoos_sf_wgs84) +
 - Shapefiles haben aber Nachteile ein sinnvolleres Format ist deshalb *geopackage*
 
 :::
-
-
-
-
-
-
-
-
-
-

@@ -35,8 +35,9 @@ library("tmap")
 :::{.callout-note}
 ## Musterlösung
 
-- <https://www.swisstopo.admin.ch/de/geodata/height/dhm25200.html>
-- Shortlink (für diesen Kurs): <https://bit.ly/3Hj4X0K>
+
+- {{< var datasets.dhm25200.url >}}
+- Shortlink (für diesen Kurs): {{< var datasets.dhm25200.shorturl >}}
 
 
 :::
@@ -130,7 +131,7 @@ install.packages("terra")
 
 library("terra")
 
-dhm200 <- rast("data/original/dhm25_200/DHM200.xyz")
+dhm200 <- rast("data-original/dhm25_200/DHM200.xyz")
 ```
 
 - Aus `terra` benötigen wir die Funktion `rast`
@@ -189,7 +190,7 @@ Importiere `DHM200` in R und schau dir das Objekt in der Konsole sowie mit `plot
 
 ```{r}
 #| label: uebung-3-8
-dhm200 <- rast("data/original/dhm25_200/DHM200.xyz")
+dhm200 <- rast("data-original/dhm25_200/DHM200.xyz")
 dhm200
 plot(dhm200)
 ```
@@ -285,7 +286,7 @@ dhm200_2056 <- project(dhm200, "epsg: 2056")
 
 #| eval: false
 #| 
-writeRaster(dhm200_2056,"data/processed/dhm200_2056.tif", overwrite = TRUE)
+writeRaster(dhm200_2056,"data-processed/dhm200_2056.tif", overwrite = TRUE)
 ```
 
 - beim Import ist die CRS Information bekannt (CRS setzen und transformieren ist nicht mehr nötig)
@@ -294,7 +295,7 @@ writeRaster(dhm200_2056,"data/processed/dhm200_2056.tif", overwrite = TRUE)
 ```{r}
 #| label: uebung-3-19
 
-dhm200_2056 <- rast("data/processed/dhm200_2056.tif")
+dhm200_2056 <- rast("data-processed/dhm200_2056.tif")
 
 dhm200_2056
 ```
