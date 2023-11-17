@@ -149,7 +149,7 @@ plot(dhm200)  # für einfache visualisierungen
 
 
 
-## Übung 3.2 <!--3-->
+## Übung 3.2a <!--3-->
 
 In welchem Koordinatensystem befindet sich dieses Höhenmodell? 
 
@@ -168,7 +168,7 @@ Tipp: Konsultiere die Metadaten!
 :::
 ::::
 
-## Übung 3.2 <!--3-->
+## Übung 3.2b <!--3-->
 
 Wie hoch ist die Auflösung?
 
