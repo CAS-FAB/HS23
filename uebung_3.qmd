@@ -289,7 +289,6 @@ dhm200_2056 <- project(dhm200, "epsg: 2056")
 
 ```{r}
 #| label: uebung-3-18
-
 #| eval: false
 #| 
 writeRaster(dhm200_2056,"data-processed/dhm200_2056.tif", overwrite = TRUE)
