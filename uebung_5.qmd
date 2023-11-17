@@ -191,7 +191,8 @@ ausserberg$elevation <- elev[,2]         # <- die 2. Spalte aus elev auf ausserb
 :::
 ::::
 
-  ## Übung 5.7 
+
+## Übung 5.7 
 
 Visualisiere nun `ausserberg` und Färbe die Punkte nach ihrer Höheninformation ein.
 
