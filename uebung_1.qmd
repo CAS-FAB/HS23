@@ -489,7 +489,7 @@ write_sf(ausserberg_sf, "data-processed/ausserberg.gpkg")
 
 Das File `aussenberg.gpkg` kann in verschiedenen GIS-Programmen geöffnet werden. Versucht mal, das File in QGIS zu öffnen.
 
-Auch beim Einlesen in R ist klar, dass es sich dabei um räumliche Daten handelt. Das Koordinatenbezugssstem `EPSG 2045` ist jetzt automatisch zugewiesen.
+Auch beim Einlesen in R ist klar, dass es sich dabei um räumliche Daten handelt. Das Koordinatenbezugssstem ist jetzt automatisch zugewiesen.
 
 ```{r}
 #| label: uebung-1-33
