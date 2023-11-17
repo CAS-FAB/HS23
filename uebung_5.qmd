@@ -384,11 +384,12 @@ tww_landquart2 <- tww[landquart, ]
 
 ## Übung 5.13
 
+Exportiere `tww_landquart2` als Geopackage
+
 ::::{.content-visible when-profile="musterloesung"}
 :::{.callout-note}
 ## Musterlösung
 
-Exportiere `tww_landquart2` als Geopackage
 
 ```{r}
 #| label: uebung-5-20
