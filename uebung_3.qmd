@@ -172,11 +172,17 @@ Tipp: Konsultiere die Metadaten!
 
 Wie hoch ist die Auflösung?
 
-## Lösung
+::::{.content-visible when-profile="musterloesung"}
+:::{.callout-note}
+## Musterlösung
+
 
 ![](images/res.png)
 
 → 200 Meter
+
+:::
+::::
 
 
 
