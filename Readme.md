@@ -19,7 +19,7 @@ quarto publish gh-pages --no-prompt
 
 To display certain text or code content only in the sample solutions, add it in the following manner. 
 
-```
+````
 ::::{.content-visible when-profile="musterloesung"}
 :::{.callout-note}
 
@@ -31,4 +31,4 @@ To display certain text or code content only in the sample solutions, add it in 
 :::
 ::::
 
-```
+````
