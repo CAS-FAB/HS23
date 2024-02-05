@@ -2,7 +2,8 @@
 
 
 :::{.content-hidden when-profile="musterloesung"}
-Wilkommen bei den Kursunterlagen zum Kurstag 17 *Geografische Kartendarstellungen mit R*, im Rahmen des Modul 2 im [CAS Vegetationsanalyse und Feldbotanik](https://www.zhaw.ch/de/lsfm/weiterbildung/detail/kurs/cas-vegetationsanalyse-feldbotanik/). Diese Kursunterlagen sollen Vegetationsökologen und Feldbotaniker in die Lage versetzen, ihre Daten mit Hilfe von R zu analysieren und zu visualisieren. Der Kurs ist als Workshop aufgebaut: Die Inputs sind relativ kurz, dafür programmieren wir *viel* und *gemeinsam*. Dabei werden am Kurstag die [Übungen 1](uebung_1.qmd) bis [Übungen 6](uebung_6.qmd) so weit wie möglich gemeinsam durchgearbeitet: Was wir nicht gemeinsam schaffen kann selbständig als Hausaufgabe gelöst werden. 
+Wilkommen bei den Kursunterlagen zum Kurstag 17 *Geografische Kartendarstellungen mit R*, im Rahmen des Modul 2 im [CAS Vegetationsanalyse und Feldbotanik](
+https://www.zhaw.ch/de/lsfm/weiterbildung/detail/kurs/cas-vegetationsanalyse-feldbotanik/). Diese Kursunterlagen sollen Vegetationsökologen und Feldbotaniker in die Lage versetzen, ihre Daten mit Hilfe von R zu analysieren und zu visualisieren. Der Kurs ist als Workshop aufgebaut: Die Inputs sind relativ kurz, dafür programmieren wir *viel* und *gemeinsam*. Dabei werden am Kurstag die [Übungen 1](uebung_1.qmd) bis [Übungen 6](uebung_6.qmd) so weit wie möglich gemeinsam durchgearbeitet: Was wir nicht gemeinsam schaffen kann selbständig als Hausaufgabe gelöst werden. 
 
 Jede Übung wird auf dem Beamer projeziert und sofern nötig mündlich ergänzt. Danach haben die Kursteilnehmer Zeit, die Übung selbständig zu lösen. Nach einer Weile wird eine Lösung präsentiert (live coding) und die Teilnehmer können Fragen stellen. Für Personen, denen das Tempo zu langsam ist, können die Übungen auch selbständig durcharbeiten. 
 
@@ -11,11 +12,11 @@ Diese Unterlagen stehen sowohl als Website ({{< var urls.uebungen >}}) wie auch 
 
 | von   | bis   | Thema                                                           |
 |-------|-------|-----------------------------------------------------------------|
-| 09:00 | 09:35 | Begrüssung und [Einführung räumliche Daten](https://cas-vegetationsanalyse-feldbotanik.github.io/Spatial/01_Einfuehrung.html)                       |
+| 09:00 | 09:35 | Begrüssung und [Einführung räumliche Daten](https://cas-vegetationsanalyse-feldbotanik.github.io/HS21/01_Einfuehrung.html)                                                              |
 | 09:50 | 10:35 | Vektordaten: [Übung 1](uebung_1.qmd)                            |
 | 10:50 | 12:00 | Vektordaten: [Übung 1](uebung_1.qmd) & [Übung 2](uebung_1.qmd)  |
 | 12:00 | 13:00 | **Mittagspause**                                                |
-| 13:00 | 13:35 | Rasterdaten: [Input](https://cas-vegetationsanalyse-feldbotanik.github.io/Spatial/04_Input_Raster.html) und [Übung 3](uebung_3.qmd) beginnen         |
+| 13:00 | 13:35 | Rasterdaten: [Input](https://cas-vegetationsanalyse-feldbotanik.github.io/HS21/04_Input_Raster.html) und [Übung 3](uebung_3.qmd) beginnen         |
 | 13:50 | 14:35 | Rasterdaten:  [Übung 3](uebung_3.qmd) & [Übung 4](uebung_4.qmd) |
 | 14:50 | 15:35 | Integration von Geodaten: [Übung 5](uebung_5.qmd)               |
 | 15:50 | 17:00 | Sampling Design: [Übung 6](uebung_6.qmd)                        |
@@ -30,7 +31,8 @@ Diese Unterlagen stehen sowohl als Website ({{< var urls.uebungen >}}) wie auch 
 :::{.callout-warning}
 ## Musterlösungen
 
-Bei diesen Unterlagen handelt es sich um die Musterlösungen zu den Aufgaben vom Kurstag 17 (*Geografische Kartendarstellung mit R*) des [CAS Vegetationsanalyse und Feldbotanik](https://www.zhaw.ch/de/lsfm/weiterbildung/detail/kurs/cas-vegetationsanalyse-feldbotanik/).
+Bei diesen Unterlagen handelt es sich um die Musterlösungen zu den Aufgaben vom Kurstag 17 (*Geografische Kartendarstellung mit R*) des [CAS Vegetationsanalyse und Feldbotanik](
+https://www.zhaw.ch/de/lsfm/weiterbildung/detail/kurs/cas-vegetationsanalyse-feldbotanik/).
 
 Die Musterlösungen stehen auch als PDF zur Verfügung (siehe PDF-Symbol oberhalb des Menübalkens links). Die Aufgabenstellungen selbst sind den Übungen jeweils vorangestellt, ein Version der Übungen ohne Musterlösungen befindet sich hier: {{< var urls.uebungen >}}.
 
