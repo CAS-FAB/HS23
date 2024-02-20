@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-CH" xml:lang="de-CH"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.489">
+<meta name="generator" content="quarto-1.5.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -62,6 +62,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "weitere Treffer in diesem Dokument",
     "search-more-matches-text": "weitere Treffer in diesem Dokument",
     "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Abbrechen",
     "search-submit-button-title": "Abschicken",
     "search-label": "Suchen"
@@ -259,17 +260,17 @@ window.onload = function() {
 <tr class="odd">
 <td>09:00</td>
 <td>09:35</td>
-<td>Begrüssung und <a href="https://cas-vegetationsanalyse-feldbotanik.github.io/Spatial/01_Einfuehrung.html">Einführung räumliche Daten</a></td>
+<td>Begrüssung und <a href="https://cas-vegetationsanalyse-feldbotanik.github.io/HS21/01_Einfuehrung.html">Einführung räumliche Daten</a></td>
 </tr>
 <tr class="even">
 <td>09:50</td>
 <td>10:35</td>
-<td>Vektordaten: <a href="./uebung_1.html">Übung 1</a></td>
+<td>Vektordaten: <a href="uebung_1.html" class="quarto-xref"><span>Übung 1</span></a></td>
 </tr>
 <tr class="odd">
 <td>10:50</td>
 <td>12:00</td>
-<td>Vektordaten: <a href="./uebung_1.html">Übung 1</a> &amp; <a href="./uebung_1.html">Übung 2</a></td>
+<td>Vektordaten: <a href="uebung_1.html" class="quarto-xref"><span>Übung 1</span></a> &amp; <a href="uebung_2.html" class="quarto-xref"><span>Übung 2</span></a></td>
 </tr>
 <tr class="even">
 <td>12:00</td>
@@ -279,22 +280,22 @@ window.onload = function() {
 <tr class="odd">
 <td>13:00</td>
 <td>13:35</td>
-<td>Rasterdaten: <a href="https://cas-vegetationsanalyse-feldbotanik.github.io/Spatial/04_Input_Raster.html">Input</a> und <a href="./uebung_3.html">Übung 3</a> beginnen</td>
+<td>Rasterdaten: <a href="https://cas-vegetationsanalyse-feldbotanik.github.io/HS21/04_Input_Raster.html">Input</a> und <a href="uebung_3.html" class="quarto-xref"><span>Übung 3</span></a> beginnen</td>
 </tr>
 <tr class="even">
 <td>13:50</td>
 <td>14:35</td>
-<td>Rasterdaten: <a href="./uebung_3.html">Übung 3</a> &amp; <a href="./uebung_4.html">Übung 4</a></td>
+<td>Rasterdaten: <a href="uebung_3.html" class="quarto-xref"><span>Übung 3</span></a> &amp; <a href="uebung_4.html" class="quarto-xref"><span>Übung 4</span></a></td>
 </tr>
 <tr class="odd">
 <td>14:50</td>
 <td>15:35</td>
-<td>Integration von Geodaten: <a href="./uebung_5.html">Übung 5</a></td>
+<td>Integration von Geodaten: <a href="uebung_5.html" class="quarto-xref"><span>Übung 5</span></a></td>
 </tr>
 <tr class="even">
 <td>15:50</td>
 <td>17:00</td>
-<td>Sampling Design: <a href="./uebung_6.html">Übung 6</a></td>
+<td>Sampling Design: <a href="uebung_6.html" class="quarto-xref"><span>Übung 6</span></a></td>
 </tr>
 </tbody>
 </table>
@@ -431,38 +432,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -471,8 +462,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -697,7 +695,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./uebung_1.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>Übung 1</span>">
+      <a href="./uebung_1.html" class="pagination-link" aria-label="Übung 1">
         <span class="nav-page-text"><span class="chapter-title">Übung 1</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

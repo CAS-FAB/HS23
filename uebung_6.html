@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-CH" xml:lang="de-CH"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.489">
+<meta name="generator" content="quarto-1.5.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CAS Vegetationsanalyse und Feldbotanik - Übung 6</title>
+<title>CAS Vegetationsanalyse und Feldbotanik – Übung 6</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,6 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "weitere Treffer in diesem Dokument",
     "search-more-matches-text": "weitere Treffer in diesem Dokument",
     "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Abbrechen",
     "search-submit-button-title": "Abschicken",
     "search-label": "Suchen"
@@ -142,6 +143,33 @@ window.onload = function() {
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -253,7 +281,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Übung 6</span></h1>
+<h1 class="title"><span id="sec-uebung-6" class="quarto-section-identifier"><span class="chapter-title">Übung 6</span></span></h1>
 <p class="subtitle lead">Sampling Design</p>
 </div>
 
@@ -272,7 +300,7 @@ window.onload = function() {
 
 
 <p>R eignet sich hervorragend um ein Sampling Design umzusetzen. Am ersten Tag des CAS habt ihr etwas zu <em>Sampling Design</em> gelernt (siehe <a href="#fig-sampling-design" class="quarto-xref">Abbildung&nbsp;<span>6.2</span></a>).</p>
-<div id="fig-sampling-design" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-sampling-design" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sampling-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="callout callout-style-default callout-note callout-titled">
@@ -292,7 +320,7 @@ Folie Sampling Design
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-sampling-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-sampling-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abbildung&nbsp;6.1
 </figcaption>
 </figure>
@@ -302,47 +330,47 @@ Abbildung&nbsp;6.1
 <ul>
 <li>zufällig
 <ul>
-<li>nicht stratifiziert (siehe <a href="#fig-zufaellig-nicht-stratifiziert2" class="quarto-xref">Abbildung&nbsp;<span>6.2 (a)</span></a> und <a href="#sec-zufaellig-nicht-stratifiziert" class="quarto-xref"><span>Kapitel&nbsp;6.2.1</span></a>)</li>
-<li>stratifiziert (siehe <a href="#fig-zufaellig-stratifiziert2" class="quarto-xref">Abbildung&nbsp;<span>6.2 (b)</span></a> und <a href="#sec-zufaellig-stratifiziert" class="quarto-xref"><span>Kapitel&nbsp;6.2.2</span></a>)</li>
+<li>nicht stratifiziert (siehe <a href="#fig-zufaellig-nicht-stratifiziert2" class="quarto-xref">Abbildung&nbsp;<span>6.2 (a)</span></a> und <a href="#sec-zufaellig-nicht-stratifiziert" class="quarto-xref"><span>Zufällig - Nicht stratifiziert</span></a>)</li>
+<li>stratifiziert (siehe <a href="#fig-zufaellig-stratifiziert2" class="quarto-xref">Abbildung&nbsp;<span>6.2 (b)</span></a> und <a href="#sec-zufaellig-stratifiziert" class="quarto-xref"><span>Zufällig - Stratifiziert</span></a>)</li>
 </ul></li>
-<li>systematisch / regelmässig (siehe <a href="#fig-systematisch2" class="quarto-xref">Abbildung&nbsp;<span>6.2 (c)</span></a> und <a href="#sec-systematisch" class="quarto-xref"><span>Kapitel&nbsp;6.3</span></a>)</li>
+<li>systematisch / regelmässig (siehe <a href="#fig-systematisch2" class="quarto-xref">Abbildung&nbsp;<span>6.2 (c)</span></a> und <a href="#sec-systematisch" class="quarto-xref"><span>Systematisch / Regelmässig</span></a>)</li>
 </ul>
 <div class="page-columns page-full">
 <div id="fig-sampling-design" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sampling-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row quarto-layout-valign-top column-page">
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sampling-design" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-zufaellig-nicht-stratifiziert2" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-layout-row column-page">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sampling-design" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-zufaellig-nicht-stratifiziert2" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-zufaellig-nicht-stratifiziert2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/nicht_stratifiziert_plot.png" class="img-fluid figure-img" data-ref-parent="fig-sampling-design">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-zufaellig-nicht-stratifiziert2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-zufaellig-nicht-stratifiziert2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) 30 Samples total, 10 Samples pro Lokalität
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sampling-design" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-zufaellig-stratifiziert2" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sampling-design" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-zufaellig-stratifiziert2" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-zufaellig-stratifiziert2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/stratifiziert_plot.png" class="img-fluid figure-img" data-ref-parent="fig-sampling-design">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-zufaellig-stratifiziert2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-zufaellig-stratifiziert2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) 30 Samples total, verteilt nach Hektaren
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sampling-design" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-systematisch2" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sampling-design" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-systematisch2" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-systematisch2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/systematisch_plot.png" class="img-fluid figure-img" data-ref-parent="fig-sampling-design">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-systematisch2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-systematisch2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) 30 Samples total, systematisch / regelmässig verteilt
 </figcaption>
 </figure>
@@ -350,7 +378,7 @@ Abbildung&nbsp;6.1
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sampling-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abbildung&nbsp;6.2: Drei verschiedene Sampling Strategien
 </figcaption>
 </figure>
@@ -486,12 +514,12 @@ Abbildung&nbsp;6.2: Drei verschiedene Sampling Strategien
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>nicht_stratifiziert_plot</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-zufaellig-nicht-stratifiziert" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-zufaellig-nicht-stratifiziert" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-zufaellig-nicht-stratifiziert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="uebung_6_files/figure-html/fig-zufaellig-nicht-stratifiziert-1.png" id="fig-zufaellig-nicht-stratifiziert" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-zufaellig-nicht-stratifiziert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-zufaellig-nicht-stratifiziert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abbildung&nbsp;6.3
 </figcaption>
 </figure>
@@ -511,12 +539,12 @@ Abbildung&nbsp;6.3
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>stratifiziert_plot</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-zufaellig-stratifiziert" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-zufaellig-stratifiziert" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-zufaellig-stratifiziert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="uebung_6_files/figure-html/fig-zufaellig-stratifiziert-1.png" id="fig-zufaellig-stratifiziert" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-zufaellig-stratifiziert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-zufaellig-stratifiziert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abbildung&nbsp;6.4
 </figcaption>
 </figure>
@@ -537,12 +565,12 @@ Abbildung&nbsp;6.4
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>systematisch_plot</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-systematisch" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-systematisch" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-systematisch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="uebung_6_files/figure-html/fig-systematisch-1.png" id="fig-systematisch" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-systematisch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-systematisch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abbildung&nbsp;6.5
 </figcaption>
 </figure>
@@ -700,38 +728,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -740,8 +758,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -964,7 +989,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./uebung_5.html" class="pagination-link  aria-label=" &lt;span="" 5&lt;="" span&gt;"="">
+      <a href="./uebung_5.html" class="pagination-link" aria-label="Übung 5">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Übung 5</span></span>
       </a>          
   </div>

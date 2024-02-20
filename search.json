@@ -10,11 +10,21 @@
     ]
   },
   {
+    "objectID": "uebung_1.html",
+    "href": "uebung_1.html",
+    "title": "Übung 1",
+    "section": "",
+    "text": "Vorbereitung",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
+    ]
+  },
+  {
     "objectID": "uebung_1.html#vorbereitung",
     "href": "uebung_1.html#vorbereitung",
     "title": "Übung 1",
-    "section": "Vorbereitung",
-    "text": "Vorbereitung\n\nErstelle ein neues RStudio Projekt\nErstelle ein neues R-Script mit dem Namen Uebung_1.R\nLade dir den Datensatz Datensatz Ausserberg für Hausaufgabe 1 herunter (Vegauf_Ausserberg_2019.xlsx)",
+    "section": "",
+    "text": "Erstelle ein neues RStudio Projekt\nErstelle ein neues R-Script mit dem Namen Uebung_1.R\nLade dir den Datensatz Datensatz Ausserberg für Hausaufgabe 1 herunter (Vegauf_Ausserberg_2019.xlsx)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Übung 1</span>"
     ]
@@ -210,11 +220,11 @@
     ]
   },
   {
-    "objectID": "uebung_2.html#vorbereitung",
-    "href": "uebung_2.html#vorbereitung",
+    "objectID": "uebung_2.html",
+    "href": "uebung_2.html",
     "title": "Übung 2",
-    "section": "Vorbereitung ",
-    "text": "Vorbereitung \nErstelle ein neues R Script mit dem Namen Uebung_2.R und lade darin die libraries sf und tmap\n\nlibrary(\"sf\")\nlibrary(\"tmap\")",
+    "section": "",
+    "text": "Vorbereitung\nErstelle ein neues R Script mit dem Namen Uebung_2.R und lade darin die libraries sf und tmap\nlibrary(\"sf\")\nlibrary(\"tmap\")",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Übung 2</span>"
     ]
@@ -280,11 +290,11 @@
     ]
   },
   {
-    "objectID": "uebung_3.html#vorbereitung",
-    "href": "uebung_3.html#vorbereitung",
+    "objectID": "uebung_3.html",
+    "href": "uebung_3.html",
     "title": "Übung 3",
-    "section": "Vorbereitung ",
-    "text": "Vorbereitung \nInstalliere zudem das R Package terra\nErstelle dann ein neues R Script mit dem Namen Uebung_3.R und lade darin die libraries sf sowie tmap.\n\nlibrary(\"sf\")\nlibrary(\"tmap\")",
+    "section": "",
+    "text": "Vorbereitung\nInstalliere zudem das R Package terra\nErstelle dann ein neues R Script mit dem Namen Uebung_3.R und lade darin die libraries sf sowie tmap.\nlibrary(\"sf\")\nlibrary(\"tmap\")",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Übung 3</span>"
     ]
@@ -410,11 +420,21 @@
     ]
   },
   {
+    "objectID": "uebung_4.html",
+    "href": "uebung_4.html",
+    "title": "Übung 4",
+    "section": "",
+    "text": "Übung 4.1",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
+    ]
+  },
+  {
     "objectID": "uebung_4.html#übung-4.1",
     "href": "uebung_4.html#übung-4.1",
     "title": "Übung 4",
-    "section": "Übung 4.1 ",
-    "text": "Übung 4.1 \n\nLadet euch einen Ausschnitt aus dem Datensatz swissimage 10 von Swisstopo herunter: https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage10.html\n\nShortlink: https://bit.ly/40Fy0Wj\n\nEnzipped den Inhalt in euer RStudio Projekt und schaut den Inhalt an\nÖffnet das File in QGIS und schaut euch die Metadaten an\nWas ist das Koordinatenbezugssystem? Wie hoch ist die räumliche Auflösung?",
+    "section": "",
+    "text": "Ladet euch einen Ausschnitt aus dem Datensatz swissimage 10 von Swisstopo herunter: https://www.swisstopo.admin.ch/de/geodata/images/ortho/swissimage10.html\n\nShortlink: https://bit.ly/40Fy0Wj\n\nEnzipped den Inhalt in euer RStudio Projekt und schaut den Inhalt an\nÖffnet das File in QGIS und schaut euch die Metadaten an\nWas ist das Koordinatenbezugssystem? Wie hoch ist die räumliche Auflösung?",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
     ]
@@ -424,7 +444,7 @@
     "href": "uebung_4.html#übung-4.2",
     "title": "Übung 4",
     "section": "Übung 4.2 ",
-    "text": "Übung 4.2 \n\nErstelle ein neues R Script mit dem Namen Uebung_4.R\nLade die libraries sf, tmap und terra.\nImportiere den Swissimage Datensatz\nWeise dem importierten Datensatz das Korrekte Koordinatenbezugssystem zu\nSchau dir den Datensatz in der Konsole sowie mit plot() an\n\n\nplot(swissimage)\n\n\n\n\n\nswissimage\n\nclass       : SpatRaster \ndimensions  : 9480, 14000, 3  (nrow, ncol, nlyr)\nresolution  : 25, 25  (x, y)\nextent      : 2484375, 2834375, 1062000, 1299000  (xmin, xmax, ymin, ymax)\ncoord. ref. : CH1903+ / LV95 (EPSG:2056) \nsource      : SI25-2012-2013-2014.tif \ncolors RGB  : 1, 2, 3 \nnames       : SI25-2012-2013-2014_1, SI25-2012-2013-2014_2, SI25-2012-2013-2014_3",
+    "text": "Übung 4.2 \n\nErstelle ein neues R Script mit dem Namen Uebung_4.R\nLade die libraries sf, tmap und terra.\nImportiere den Swissimage Datensatz\nWeise dem importierten Datensatz das Korrekte Koordinatenbezugssystem zu\nSchau dir den Datensatz in der Konsole sowie mit plot() an\n\n\nplot(swissimage)\n\n\n\n\n\n\n\n\n\nswissimage\n\nclass       : SpatRaster \ndimensions  : 9480, 14000, 3  (nrow, ncol, nlyr)\nresolution  : 25, 25  (x, y)\nextent      : 2484375, 2834375, 1062000, 1299000  (xmin, xmax, ymin, ymax)\ncoord. ref. : CH1903+ / LV95 (EPSG:2056) \nsource      : SI25-2012-2013-2014.tif \ncolors RGB  : 1, 2, 3 \nnames       : SI25-2012-2013-2014_1, SI25-2012-2013-2014_2, SI25-2012-2013-2014_3",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Übung 4</span>"
     ]
@@ -470,10 +490,10 @@
     ]
   },
   {
-    "objectID": "uebung_5.html#übung-5.1",
-    "href": "uebung_5.html#übung-5.1",
+    "objectID": "uebung_5.html",
+    "href": "uebung_5.html",
     "title": "Übung 5",
-    "section": "Übung 5.1",
+    "section": "",
     "text": "Übung 5.1\nImportiere die Datensätze ausserberg.gpkg (aus Übung 2) sowie dhm200_2056.tif (aus Übung 3, data-processed/ausserberg.gpkg bzw. data-processed/dhm200_2056.tif)",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Übung 5</span>"
@@ -620,11 +640,11 @@
     ]
   },
   {
-    "objectID": "uebung_6.html#vorbereitung",
-    "href": "uebung_6.html#vorbereitung",
+    "objectID": "uebung_6.html",
+    "href": "uebung_6.html",
     "title": "Übung 6",
-    "section": "Vorbereitung",
-    "text": "Vorbereitung\n\nlibrary(\"sf\")\nlibrary(\"terra\")\nlibrary(\"tmap\")\ntmap_mode(\"plot\")\n\nset.seed(1920)\n\n\ntww &lt;- read_sf(\"data-original/TWW/TWW_LV95/trockenwiesenweiden.shp\")\n\n1filter &lt;- c(\"Marièrs\", \"Buzzera\", \"Truois\")\ntww &lt;- tww[tww$Name %in% filter,]\n\n2tww &lt;- tww[, \"Name\"]\n\n3tww$area_ha &lt;- as.numeric(st_area(tww))/10000\n\n4samples_total &lt;- 30\n\n\n5base_plot &lt;- tm_shape(tww) +\n  tm_polygons(col = \"Name\") +\n  tm_layout(legend.show = FALSE, asp = 7/5)\n\n\n1\n\nNur 3 Lokaliäten auswählen\n\n2\n\nNur die Spalte “Name” (=Lokalität) behalten. Die Geometrie Spalte kommt automatisch mit.\n\n3\n\nFläche berechnen und in Hektaren umrechnen (als Vorbereitung für die das stratifizierte Sampling)\n\n4\n\nVariabel erstelen für die Summe an Samples, die wir machen können / wollen\n\n5\n\nOptional: Da wir immer wieder die gleiche Karte machen, können wir eine Basis Karte erstellen und immer wieder benutzen.",
+    "section": "",
+    "text": "Vorbereitung\nlibrary(\"sf\")\nlibrary(\"terra\")\nlibrary(\"tmap\")\ntmap_mode(\"plot\")\n\nset.seed(1920)\ntww &lt;- read_sf(\"data-original/TWW/TWW_LV95/trockenwiesenweiden.shp\")\n\n1filter &lt;- c(\"Marièrs\", \"Buzzera\", \"Truois\")\ntww &lt;- tww[tww$Name %in% filter,]\n\n2tww &lt;- tww[, \"Name\"]\n\n3tww$area_ha &lt;- as.numeric(st_area(tww))/10000\n\n4samples_total &lt;- 30\n\n\n5base_plot &lt;- tm_shape(tww) +\n  tm_polygons(col = \"Name\") +\n  tm_layout(legend.show = FALSE, asp = 7/5)\n\n\n1\n\nNur 3 Lokaliäten auswählen\n\n2\n\nNur die Spalte “Name” (=Lokalität) behalten. Die Geometrie Spalte kommt automatisch mit.\n\n3\n\nFläche berechnen und in Hektaren umrechnen (als Vorbereitung für die das stratifizierte Sampling)\n\n4\n\nVariabel erstelen für die Summe an Samples, die wir machen können / wollen\n\n5\n\nOptional: Da wir immer wieder die gleiche Karte machen, können wir eine Basis Karte erstellen und immer wieder benutzen.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Übung 6</span>"
     ]
